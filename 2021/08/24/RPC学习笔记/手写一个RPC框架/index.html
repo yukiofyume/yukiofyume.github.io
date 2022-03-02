@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.0.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/project/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/project/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/project/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/project/images/logo.svg" color="#222">
+  <link rel="manifest" href="/project/images/site.webmanifest">
+  <meta name="msvalidate.01" content="D3FDD75F8B58D895791F85E2CFB6FF50">
+
+<link rel="stylesheet" href="/project/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yukiofyume.github.io","root":"/project/","images":"/project/images","scheme":"Muse","darkmode":true,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","width":320,"display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/project/js/config.js"></script>
+
+    <meta name="description" content="0.说明这是一个基于 Netty 和 Nacos 的 RPC 框架最最最最基本的实现，只是为了学习 RPC 的调用过程以及相关知识 1.实现思路1.1.RPC介绍RPC 也就是远程过程调用，生产者服务端向 Ncos 注册中心注册服务，消费者客户端通过注册中心拿到服务相关信息，然后再通过网络请求向 Server 请求服务。 1.2.需要实现的模块 注册中心 Nacos：用来负责服务的注册和发现； 网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手写一个RPC框架">
+<meta property="og:url" content="https://yukiofyume.github.io/project/2021/08/24/RPC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AARPC%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="像我这样的人">
+<meta property="og:description" content="0.说明这是一个基于 Netty 和 Nacos 的 RPC 框架最最最最基本的实现，只是为了学习 RPC 的调用过程以及相关知识 1.实现思路1.1.RPC介绍RPC 也就是远程过程调用，生产者服务端向 Ncos 注册中心注册服务，消费者客户端通过注册中心拿到服务相关信息，然后再通过网络请求向 Server 请求服务。 1.2.需要实现的模块 注册中心 Nacos：用来负责服务的注册和发现； 网">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210907102313.png">
+<meta property="og:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210902130951.png">
+<meta property="og:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210907102624.png">
+<meta property="article:published_time" content="2021-08-24T08:42:34.000Z">
+<meta property="article:modified_time" content="2021-09-09T13:49:48.096Z">
+<meta property="article:author" content="Lee Wenhao">
+<meta property="article:tag" content="netty">
+<meta property="article:tag" content="RPC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210907102313.png">
+
+
+<link rel="canonical" href="https://yukiofyume.github.io/project/2021/08/24/RPC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AARPC%E6%A1%86%E6%9E%B6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yukiofyume.github.io/project/2021/08/24/RPC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AARPC%E6%A1%86%E6%9E%B6/","path":"2021/08/24/RPC学习笔记/手写一个RPC框架/","title":"手写一个RPC框架"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>手写一个RPC框架 | 像我这样的人</title>
+  
+
+  <script src="/project/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?9432d2000e722c28f2be1a7d3598c720"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/project/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/project/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">像我这样的人</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/project/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/project/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">22</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/project/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">18</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/project/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/project/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-%E8%AF%B4%E6%98%8E"><span class="nav-text">0.说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-text">1.实现思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-RPC%E4%BB%8B%E7%BB%8D"><span class="nav-text">1.1.RPC介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E9%9C%80%E8%A6%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="nav-text">1.2.需要实现的模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B"><span class="nav-text">2.调用过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E6%9C%8D%E5%8A%A1%E5%90%AF%E5%8A%A8"><span class="nav-text">2.1.服务启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C%E5%88%B0Nacos"><span class="nav-text">服务的自动注册到Nacos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AFchannel%E7%9A%84%E6%9E%84%E5%BB%BA"><span class="nav-text">服务端channel的构建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%9C%8D%E5%8A%A1"><span class="nav-text">2.1.客户端使用服务</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lee Wenhao"
+      src="/project/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lee Wenhao</p>
+  <div class="site-description" itemprop="description">记录下东西</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/project/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yukiofyume" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yukiofyume" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/14083449" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;14083449" rel="noopener" target="_blank"><i class="fab fa-bilibili fa-fw"></i>bilibili</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/yukiofyume" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yukiofyume.github.io/project/2021/08/24/RPC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AARPC%E6%A1%86%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/project/images/avatar.png">
+      <meta itemprop="name" content="Lee Wenhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="像我这样的人">
+      <meta itemprop="description" content="记录下东西">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="手写一个RPC框架 | 像我这样的人">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          手写一个RPC框架
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-24 16:42:34" itemprop="dateCreated datePublished" datetime="2021-08-24T16:42:34+08:00">2021-08-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-09-09 21:49:48" itemprop="dateModified" datetime="2021-09-09T21:49:48+08:00">2021-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/project/categories/RPC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">RPC学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="0-说明"><a href="#0-说明" class="headerlink" title="0.说明"></a>0.说明</h1><p>这是一个基于 Netty 和 Nacos 的 RPC 框架最最最最基本的实现，只是为了学习 RPC 的调用过程以及相关知识</p>
+<h1 id="1-实现思路"><a href="#1-实现思路" class="headerlink" title="1.实现思路"></a>1.实现思路</h1><h2 id="1-1-RPC介绍"><a href="#1-1-RPC介绍" class="headerlink" title="1.1.RPC介绍"></a>1.1.RPC介绍</h2><p>RPC 也就是远程过程调用，生产者服务端向 Ncos 注册中心注册服务，消费者客户端通过注册中心拿到服务相关信息，<br>然后再通过网络请求向 Server 请求服务。</p>
+<h2 id="1-2-需要实现的模块"><a href="#1-2-需要实现的模块" class="headerlink" title="1.2.需要实现的模块"></a>1.2.需要实现的模块</h2><ol>
+<li><strong>注册中心 Nacos</strong>：用来负责服务的注册和发现；</li>
+<li><strong>网络传输</strong>：需要调用远程方法就需要发送请求，如何确定一个方法呢？需要传输的信息至少要包括<br><strong>类名、方法名以及参数列表</strong>，这样就可以准确地找到一个方法了。</li>
+<li><strong>序列化</strong>：网络传输需要序列化，定义了四种序列化方式，JSON、Hessian、Kyro以及Protobuf。</li>
+<li><strong>动态代理</strong>：使用 JDK 动态代理屏蔽远程方法调用的细节，在调用远程方法的时候，通过代理对象来传输网络请求。</li>
+<li><strong>负载均衡</strong>：提高可用性。</li>
+</ol>
+<h1 id="2-调用过程"><a href="#2-调用过程" class="headerlink" title="2.调用过程"></a>2.调用过程</h1><h2 id="2-1-服务启动"><a href="#2-1-服务启动" class="headerlink" title="2.1.服务启动"></a>2.1.服务启动</h2><p><img src="https://gitee.com/sakuralee/blog-img/raw/master/img/20210907102313.png" alt="image-20210907102313883"></p>
+<p>服务端代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ServiceScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NettyTestServer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">NettyServer</span> <span class="variable">server</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NettyServer</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">9999</span>, CommonSerializer.PROTOBUF_SERIALIZER);</span><br><span class="line">        server.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@ServiceScan 会去扫描被 @Service 注解的服务。</p>
+<h3 id="服务的自动注册到Nacos"><a href="#服务的自动注册到Nacos" class="headerlink" title="服务的自动注册到Nacos"></a>服务的自动注册到Nacos</h3><p>自定义了两个注解：</p>
+<ul>
+<li><strong>@Service</strong>：在客户端使用，用于标识服务；</li>
+<li><strong>@ServiceScan</strong>：在服务端使用，用于扫描服务。</li>
+</ul>
+<p>然后编写 <code>ReflectUtil</code> 类用于扫描包。</p>
+<p>定义 <code>AbstracRpcServer</code> 用于服务端扫描服务，<code>scanServices()</code> 方法去对被 @ServiceScane 注解的类调用 <code>ReflectUtil.getStackTrace()</code> 方法区扫包。</p>
+<p>在服务端 <code>new NettyServer()</code> 之后，构造方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">NettyServer</span><span class="params">(String host, <span class="type">int</span> port, Integer serializer)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.host = host;</span><br><span class="line">    <span class="built_in">this</span>.port = port;</span><br><span class="line">    serviceRegistry = <span class="keyword">new</span> <span class="title class_">NacosServiceRegistry</span>();</span><br><span class="line">    serviceProvider = <span class="keyword">new</span> <span class="title class_">ServiceProviderImpl</span>();</span><br><span class="line">    <span class="built_in">this</span>.serializer = CommonSerializer.getByCode(serializer);</span><br><span class="line">    scanServices();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>并且在 <code>NacosServiceRegistry</code> 中有静态代码段</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 连接到Nacos，好像只需要直到ip+port就可以了</span></span><br><span class="line">        namingService = NamingFactory.createNamingService(SERVER_ADDR);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (NacosException e) &#123;</span><br><span class="line">        logger.error(<span class="string">&quot;连接到Nacos时有错误发生：&quot;</span>, e);</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RpcException</span>(RpcError.FAILED_TO_CONNECT_TO_SERVICE_REGISTRY);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也就是说在服务端创建 <code>NettyServer</code> 对象的时候就已经完成了 Nacos 注册中心的连接。同时构造最后一行调用了父类 <code>AbstractRpcServer</code> 的 <code>scanservices()</code> 方法，去扫描所有被 <code>@Service</code> 所注解的类，然后去调用 <code>publishService()</code> 方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="keyword">void</span> <span class="title function_">publishService</span><span class="params">(T service, String serviceName)</span> &#123;</span><br><span class="line">    serviceProvider.addServiceProvider(service, serviceName);</span><br><span class="line">    serviceRegistry.register(serviceName, <span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(host, port));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>addServiceProvider()</code> 方法会将服务保存在服务端。</p>
+<p><code>register()</code> 会将服务发送到 Nacos 注册中心。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 服务名与提供服务的对象</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map&lt;String, Object&gt; serviceMap = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 已经被注册对象</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Set&lt;String&gt; registeredService = ConcurrentHashMap.newKeySet();</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务端channel的构建"><a href="#服务端channel的构建" class="headerlink" title="服务端channel的构建"></a>服务端channel的构建</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">       <span class="comment">// 创建Netty服务器</span></span><br><span class="line">       <span class="type">ServerBootstrap</span> <span class="variable">serverBootstrap</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>();</span><br><span class="line">       serverBootstrap.group(bossGroup, workerGroup)</span><br><span class="line">               .channel(NioServerSocketChannel.class)</span><br><span class="line">               .handler(<span class="keyword">new</span> <span class="title class_">LoggingHandler</span>(LogLevel.INFO))</span><br><span class="line">               <span class="comment">// 基于TCP/IP协议，256是临时存放三次握手的请求队列的长度</span></span><br><span class="line">               .option(ChannelOption.SO_BACKLOG, <span class="number">256</span>)</span><br><span class="line">               <span class="comment">// 保持长连接，这个版本需要使用childOption去设置</span></span><br><span class="line"><span class="comment">// .option(ChannelOption.SO_KEEPALIVE, true)</span></span><br><span class="line">               .childOption(ChannelOption.SO_KEEPALIVE, <span class="literal">true</span>)</span><br><span class="line">               <span class="comment">// 设置低延迟</span></span><br><span class="line">               .childOption(ChannelOption.TCP_NODELAY, <span class="literal">true</span>)</span><br><span class="line">               <span class="comment">// 初始化通信管道</span></span><br><span class="line">               .childHandler(<span class="keyword">new</span> <span class="title class_">ChannelInitializer</span>&lt;SocketChannel&gt;() &#123;</span><br><span class="line">                   <span class="meta">@Override</span></span><br><span class="line">                   <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">initChannel</span><span class="params">(SocketChannel socketChannel)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">                       <span class="type">ChannelPipeline</span> <span class="variable">pipeline</span> <span class="operator">=</span> socketChannel.pipeline();</span><br><span class="line">                       <span class="comment">// 设置编码方式</span></span><br><span class="line">                       pipeline.addLast(<span class="keyword">new</span> <span class="title class_">CommonEncoder</span>(<span class="keyword">new</span> <span class="title class_">KryoSerializer</span>()));</span><br><span class="line">                       pipeline.addLast(<span class="keyword">new</span> <span class="title class_">CommonDecoder</span>());</span><br><span class="line">                       pipeline.addLast(<span class="keyword">new</span> <span class="title class_">NettyServerHandler</span>());</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;);</span><br><span class="line">       <span class="type">ChannelFuture</span> <span class="variable">future</span> <span class="operator">=</span> serverBootstrap.bind(host, port).sync();</span><br><span class="line">       ShutdownHook.getShutdownHook().addClearAllHook();</span><br><span class="line">       future.channel().closeFuture().sync();</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="https://gitee.com/sakuralee/blog-img/raw/master/img/20210902130951.png" alt="image-20210902130944777"></p>
+<p><code>NettyServer</code> 继承自抽象类 <code>AbstractRpcServer</code>，抽象类 <code>AbstractRpcServer</code> 实现了 <code>RpcServer</code> 接口（启动服务以及发布服务两个方法）。</p>
+<ul>
+<li>设置主线程组 boosGroup 和工作线程组 workerGroup；</li>
+<li>主线程组设置 Channel 类型为 <code>NioServerSocketChannel</code> ；</li>
+<li>主线程组设置通道参数通信协议为 TCP&#x2F;IP 协议，工作线程组设置保持长连接、低延迟；</li>
+<li>当有连接到达的时候，工作线程组会初始化一个 channel，同时为 channel 的pipeline 设置序列化、反序列化协议以及 handler；</li>
+<li><code>ChannelFuture future = serverBootstrap.bind(host, port).sync()</code> 通过调用 sync 同步方法阻塞直到绑定成功；</li>
+<li>通过 <code>future().channel().closeFuture().sync()</code> 以同步的方式关闭事件循环 EventLoopGroup。</li>
+</ul>
+<p>工作线程组在初始化 channel 的时候设置 hanlder 是自定义的 <code>NettyServerHandler</code>，继承自 <code>SimpleChannelInboundHandler</code> ，重写了 <code>channelRead0()</code> 方法，通过线程池的方式去调用 <code>RequestHandler.handle()</code> ，<code>RequestHandler.handle()</code>  中通过 <code>serviceProvider.getServiceProvider(InterfaceName)</code> 去从服务端本地保存服务的 Map 中取出具体 service，然后通过 <code>invoke()</code> 去调用具体 service，然后将结果交给 ChannelFuture 去异步返回给客户端，然后通过 <code>ChannelFuture.addListner(ChannelFutureListener.CLOSE)</code> 去关闭此 channel。</p>
+<h2 id="2-1-客户端使用服务"><a href="#2-1-客户端使用服务" class="headerlink" title="2.1.客户端使用服务"></a>2.1.客户端使用服务</h2><p><img src="https://gitee.com/sakuralee/blog-img/raw/master/img/20210907102624.png" alt="image-20210907102624284"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NettyTestClient</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">RpcClient</span> <span class="variable">client</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NettyClient</span>();</span><br><span class="line">        client.setSerializer(<span class="keyword">new</span> <span class="title class_">ProtobufSerializer</span>());</span><br><span class="line">        <span class="type">RpcClientProxy</span> <span class="variable">rpcClientProxy</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RpcClientProxy</span>(client);</span><br><span class="line">        <span class="type">HelloService</span> <span class="variable">helloService</span> <span class="operator">=</span> rpcClientProxy.getProxy(HelloService.class);</span><br><span class="line">        <span class="type">HelloObject</span> <span class="variable">object</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HelloObject</span>(<span class="number">12</span>, <span class="string">&quot;This is a message&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">res</span> <span class="operator">=</span> helloService.hello(object);</span><br><span class="line">        System.out.println(res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先构建一个 <code>NettyClient</code> 实例对象，然后将这个实例对象传入 <code>RpcClientProxy</code> 中，<code>RpcClientProxy</code> 实现了 <code>InvocationHandler</code> 接口去实现服务的 jdk 动态代理，在动态代理中去调用 <code>NettyClient</code> 的 <code>sendRequest()</code> 方法。<code>sendRequest()</code> 首先会去调用 <code>ServiceDiscovery.lookupService()</code> 方法通过负载均衡算法去 Nacos 注册中心找到相应服务所在的地址，接着调用 <code>ChannelProvider.get()</code> 方法去获取 Channel 对象，如果已经存在了存活着的 channel，那么直接返回，不然就重新构建一个。首先创建一个 <code>Bootstrap</code> 的实例对象，参数有 <code>NioEventLoopGroup</code> 事件循环，channel 的类型，超时时间，是否开启 TCP 心跳机制以及设置 TCP 去使用 Nagle 算法去发送尽可能大数据块，减少网络传输，在设置好参数后调用 <code>handler()</code> 构建通信管道，设置序列化反序列化方法，状态处理程序以及自定义的 <code>NettyClientHandler</code> 处理程序。最后使用这个通信管道去处理 channel  的入站以及出站事件，这样一个客户端到 Nacos 注册中心服务发现，以及调用具体服务的 channel 就构建完成了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">NettyClient</span><span class="params">()</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.serviceDiscovery = <span class="keyword">new</span> <span class="title class_">NacosServiceDiscovery</span>(<span class="keyword">new</span> <span class="title class_">RandomLoadBalancer</span>());</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端在使用的时候首先会创建一个 <code>NettyClient</code> 的实例对象，<del>这个实例对象在创建的时候会在静态代码块中通过 <code>bootstrap</code> 去设置 channels 的基本属性为 Nio 以及长连接，而并没有去创建 channel。</del>同时在使用构造方法的时候会创建一个 <code>serviceDiscovery</code> 的实例对象。</p>
+<p>然后使用<code>RpcClientProxy(client)</code> 的 <code>getProxy()</code> 方法去返回动态代理的 <code>helloservice</code> 对象，在调用 <code>helloService.hello()</code> 方法的时候就会去调用动态代理类 <code>RPCClientProxy</code> 的 <code>invoke()</code> 方法，在 <code>invoke()</code> 方法中首先会根据（请求号，待调用接口名，方法名，参数，参数类型）去创建一个 <code>RpcRequest</code> 对象，然后调用 <code>RpcClient.sendRequest(rpcRequest)</code> 去向 Nacos 注册中心发送请求。</p>
+<p>请求过程：首先会调用 <code>serviceDiscovery.lookupService(接口名)</code> 去找到相应服务所在的地址，然后调用 <code>ChannelProvider.get()</code> 方法去创建连接到服务端的 channel，如果channel存在就直接使用，不然就通过 <code>Bootstrap</code> 去创建，同时设置 pipeline 上的 handler 为 <code>NettyClientHanlder</code> ，这样 channel 就构建完成了。最后返回 RPCResponse。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/project/tags/netty/" rel="tag"><i class="fa fa-tag"></i> netty</a>
+              <a href="/project/tags/RPC/" rel="tag"><i class="fa fa-tag"></i> RPC</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/project/2021/08/24/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Spring%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="prev" title="Spring常见面试题">
+                  <i class="fa fa-chevron-left"></i> Spring常见面试题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/project/2021/09/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/SSL-TLS%E5%8D%8F%E8%AE%AE/" rel="next" title="SSL/TLS协议">
+                  SSL/TLS协议 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lwh@lee</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/project/js/comments.js"></script><script src="/project/js/utils.js"></script><script src="/project/js/schemes/muse.js"></script><script src="/project/js/next-boot.js"></script><script src="/project/js/bookmark.js"></script><script src="/project/js/pjax.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/project/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
