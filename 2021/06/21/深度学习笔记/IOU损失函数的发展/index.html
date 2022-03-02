@@ -7,25 +7,25 @@
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.0.0">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="apple-touch-icon" sizes="180x180" href="/project/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/project/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/project/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/project/images/logo.svg" color="#222">
-  <link rel="manifest" href="/project/images/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
   <meta name="msvalidate.01" content="D3FDD75F8B58D895791F85E2CFB6FF50">
 
-<link rel="stylesheet" href="/project/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"yukiofyume.github.io","root":"/project/","images":"/project/images","scheme":"Muse","darkmode":true,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","width":320,"display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/project/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","width":320,"display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="参考文献：Distance-IoU Loss: Faster and Better Learning for Bounding Box Regression 1. IOU的发展及意义边界框回归是目标检测的关键步骤。 边界框回归算法选择的好坏与否会影响到最终的预测结果，下图中，即使正确的分类出飞机，但是 IOU太小了，也说明没有正确地检测出飞机，此时如果能够对红色的框进行微调，那么定位就会更加准确，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IOU损失函数的发展">
-<meta property="og:url" content="https://yukiofyume.github.io/project/2021/06/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/IOU%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%91%E5%B1%95/index.html">
+<meta property="og:url" content="http://example.com/2021/06/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/IOU%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%91%E5%B1%95/index.html">
 <meta property="og:site_name" content="像我这样的人">
 <meta property="og:description" content="参考文献：Distance-IoU Loss: Faster and Better Learning for Bounding Box Regression 1. IOU的发展及意义边界框回归是目标检测的关键步骤。 边界框回归算法选择的好坏与否会影响到最终的预测结果，下图中，即使正确的分类出飞机，但是 IOU太小了，也说明没有正确地检测出飞机，此时如果能够对红色的框进行微调，那么定位就会更加准确，">
 <meta property="og:locale" content="zh_CN">
@@ -56,24 +56,24 @@
 <meta name="twitter:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210625205430.png">
 
 
-<link rel="canonical" href="https://yukiofyume.github.io/project/2021/06/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/IOU%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%91%E5%B1%95/">
+<link rel="canonical" href="http://example.com/2021/06/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/IOU%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%91%E5%B1%95/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yukiofyume.github.io/project/2021/06/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/IOU%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%91%E5%B1%95/","path":"2021/06/21/深度学习笔记/IOU损失函数的发展/","title":"IOU损失函数的发展"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/06/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/IOU%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%91%E5%B1%95/","path":"2021/06/21/深度学习笔记/IOU损失函数的发展/","title":"IOU损失函数的发展"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>IOU损失函数的发展 | 像我这样的人</title>
   
 
-  <script src="/project/js/third-party/analytics/baidu-analytics.js"></script>
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
   <script async src="https://hm.baidu.com/hm.js?9432d2000e722c28f2be1a7d3598c720"></script>
 
 
 
 
   <noscript>
-    <link rel="stylesheet" href="/project/css/noscript.css">
+    <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
 </head>
 
@@ -93,7 +93,7 @@
 
   <div class="site-meta">
 
-    <a href="/project/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
       <p class="site-title">像我这样的人</p>
       <i class="logo-line"></i>
@@ -110,11 +110,11 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/project/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/project/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">22</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/project/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">18</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/project/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a></li>
-        <li class="menu-item menu-item-about"><a href="/project/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">22</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">18</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
   </ul>
 </nav>
 
@@ -152,14 +152,14 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Lee Wenhao"
-      src="/project/images/avatar.png">
+      src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">Lee Wenhao</p>
   <div class="site-description" itemprop="description">记录下东西</div>
 </div>
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        <a href="/project/archives/">
+        <a href="/archives/">
           <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
@@ -220,10 +220,10 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yukiofyume.github.io/project/2021/06/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/IOU%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%91%E5%B1%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/IOU%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%91%E5%B1%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/project/images/avatar.png">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Lee Wenhao">
     </span>
 
@@ -264,7 +264,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/project/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">深度学习笔记</span></a>
+          <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">深度学习笔记</span></a>
         </span>
     </span>
 
@@ -365,12 +365,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/project/2021/06/19/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/%E7%AE%A1%E7%90%86%E5%91%98%E7%B3%BB%E7%BB%9F%E7%BC%96%E5%86%99%E6%B5%81%E7%A8%8B/" rel="prev" title="管理员系统编写流程">
+                <a href="/2021/06/19/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/%E7%AE%A1%E7%90%86%E5%91%98%E7%B3%BB%E7%BB%9F%E7%BC%96%E5%86%99%E6%B5%81%E7%A8%8B/" rel="prev" title="管理员系统编写流程">
                   <i class="fa fa-chevron-left"></i> 管理员系统编写流程
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/project/2021/06/23/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/Spring%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="Spring中的设计模式">
+                <a href="/2021/06/23/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/Spring%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="Spring中的设计模式">
                   Spring中的设计模式 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -406,7 +406,7 @@
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
-<script src="/project/js/comments.js"></script><script src="/project/js/utils.js"></script><script src="/project/js/schemes/muse.js"></script><script src="/project/js/next-boot.js"></script><script src="/project/js/bookmark.js"></script><script src="/project/js/pjax.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
 
   
 
@@ -422,7 +422,7 @@
   
 
   <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
-<script src="/project/js/third-party/math/mathjax.js"></script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
