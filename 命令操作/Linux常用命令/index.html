@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.0.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="msvalidate.01" content="D3FDD75F8B58D895791F85E2CFB6FF50">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","width":320,"display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1.rm 命令1.删除任何 .log 文件，删除前逐一询问 rm -i *.log 2.mv 命令使用这个命令重命名的时候可以加上 mv -i 1.txt 2.txt ，这样如果是存在，就会提示是否需要覆盖 3.cp 命令同样可以 cp -i ，来提示 4.cat 命令 一次性显示整个文件：cat filename 新建一个文件：cat &gt; filename 合并几个文件：cat file1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令">
+<meta property="og:url" content="http://example.com/%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="像我这样的人">
+<meta property="og:description" content="1.rm 命令1.删除任何 .log 文件，删除前逐一询问 rm -i *.log 2.mv 命令使用这个命令重命名的时候可以加上 mv -i 1.txt 2.txt ，这样如果是存在，就会提示是否需要覆盖 3.cp 命令同样可以 cp -i ，来提示 4.cat 命令 一次性显示整个文件：cat filename 新建一个文件：cat &gt; filename 合并几个文件：cat file1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-01T12:30:07.000Z">
+<meta property="article:modified_time" content="2022-03-01T13:24:57.467Z">
+<meta property="article:author" content="Lee Wenhao">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/","path":"命令操作/Linux常用命令/","title":"Linux常用命令"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux常用命令 | 像我这样的人</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?9432d2000e722c28f2be1a7d3598c720"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">像我这样的人</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">22</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">18</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-rm-%E5%91%BD%E4%BB%A4"><span class="nav-text">1.rm 命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-mv-%E5%91%BD%E4%BB%A4"><span class="nav-text">2.mv 命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-cp-%E5%91%BD%E4%BB%A4"><span class="nav-text">3.cp 命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-cat-%E5%91%BD%E4%BB%A4"><span class="nav-text">4.cat 命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-more-%E5%91%BD%E4%BB%A4"><span class="nav-text">5.more 命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-head-%E5%91%BD%E4%BB%A4"><span class="nav-text">6.head 命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-tail-%E5%91%BD%E4%BB%A4"><span class="nav-text">7.tail 命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%91%BD%E4%BB%A4"><span class="nav-text">8.查找文件命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-which"><span class="nav-text">8.1.which</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-whereis"><span class="nav-text">8.2.whereis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-locate"><span class="nav-text">8.3.locate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4-find"><span class="nav-text">8.4.find</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-ps-%E5%91%BD%E4%BB%A4"><span class="nav-text">9.ps 命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-top-%E5%91%BD%E4%BB%A4"><span class="nav-text">10.top 命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E6%83%85%E5%86%B5"><span class="nav-text">11.查看端口占用情况</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-1-lsof"><span class="nav-text">11.1.lsof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-2-netstat"><span class="nav-text">11.2.netstat</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lee Wenhao"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lee Wenhao</p>
+  <div class="site-description" itemprop="description">记录下东西</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yukiofyume" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yukiofyume" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/14083449" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;14083449" rel="noopener" target="_blank"><i class="fab fa-bilibili fa-fw"></i>bilibili</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/yukiofyume" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Lee Wenhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="像我这样的人">
+      <meta itemprop="description" content="记录下东西">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Linux常用命令 | 像我这样的人">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux常用命令
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-03-01 20:30:07 / 修改时间：21:24:57" itemprop="dateCreated datePublished" datetime="2022-03-01T20:30:07+08:00">2022-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">命令操作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="1-rm-命令"><a href="#1-rm-命令" class="headerlink" title="1.rm 命令"></a>1.rm 命令</h1><p><strong>1.删除任何 .log 文件，删除前逐一询问</strong></p>
+<p><code>rm -i *.log</code></p>
+<h1 id="2-mv-命令"><a href="#2-mv-命令" class="headerlink" title="2.mv 命令"></a>2.mv 命令</h1><p>使用这个命令重命名的时候可以加上 <code>mv -i 1.txt 2.txt</code> ，这样如果是存在，就会提示是否需要覆盖</p>
+<h1 id="3-cp-命令"><a href="#3-cp-命令" class="headerlink" title="3.cp 命令"></a>3.cp 命令</h1><p>同样可以 <code>cp -i</code> ，来提示</p>
+<h1 id="4-cat-命令"><a href="#4-cat-命令" class="headerlink" title="4.cat 命令"></a>4.cat 命令</h1><ol>
+<li>一次性显示整个文件：<code>cat filename</code></li>
+<li>新建一个文件：<code>cat &gt; filename</code></li>
+<li>合并几个文件：<code>cat file1 file2 &gt; file</code></li>
+<li>反向输出文件：<code>tac filename</code></li>
+</ol>
+<ul>
+<li>-n 输出所有行号</li>
+<li>-b 对非空输出行号</li>
+</ul>
+<h1 id="5-more-命令"><a href="#5-more-命令" class="headerlink" title="5.more 命令"></a>5.more 命令</h1><p>功能类似于 cat, more 会以一页一页的显示方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示</p>
+<ul>
+<li>+n      从笫 n 行开始显示</li>
+<li>-n       定义屏幕大小为n行</li>
+<li>+&#x2F;pattern 在每个档案显示前搜寻该字串（pattern），然后从该字串前两行之后开始显示 </li>
+<li>-c       从顶部清屏，然后显示</li>
+<li>-d       提示“Press space to continue，’q’ to quit（按空格键继续，按q键退出）”，禁用响铃功能</li>
+<li>-l        忽略Ctrl+l（换页）字符</li>
+<li>-p       通过清除窗口而不是滚屏来对文件进行换页，与-c选项相似</li>
+<li>-s       把连续的多个空行显示为一行</li>
+<li>-u       把文件内容中的下画线去掉<span id="more"></span></li>
+</ul>
+<h1 id="6-head-命令"><a href="#6-head-命令" class="headerlink" title="6.head 命令"></a>6.head 命令</h1><p>打印前面几行</p>
+<ol>
+<li>显示前20行：<code>head  -n 20 a.txt</code></li>
+<li>显示前20字节：<code>head -c 20 a.txt</code></li>
+<li>从倒数10行开始显示：<code>hean -n -10 a.txt</code></li>
+</ol>
+<h1 id="7-tail-命令"><a href="#7-tail-命令" class="headerlink" title="7.tail 命令"></a>7.tail 命令</h1><p>-f 循环读取（常用于查看递增的日志文件） <code>tail -f filename</code></p>
+<h1 id="8-查找文件命令"><a href="#8-查找文件命令" class="headerlink" title="8.查找文件命令"></a>8.查找文件命令</h1><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">which</td>
+<td align="center">查找可执行文件的位置</td>
+</tr>
+<tr>
+<td align="center">whereis</td>
+<td align="center">查看文件的位置</td>
+</tr>
+<tr>
+<td align="center">locate</td>
+<td align="center">配合数据库查看文件位置</td>
+</tr>
+<tr>
+<td align="center">find</td>
+<td align="center">实时搜寻磁盘，查询文件名称</td>
+</tr>
+</tbody></table>
+<h2 id="8-1-which"><a href="#8-1-which" class="headerlink" title="8.1.which"></a>8.1.which</h2><p>查看命令是否存在 <code>which ls</code></p>
+<h2 id="8-2-whereis"><a href="#8-2-whereis" class="headerlink" title="8.2.whereis"></a>8.2.whereis</h2><p>whereis 命令只能用于程序名的搜索。只搜索二进制文件（参数-b）、man说明文件（参数-m）和源代码文件（参数-s）。如果省略参数，则返回所有信息。whereis 及 locate 都是基于系统内建的数据库进行搜索，因此效率很高，而find则是遍历硬盘查找文件。</p>
+<h2 id="8-3-locate"><a href="#8-3-locate" class="headerlink" title="8.3.locate"></a>8.3.locate</h2><p>基于系统内部数据库，查找很快。</p>
+<ol>
+<li>查找和 pwd 相关的所有文件 ：<code>locate pwd</code></li>
+</ol>
+<h2 id="8-4-find"><a href="#8-4-find" class="headerlink" title="8.4.find"></a>8.4.find</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">-name 按照文件名查找文件</span><br><span class="line">-perm 按文件权限查找文件</span><br><span class="line">-user 按文件属主查找文件</span><br><span class="line">-group  按照文件所属的组来查找文件。</span><br><span class="line">-type  查找某一类型的文件，诸如：</span><br><span class="line">   b - 块设备文件</span><br><span class="line">   d - 目录</span><br><span class="line">   c - 字符设备文件</span><br><span class="line">   l - 符号链接文件</span><br><span class="line">   p - 管道文件</span><br><span class="line">   f - 普通文件</span><br><span class="line"></span><br><span class="line">-size n :[c] 查找文件长度为n块文件，带有c时表文件字节大小</span><br><span class="line">-amin n   查找系统中最后N分钟访问的文件</span><br><span class="line">-atime n  查找系统中最后n*24小时访问的文件</span><br><span class="line">-cmin n   查找系统中最后N分钟被改变文件状态的文件</span><br><span class="line">-ctime n  查找系统中最后n*24小时被改变文件状态的文件</span><br><span class="line">-mmin n   查找系统中最后N分钟被改变文件数据的文件</span><br><span class="line">-mtime n  查找系统中最后n*24小时被改变文件数据的文件</span><br><span class="line">(用减号-来限定更改时间在距今n日以内的文件，而用加号+来限定更改时间在距今n日以前的文件。 )</span><br><span class="line">-maxdepth n 最大查找目录深度</span><br><span class="line">-prune 选项来指出需要忽略的目录。在使用-prune选项时要当心，因为如果你同时使用了-depth选项，那么-prune选项就会被find命令忽略</span><br><span class="line">-newer 如果希望查找更改时间比某个文件新但比另一个文件旧的所有文件，可以使用-newer选项</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>查找 48 小时内修改过的文件：<code>find -atime -2</code></li>
+<li>查找当前目录以 .txt 结尾的文件：<code>find ./ -name &#39;*.txt&#39;</code></li>
+<li>查找大于 1k 的文件：<code>find -size +1000c</code></li>
+</ol>
+<h1 id="9-ps-命令"><a href="#9-ps-命令" class="headerlink" title="9.ps 命令"></a>9.ps 命令</h1><p>ps(process status)，用来查看当前运行的进程状态，一次性查看，如果需要动态连续结果使用 top</p>
+<h1 id="10-top-命令"><a href="#10-top-命令" class="headerlink" title="10.top 命令"></a>10.top 命令</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-c 显示完整的进程命令</span><br><span class="line">-s 保密模式</span><br><span class="line">-p &lt;进程号&gt; 指定进程显示</span><br><span class="line">-n &lt;次数&gt;循环显示次数</span><br></pre></td></tr></table></figure>
+
+<h1 id="11-查看端口占用情况"><a href="#11-查看端口占用情况" class="headerlink" title="11.查看端口占用情况"></a>11.查看端口占用情况</h1><h2 id="11-1-lsof"><a href="#11-1-lsof" class="headerlink" title="11.1.lsof"></a>11.1.lsof</h2><p>lsof(list open files)是一个列出当前系统打开文件的工具。</p>
+<p><code>lsof -i:port</code></p>
+<h2 id="11-2-netstat"><a href="#11-2-netstat" class="headerlink" title="11.2.netstat"></a>11.2.netstat</h2><p><code>netstat -tunlp|grep port</code></p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/uncategorized/%E7%89%9B%E5%AE%A2%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/" rel="prev" title="牛客秒杀项目笔记">
+                  <i class="fa fa-chevron-left"></i> 牛客秒杀项目笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/uncategorized/git%E5%AD%A6%E4%B9%A0/" rel="next" title="git学习">
+                  git学习 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lwh@lee</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

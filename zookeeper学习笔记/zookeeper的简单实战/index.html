@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.0.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="msvalidate.01" content="D3FDD75F8B58D895791F85E2CFB6FF50">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","width":320,"display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 安装与使用1.1. 安装下载镜像 docker pull zookeeper 运行 docker docker run -d --name zookeeper -p 2181:2181 zookeeper 1.2. 连接 zookeeper 服务器 进入容器 docker exec -it ContainerID &#x2F;bin&#x2F;bash 切换到 bin 目录，并连接 .&#x2F;zkCli.sh -se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zookeeper的简单实战">
+<meta property="og:url" content="http://example.com/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/zookeeper%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:site_name" content="像我这样的人">
+<meta property="og:description" content="1. 安装与使用1.1. 安装下载镜像 docker pull zookeeper 运行 docker docker run -d --name zookeeper -p 2181:2181 zookeeper 1.2. 连接 zookeeper 服务器 进入容器 docker exec -it ContainerID &#x2F;bin&#x2F;bash 切换到 bin 目录，并连接 .&#x2F;zkCli.sh -se">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512162554.png">
+<meta property="og:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512163003.png">
+<meta property="og:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512163125.png">
+<meta property="og:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512163222.png">
+<meta property="og:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512163329.png">
+<meta property="og:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512163352.png">
+<meta property="og:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512163520.png">
+<meta property="article:published_time" content="2021-05-12T08:16:48.000Z">
+<meta property="article:modified_time" content="2021-05-12T08:45:44.187Z">
+<meta property="article:author" content="Lee Wenhao">
+<meta property="article:tag" content="中间件">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512162554.png">
+
+
+<link rel="canonical" href="http://example.com/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/zookeeper%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E6%88%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/zookeeper%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E6%88%98/","path":"zookeeper学习笔记/zookeeper的简单实战/","title":"zookeeper的简单实战"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>zookeeper的简单实战 | 像我这样的人</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?9432d2000e722c28f2be1a7d3598c720"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">像我这样的人</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">22</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">18</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="nav-text">1. 安装与使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%AE%89%E8%A3%85"><span class="nav-text">1.1. 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E8%BF%9E%E6%8E%A5-zookeeper-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">1.2. 连接 zookeeper 服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%BC%94%E7%A4%BA"><span class="nav-text">1.3. 常用命令演示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9"><span class="nav-text">1.3.1. 创建节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-%E6%9B%B4%E6%96%B0%E8%8A%82%E7%82%B9%E6%95%B0%E6%8D%AE%E5%86%85%E5%AE%B9"><span class="nav-text">1.3.2. 更新节点数据内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-%E8%8E%B7%E5%8F%96%E8%8A%82%E7%82%B9%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-text">1.3.3. 获取节点的数据 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-4-%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E5%AD%90%E8%8A%82%E7%82%B9"><span class="nav-text">1.3.4. 查看某个目录下的子节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-5-%E6%9F%A5%E7%9C%8B%E8%8A%82%E7%82%B9%E7%8A%B6%E6%80%81"><span class="nav-text">1.3.5. 查看节点状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-6-%E5%88%A0%E9%99%A4%E7%BB%93%E7%82%B9"><span class="nav-text">1.3.6. 删除结点</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lee Wenhao"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lee Wenhao</p>
+  <div class="site-description" itemprop="description">记录下东西</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yukiofyume" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yukiofyume" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/14083449" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;14083449" rel="noopener" target="_blank"><i class="fab fa-bilibili fa-fw"></i>bilibili</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/yukiofyume" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/zookeeper%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Lee Wenhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="像我这样的人">
+      <meta itemprop="description" content="记录下东西">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="zookeeper的简单实战 | 像我这样的人">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          zookeeper的简单实战
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-05-12 16:16:48 / 修改时间：16:45:44" itemprop="dateCreated datePublished" datetime="2021-05-12T16:16:48+08:00">2021-05-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">zookeeper学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="1-安装与使用"><a href="#1-安装与使用" class="headerlink" title="1. 安装与使用"></a>1. 安装与使用</h1><h2 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1. 安装"></a>1.1. 安装</h2><p>下载镜像</p>
+<p><code>docker pull zookeeper</code></p>
+<p>运行 docker</p>
+<p><code>docker run -d --name zookeeper -p 2181:2181 zookeeper</code></p>
+<h2 id="1-2-连接-zookeeper-服务器"><a href="#1-2-连接-zookeeper-服务器" class="headerlink" title="1.2. 连接 zookeeper 服务器"></a>1.2. 连接 zookeeper 服务器</h2><ol>
+<li>进入容器 <code>docker exec -it ContainerID /bin/bash</code></li>
+<li>切换到 bin 目录，并连接 <code>./zkCli.sh -server 127.0.0.1:2181</code></li>
+</ol>
+<p><img src="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512162554.png" alt="image-20210512162554270"></p>
+<h2 id="1-3-常用命令演示"><a href="#1-3-常用命令演示" class="headerlink" title="1.3. 常用命令演示"></a>1.3. 常用命令演示</h2><h3 id="1-3-1-创建节点"><a href="#1-3-1-创建节点" class="headerlink" title="1.3.1. 创建节点"></a>1.3.1. 创建节点</h3><p>通过 <code>create</code> 命令在根目录创建了 node1 节点，与它关联的字符串是”node1”</p>
+<p><img src="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512163003.png" alt="image-20210512163003619"></p>
+<p>通过 <code>create</code> 命令在根目录创建了 node1 子节点 node1.1，与它关联的内容是数字 123</p>
+<p><img src="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512163125.png" alt="image-20210512163125493"></p>
+<h3 id="1-3-2-更新节点数据内容"><a href="#1-3-2-更新节点数据内容" class="headerlink" title="1.3.2. 更新节点数据内容"></a>1.3.2. 更新节点数据内容</h3><p><img src="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512163222.png" alt="image-20210512163221996"></p>
+<h3 id="1-3-3-获取节点的数据"><a href="#1-3-3-获取节点的数据" class="headerlink" title="1.3.3. 获取节点的数据 "></a>1.3.3. 获取节点的数据 <span id="more"></span></h3><h3 id="1-3-4-查看某个目录下的子节点"><a href="#1-3-4-查看某个目录下的子节点" class="headerlink" title="1.3.4. 查看某个目录下的子节点"></a>1.3.4. 查看某个目录下的子节点</h3><p><img src="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512163329.png" alt="image-20210512163329665"></p>
+<h3 id="1-3-5-查看节点状态"><a href="#1-3-5-查看节点状态" class="headerlink" title="1.3.5. 查看节点状态"></a>1.3.5. 查看节点状态</h3><p><img src="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512163352.png" alt="image-20210512163352311"></p>
+<h3 id="1-3-6-删除结点"><a href="#1-3-6-删除结点" class="headerlink" title="1.3.6. 删除结点"></a>1.3.6. 删除结点</h3><p>被删除的节点必须没有子节点</p>
+<p><img src="https://gitee.com/sakuralee/blog-img/raw/master/img/20210512163520.png" alt="image-20210512163520455"></p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag"><i class="fa fa-tag"></i> 中间件</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/zookeeper%E5%85%A5%E9%97%A8/" rel="prev" title="zookeeper入门">
+                  <i class="fa fa-chevron-left"></i> zookeeper入门
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E5%8E%9F%E7%90%86/" rel="next" title="SpringBoot自动装配原理">
+                  SpringBoot自动装配原理 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lwh@lee</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
