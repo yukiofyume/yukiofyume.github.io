@@ -90,7 +90,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">22</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">18</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
   </ul>
 </nav>
@@ -136,7 +136,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -186,166 +186,6 @@
 
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/Redis6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Lee Wenhao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="像我这样的人">
-      <meta itemprop="description" content="记录下东西">
-    </span>
-    
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 像我这样的人">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/Redis6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">Redis面试题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-05-27 21:44:32" itemprop="dateCreated datePublished" datetime="2021-05-27T21:44:32+08:00">2021-05-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-08-29 11:29:55" itemprop="dateModified" datetime="2021-08-29T11:29:55+08:00">2021-08-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Redis6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Redis6学习笔记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="一、缓存使用中的坑"><a href="#一、缓存使用中的坑" class="headerlink" title="一、缓存使用中的坑"></a>一、缓存使用中的坑</h1><h2 id="1-1-缓存一致性"><a href="#1-1-缓存一致性" class="headerlink" title="1.1. 缓存一致性"></a>1.1. 缓存一致性</h2><table>
-<thead>
-<tr>
-<th>方案</th>
-<th>问题</th>
-<th>问题出现概率</th>
-<th>推荐程度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>更新数据库 -&gt; 更新缓存</td>
-<td>并发更新数据库场景下，可能将脏数据刷到缓存</td>
-<td>并发写场景，概率一般</td>
-<td>写请求较多时会出现不一致问题，不推荐使用</td>
-</tr>
-<tr>
-<td>删除缓存 -&gt; 更新数据库</td>
-<td>更新数据库之前，若有查询请求，会将脏数据刷到缓存</td>
-<td>并发读场景，概率较大</td>
-<td>读请求较多时会出现不一致问题，不推荐使用</td>
-</tr>
-<tr>
-<td>更新数据库 -&gt; 删除缓存</td>
-<td>在更新数据库之前有查询请求，并且缓存失效了，会查询数据库，然后更新缓存。如果在查询数据库和更新缓存之间进行了数据库更新的操作，那么就会把脏数据刷到缓存</td>
-<td>并发读场景&amp;读操作慢于写操作，概率最小</td>
-<td><strong>读操作比写操作更慢的情况较少，相比于其他方式出错的概率小一些。勉强推荐。</strong></td>
-</tr>
-</tbody></table>
-<h3 id="延迟双删"><a href="#延迟双删" class="headerlink" title="延迟双删"></a>延迟双删</h3><p><strong>推荐使用</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">write</span><span class="params">(String key,Object data)</span>&#123;</span><br><span class="line">  	 redis.del(key);</span><br><span class="line">     db.update(data);</span><br><span class="line">     Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">     redis.del(key);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>先淘汰缓存</li>
-<li>再写数据库</li>
-<li>休眠1秒，再次淘汰缓存</li>
-</ul>
-<p>这么做的目的，就是确保读请求结束，写请求可以删除读请求造成的缓存脏数据。</p>
-<h2 id="1-2-缓存击穿"><a href="#1-2-缓存击穿" class="headerlink" title="1.2. 缓存击穿"></a>1.2. 缓存击穿</h2><p>对于一些设置了过期时间的 key，可能这些key会在某些时间点被超高并发地访问，是一种非常“热点”的数据。这个时候，需要考虑缓存被“击穿”的问题，和缓存雪崩的区别在于这里针对某一 key 缓存，而缓存雪崩则是很多 key。</p>
-<p><strong>解决方案</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>解决方案</th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>使用互斥锁</td>
-<td>思路简单，保证一致性</td>
-<td>代码复杂度大，存在死锁的可能</td>
-</tr>
-<tr>
-<td>提前使用互斥锁</td>
-<td>保证一致性</td>
-<td>同上</td>
-</tr>
-<tr>
-<td>缓存永不过期</td>
-<td>异步构建缓存，不会阻塞线程池</td>
-<td>不保证一致性，代码复杂度大，占用一定的内存空间</td>
-</tr>
-</tbody></table>
-<p>业界比较常用的做法，是使用 mutex。简单地来说，就是在缓存失效的时候（判断拿出来的值为空），不是立即去load db，而是先使用缓存工具的某些带成功操作返回值的操作（比如 Redis 的 SETNX 或者 Memcache 的ADD）去 set 一个mutex key，当操作返回成功时，再进行load db的操作并回设缓存；否则，就重试整个get缓存的方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">get</span><span class="params">(key)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> redis.get(key);</span><br><span class="line">    <span class="keyword">if</span> (value == <span class="literal">null</span>)&#123;<span class="comment">// 代表缓存过期</span></span><br><span class="line">        <span class="comment">//设置3min的超时，防止del操作失败的时候，下次缓存过期一直不能load db</span></span><br><span class="line">        <span class="keyword">if</span> (redis.setnx(key_mutex, <span class="number">1</span>, <span class="number">3</span> * <span class="number">60</span>) == <span class="number">1</span>)&#123; <span class="comment">//代表设置成功</span></span><br><span class="line">            value = db.get(key);</span><br><span class="line">            redis.set(key, value, expire_secs);</span><br><span class="line">            redis.del(key_mutex);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">//这个时候代表同时候的其他线程已经load db并回设到缓存了，这时候重试获取缓存值即可</span></span><br><span class="line">            sleep(<span class="number">50</span>);</span><br><span class="line">            get(key);<span class="comment">//重试</span></span><br><span class="line">        &#125;          </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-3-缓存穿透"><a href="#1-3-缓存穿透" class="headerlink" title="1.3. 缓存穿透"></a>1.3. 缓存穿透</h2><p>缓存穿透是指查询一个一定不存在的数据，导致大量请求落到数据库，导致数据库崩溃
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/05/Redis6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      
-
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1860,6 +1700,105 @@
             </div>
           <!--/noindex-->
         
+      
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/involution%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Lee Wenhao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="像我这样的人">
+      <meta itemprop="description" content="记录下东西">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 像我这样的人">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/involution%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">involution学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-08 19:57:49" itemprop="dateCreated datePublished" datetime="2021-05-08T19:57:49+08:00">2021-05-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-05-31 11:23:04" itemprop="dateModified" datetime="2021-05-31T11:23:04+08:00">2021-05-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">深度学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="1-残差块"><a href="#1-残差块" class="headerlink" title="1. 残差块"></a>1. 残差块</h1><p><img src="https://gitee.com/sakuralee/blog-img/raw/master/img/20210508200910.png" alt="image-20210508200910303"></p>
+<p>左边为 <strong>BasicBlock</strong>， 右边为 <strong>Bottleneck</strong>。</p>
+<p>使用involution替换ResNet bottleneck block中的 $3\times3$ （使用 $3\times3$ 或者 $7\times7$ 的内卷替换）得到了一族新的骨干网络<strong>RedNet</strong>，性能和效率优于ResNet和其他self-attention做op的SOTA模型。</p>
+<h1 id="2-可以进一步提升的地方"><a href="#2-可以进一步提升的地方" class="headerlink" title="2. 可以进一步提升的地方"></a>2. 可以进一步提升的地方</h1><ol>
+<li><p>关于广义的involution中kernel生成函数空间进一步的探索；</p>
+</li>
+<li><p>类似于deformable convolution加入offest生成函数，使得这个op空间建模能力的灵活性进一步提升；</p>
+</li>
+<li><p>结合NAS的技术搜索convolution-involution混合结构（原文Section 4.3）；</p>
+</li>
+<li><p>我们在上文论述了self-attention只是一种表达形式，但希望(self-)attention机制能够启发我们设计更好的视觉模型，类似地detection领域最近不少好的工作，也从DETR的架构中获益匪浅。</p>
+</li>
+</ol>
+
       
     </div>
 
