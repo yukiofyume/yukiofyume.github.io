@@ -19,6 +19,35 @@
             <category term="shoka" scheme="https://yukiofyume.github.io/categories/shoka/" />
             <pubDate>Thu, 03 Mar 2022 22:19:26 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;1-颜色修改&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-颜色修改&#34;&gt;#&lt;/a&gt; 1 颜色修改&lt;/h1&gt;
+&lt;p&gt;调整具体的选项可以在 hexo 项目的根目录进行，新建  &lt;code&gt;/hexo-site/source/_data/colors.styl&lt;/code&gt; ，然后将 shoka 主题下的  &lt;code&gt;/themes/shoka/source/css/_colors.styl&lt;/code&gt;  内容复制过来进行修改就好，原理是： &lt;code&gt;/themes/shoka/source/app.styl&lt;/code&gt; ：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@import &amp;quot;_variables&amp;quot;;
+
+@import &amp;quot;_mixins&amp;quot;;
+
+if $colors = hexo-config(&#39;style.colors&#39;)
+  @import $colors;
+else
+  @import &amp;quot;_colors&amp;quot;;
+
+if $_iconfont = hexo-config(&#39;style.iconfont&#39;)
+  @import $_iconfont;
+else
+  @import &amp;quot;_iconfont&amp;quot;;
+
+// Scaffolding
+@import &amp;quot;_common/scaffolding&amp;quot;;
+
+// Layout
+@import &amp;quot;_common/outline&amp;quot;;
+
+// Components
+@import &amp;quot;_common/components&amp;quot;;
+
+if $custom = hexo-config(&#39;style.custom&#39;)
+  @import $custom;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以看到是在这里做了逻辑判断。&lt;/p&gt;
  ]]></description>
         </item>
         <item>
