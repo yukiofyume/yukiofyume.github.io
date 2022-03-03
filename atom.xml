@@ -8,7 +8,16 @@
     <author>
       <name>Lee Wenhao</name>
     </author>
-    <updated>2022-03-02T06:24:51.577Z</updated>
+    <updated>2022-03-03T14:19:26.000Z</updated>
+    <entry>
+        <id>https://yukiofyume.github.io/2022/03/shoka/shoka%E9%85%8D%E7%BD%AE/</id>
+        <title>shoka配置</title>
+        <link rel="alternate" href="https://yukiofyume.github.io/2022/03/shoka/shoka%E9%85%8D%E7%BD%AE/"/>
+        <content type="html">&lt;h1 id=&#34;1-颜色修改&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-颜色修改&#34;&gt;#&lt;/a&gt; 1 颜色修改&lt;/h1&gt;
+</content>
+        <category term="shoka" scheme="https://yukiofyume.github.io/categories/shoka/" />
+        <updated>2022-03-03T14:19:26.000Z</updated>
+    </entry>
     <entry>
         <id>https://yukiofyume.github.io/2022/03/uncategorized/Transformer%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</id>
         <title>Transformer阅读笔记</title>
@@ -1741,210 +1750,5 @@ config/server-2.properties:
         <category term="Java学习笔记" scheme="https://yukiofyume.github.io/categories/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
         <category term="Java容器" scheme="https://yukiofyume.github.io/tags/Java%E5%AE%B9%E5%99%A8/" />
         <updated>2021-05-31T01:50:29.000Z</updated>
-    </entry>
-    <entry>
-        <id>https://yukiofyume.github.io/2021/05/Redis6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/</id>
-        <title>Redis面试题</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/2021/05/Redis6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-        <content type="html">&lt;h1 id=&#34;一-缓存使用中的坑&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-缓存使用中的坑&#34;&gt;#&lt;/a&gt; 一、缓存使用中的坑&lt;/h1&gt;
-&lt;h2 id=&#34;11-缓存一致性&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#11-缓存一致性&#34;&gt;#&lt;/a&gt; 1.1. 缓存一致性&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;方案&lt;/th&gt;
-&lt;th&gt;问题&lt;/th&gt;
-&lt;th&gt;问题出现概率&lt;/th&gt;
-&lt;th&gt;推荐程度&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;更新数据库 -&amp;gt; 更新缓存&lt;/td&gt;
-&lt;td&gt;并发更新数据库场景下，可能将脏数据刷到缓存&lt;/td&gt;
-&lt;td&gt;并发写场景，概率一般&lt;/td&gt;
-&lt;td&gt;写请求较多时会出现不一致问题，不推荐使用&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;删除缓存 -&amp;gt; 更新数据库&lt;/td&gt;
-&lt;td&gt;更新数据库之前，若有查询请求，会将脏数据刷到缓存&lt;/td&gt;
-&lt;td&gt;并发读场景，概率较大&lt;/td&gt;
-&lt;td&gt;读请求较多时会出现不一致问题，不推荐使用&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;更新数据库 -&amp;gt; 删除缓存&lt;/td&gt;
-&lt;td&gt;在更新数据库之前有查询请求，并且缓存失效了，会查询数据库，然后更新缓存。如果在查询数据库和更新缓存之间进行了数据库更新的操作，那么就会把脏数据刷到缓存&lt;/td&gt;
-&lt;td&gt;并发读场景 &amp;amp; 读操作慢于写操作，概率最小&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;读操作比写操作更慢的情况较少，相比于其他方式出错的概率小一些。勉强推荐。&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;延迟双删&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#延迟双删&#34;&gt;#&lt;/a&gt; 延迟双删&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;推荐使用&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&#34;highlight java&#34;&gt;&lt;figcaption data-lang=&#34;java&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;String&lt;/span&gt; key&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;Object&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  	 redis&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;del&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;key&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;     db&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;update&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;     &lt;span class=&#34;token class-name&#34;&gt;Thread&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;     redis&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;del&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;key&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;ul&gt;
-&lt;li&gt;先淘汰缓存&lt;/li&gt;
-&lt;li&gt;再写数据库&lt;/li&gt;
-&lt;li&gt;休眠 1 秒，再次淘汰缓存&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这么做的目的，就是确保读请求结束，写请求可以删除读请求造成的缓存脏数据。&lt;/p&gt;
-&lt;h2 id=&#34;12-缓存击穿&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#12-缓存击穿&#34;&gt;#&lt;/a&gt; 1.2. 缓存击穿&lt;/h2&gt;
-&lt;p&gt;对于一些设置了过期时间的 key，可能这些 key 会在某些时间点被超高并发地访问，是一种非常 “热点” 的数据。这个时候，需要考虑缓存被 “击穿” 的问题，和缓存雪崩的区别在于这里针对某一 key 缓存，而缓存雪崩则是很多 key。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;解决方案&lt;/th&gt;
-&lt;th&gt;优点&lt;/th&gt;
-&lt;th&gt;缺点&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;使用互斥锁&lt;/td&gt;
-&lt;td&gt;思路简单，保证一致性&lt;/td&gt;
-&lt;td&gt;代码复杂度大，存在死锁的可能&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;提前使用互斥锁&lt;/td&gt;
-&lt;td&gt;保证一致性&lt;/td&gt;
-&lt;td&gt;同上&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;缓存永不过期&lt;/td&gt;
-&lt;td&gt;异步构建缓存，不会阻塞线程池&lt;/td&gt;
-&lt;td&gt;不保证一致性，代码复杂度大，占用一定的内存空间&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;业界比较常用的做法，是使用 mutex。简单地来说，就是在缓存失效的时候（判断拿出来的值为空），不是立即去 load db，而是先使用缓存工具的某些带成功操作返回值的操作（比如 Redis 的 SETNX 或者 Memcache 的 ADD）去 set 一个 mutex key，当操作返回成功时，再进行 load db 的操作并回设缓存；否则，就重试整个 get 缓存的方法。&lt;/p&gt;
-&lt;figure class=&#34;highlight java&#34;&gt;&lt;figcaption data-lang=&#34;java&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;key&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token class-name&#34;&gt;String&lt;/span&gt; value &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; redis&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;key&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;value &lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;null&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;span class=&#34;token comment&#34;&gt;// 代表缓存过期&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token comment&#34;&gt;// 设置 3min 的超时，防止 del 操作失败的时候，下次缓存过期一直不能 load db&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;redis&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;setnx&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;key_mutex&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;60&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;// 代表设置成功&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            value &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; db&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;key&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            redis&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;key&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; value&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; expire_secs&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            redis&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;del&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;key_mutex&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;// 这个时候代表同时候的其他线程已经 load db 并回设到缓存了，这时候重试获取缓存值即可&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token function&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token function&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;key&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token comment&#34;&gt;// 重试&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;          &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; value&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;13-缓存穿透&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#13-缓存穿透&#34;&gt;#&lt;/a&gt; 1.3. 缓存穿透&lt;/h2&gt;
-&lt;p&gt;缓存穿透是指查询一个一定不存在的数据，导致大量请求落到数据库，导致数据库崩溃&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;h3 id=&#34;解决方案&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#解决方案&#34;&gt;#&lt;/a&gt; 解决方案&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;缓存空数据&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;当客户端请求 miss 之后，将空对象保留到 Cache 中，这样下次请求这个 key 的时候就可以返回数据了；&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;布隆过滤器&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210527225121.png&#34; alt=&#34;image-20210527225121737&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;用布隆过滤器实际只需要判断客户端传过来的 userCode 是否存在就可以，图中的 hash1,hash2,hash3 分别代表三种 hash 算法，不同的 userCode 对应着不同的数据位，当需要校验的时候，判断每一种算法的得出来的 byte 位是否相同，只要一位不同，那么我们可以认为这个 userCode 不存在。&lt;/p&gt;
-&lt;p&gt;一般 BloomFilter 要缓存全量的 key，这就要求全量的 key 数量不大，10 亿条数据以内最佳，因为 10 亿条数据大概要占用 1.2 GB 的内存。也可以用 BloomFilter 缓存非法 key，每次发现一个 key 是不存在的非法 key，就记录到 BloomFilter 中，这种记录方案，会导致 BloomFilter 存储的 key 持续高速增长，为了避免记录 key 太多而导致误判率增大，需要定期清零处理。&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;解决方案&lt;/th&gt;
-&lt;th&gt;使用场景&lt;/th&gt;
-&lt;th&gt;优缺点&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;缓存空数据&lt;/td&gt;
-&lt;td&gt;数据命中不高，数据频繁变化实时性高&lt;/td&gt;
-&lt;td&gt;维护简单，需要更多的缓存空间，可能数据不一致&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;布隆过滤器&lt;/td&gt;
-&lt;td&gt;数据命中不高，数据相对固定实时性低&lt;/td&gt;
-&lt;td&gt;代码维护复杂，缓存空间占用少&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;14-缓存雪崩&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#14-缓存雪崩&#34;&gt;#&lt;/a&gt; 1.4. 缓存雪崩&lt;/h2&gt;
-&lt;p&gt;缓存中大量数据同时到期，导致大量请求无法得到处理&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;设置不同过期时间&lt;/li&gt;
-&lt;li&gt;服务降级处理&lt;/li&gt;
-&lt;li&gt;对缓存增加多个副本&lt;/li&gt;
-&lt;li&gt;对缓存体系进行实时监控&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;二-事务&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-事务&#34;&gt;#&lt;/a&gt; 二、事务&lt;/h1&gt;
-&lt;h2 id=&#34;21-事务的acid性质&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#21-事务的acid性质&#34;&gt;#&lt;/a&gt; 2.1. 事务的 ACID 性质&lt;/h2&gt;
-&lt;h3 id=&#34;原子性&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#原子性&#34;&gt;#&lt;/a&gt; 原子性&lt;/h3&gt;
-&lt;p&gt;Redis 的事务与传统的关系型数据库事务的最大区别在于，Redis 不支持事务回滚机制。&lt;/p&gt;
-&lt;h3 id=&#34;一致性&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一致性&#34;&gt;#&lt;/a&gt; 一致性&lt;/h3&gt;
-&lt;p&gt;事务的一致性指的是，如果数据库在执行事务之前是一致的，那么在执行事务之后，无论事务是否执行成功，数据库也应该是一致的。&lt;strong&gt;一致&lt;/strong&gt; 指的是数据符合数据库本身的定义和要求，没有包含非法或者无效的错误数据。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;入队错误&lt;/strong&gt;：服务器会拒绝执行入队过程中出现错误的事务，所以 Redis 事务的一致性不会被带有入队错误的事务影响。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;执行错误&lt;/strong&gt;：1. 执行过程中发生的错误都是一些不能在入队时被服务器发现的错误，这些错误只有在命令实际执行时才会被发现。2. 即使在事务的执行过程中发生了错误，服务器也不会中断事务的执行，它会继续执行事务中余下的其他命令，并且已执行的命令（包括执行命令所产生的结果）不会被出错的命令影响。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;服务器停机&lt;/strong&gt;：1. 如果服务器运行在无持久化的内存模式下，那么重启后的数据库将会是空白的，因为数据总是一致的；2. 如果服务器运行在 RDB 模式下，那么在事务中途停机不会导致一致性，因为服务器可以根据现有的 RDB 文件来恢复数据，从而将数据库还原到一个一致的状态。如果找不到可供使用的 RDB 文件，那么重启之后的数据库将是空白的，而空白数据库总是一致的；3. 如果服务器运行在 AOF 模式下，那么在事务中途停机不会导致一致性，因为服务器可以根据现有的 AOF 文件来恢复数据，从而将数据库还原到一个一致的状态。如果找不到可供使用的 AOF 文件，那么重启之后的数据库将是空白的，而空白数据库总是一致的。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;隔离性&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#隔离性&#34;&gt;#&lt;/a&gt; 隔离性&lt;/h3&gt;
-&lt;p&gt;事务的隔离性指的是，即使数据库中有多个事务并发地执行，各个事务之间也不会相互影响。并且并发状态下执行的事务和串行执行的事务产生的结果完全相同。&lt;/p&gt;
-&lt;h3 id=&#34;耐久性&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#耐久性&#34;&gt;#&lt;/a&gt; 耐久性&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;内存模式&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;条件&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;耐久性&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;无持久化&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;无&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;RDB 持久化&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;特定条件下才会执行 BGSAVE 命令&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;无&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;AOF 持久化&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;appendfsync = always、everysec、no&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;只有为 always 时才具有耐久性&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;!-- more --&gt;&lt;/p&gt;
-&lt;h1 id=&#34;三-redis-主从架构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#三-redis-主从架构&#34;&gt;#&lt;/a&gt; 三、Redis 主从架构&lt;/h1&gt;
-&lt;h2 id=&#34;31-简介&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#31-简介&#34;&gt;#&lt;/a&gt; 3.1. 简介&lt;/h2&gt;
-&lt;p&gt;单机的 Redis，能够承载的 QPS 大概就在上万到几万不等。对于缓存来说，一般都是用来支撑&lt;strong&gt;读高并发&lt;/strong&gt;的。&lt;/p&gt;
-&lt;p&gt;因此架构做成主从 (master-slave) 架构，一主多从，&lt;strong&gt;主负责写&lt;/strong&gt;，并且将数据复制到其它的 slave 节点，&lt;strong&gt;从节点负责读&lt;/strong&gt;。所有的&lt;strong&gt;读请求全部走从节点&lt;/strong&gt;。这样也可以很轻松实现水平扩容，&lt;strong&gt;支撑读高并发&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210621162859.png&#34; alt=&#34;image-20210621162852892&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;四-三种缓存读写策略&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#四-三种缓存读写策略&#34;&gt;#&lt;/a&gt; 四、三种缓存读写策略&lt;/h1&gt;
-&lt;h2 id=&#34;41旁路缓存模式&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#41旁路缓存模式&#34;&gt;#&lt;/a&gt; 4.1. 旁路缓存模式&lt;/h2&gt;
-&lt;p&gt;Cache Aside Pattern 是平时用的比较多的一个缓存读写模式，比较适合&lt;strong&gt;读请求比较多的场景&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id=&#34;写过程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#写过程&#34;&gt;#&lt;/a&gt; 写过程&lt;/h3&gt;
-&lt;p&gt;先更新 DB，然后直接删除 cache。&lt;/p&gt;
-&lt;h3 id=&#34;读过程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#读过程&#34;&gt;#&lt;/a&gt; 读过程&lt;/h3&gt;
-&lt;p&gt;从 cache 中读取数据，读取到就直接返回，cache 中读取不到的话，就从 DB 中读取数据返回，再将数据放到 cache 中。&lt;/p&gt;
-&lt;h2 id=&#34;42读写穿透&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#42读写穿透&#34;&gt;#&lt;/a&gt; 4.2. 读写穿透&lt;/h2&gt;
-&lt;h3 id=&#34;写过程-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#写过程-2&#34;&gt;#&lt;/a&gt; 写过程&lt;/h3&gt;
-&lt;p&gt;先查 cache，cache 中不存在，直接更新 DB。cache 中存在，则先更新 cache，然后 cache 服务自己更新 DB。&lt;/p&gt;
-&lt;h3 id=&#34;读过程-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#读过程-2&#34;&gt;#&lt;/a&gt; 读过程&lt;/h3&gt;
-&lt;p&gt;从 cache 中读取数据，读取到就直接返回，读取不到的话，先从 DB 加载，写入到 cache 后返回响应。&lt;/p&gt;
-&lt;h2 id=&#34;43异步缓存写入&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#43异步缓存写入&#34;&gt;#&lt;/a&gt; 4.3. 异步缓存写入&lt;/h2&gt;
-&lt;p&gt;异步缓存写入只更新缓存，不直接更新 DB，而是改为异步批量的方式来更新 DB。&lt;/p&gt;
-&lt;h1 id=&#34;五-redis6多线程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#五-redis6多线程&#34;&gt;#&lt;/a&gt; 五、Redis6 多线程&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;Redis6.0 引入多线程主要是为了提高网络 I/O 读写性能&lt;/strong&gt;，因为这个算是 Redis 中的一个性能瓶颈（Redis 的瓶颈主要受限于内存和网络）。&lt;/p&gt;
-&lt;p&gt;虽然，Redis6.0 引入了多线程，但是 Redis 的多线程只是在网络数据的读写这类耗时操作上使用了， 执行命令仍然是单线程顺序执行。因此，你也不需要担心线程安全问题。&lt;/p&gt;
-&lt;p&gt;Redis6.0 的多线程默认是禁用的，只使用主线程。如需开启需要修改 redis 配置文件  &lt;code&gt;redis.conf&lt;/code&gt;  ：&lt;/p&gt;
-&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;io-threads-do-reads &lt;span class=&#34;token function&#34;&gt;yes&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;开启多线程后，还需要设置线程数，否则是不生效的。同样需要修改 redis 配置文件  &lt;code&gt;redis.conf&lt;/code&gt;  :&lt;/p&gt;
-&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;io-threads &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#官网建议 4 核的机器建议设置为 2 或 3 个线程，8 核的建议设置为 6 个线程&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;六-redis内存淘汰机制&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#六-redis内存淘汰机制&#34;&gt;#&lt;/a&gt; 六、Redis 内存淘汰机制&lt;/h1&gt;
-&lt;p&gt;Redis 提供 6 种数据淘汰策略：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;volatile-lru（least recently used）&lt;/strong&gt;：从已设置过期时间的数据集（server.db [i].expires）中挑选最近最少使用的数据淘汰。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;volatile-ttl&lt;/strong&gt;：从已设置过期时间的数据集（server.db [i].expires）中挑选将要过期的数据淘汰。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;volatile-random&lt;/strong&gt;：从已设置过期时间的数据集（server.db [i].expires）中任意选择数据淘汰。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;allkeys-lru（least recently used）&lt;/strong&gt;：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的 key（&lt;strong&gt;这个是最常用的&lt;/strong&gt;）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;allkeys-random&lt;/strong&gt;：从数据集（server.db [i].dict）中任意选择数据淘汰。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;no-eviction&lt;/strong&gt;：禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。这个应该没人使用吧！&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;4.0 版本后增加以下两种：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;volatile-lfu（least frequently used）&lt;/strong&gt;：从已设置过期时间的数据集 (server.db [i].expires) 中挑选最不经常使用的数据淘汰。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;allkeys-lfu（least frequently used）&lt;/strong&gt;：当内存不足以容纳新写入数据时，在键空间中，移除最不经常使用的 key。&lt;/li&gt;
-&lt;/ol&gt;
-</content>
-        <category term="Redis6学习笔记" scheme="https://yukiofyume.github.io/categories/Redis6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
-        <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-        <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
-        <updated>2021-05-27T13:44:32.000Z</updated>
     </entry>
 </feed>
