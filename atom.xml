@@ -43,6 +43,13 @@ if $custom = hexo-config(&#39;style.custom&#39;)
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;可以看到是在这里做了逻辑判断。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/themes/shoka/source/css/_mixins.styl&lt;/code&gt;  修改按钮颜色:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$color-btn &amp;#123;
+  color: var(--grey-0);
+  background-image: linear-gradient(to right,var(--color-pink) 0,var(--color-orange) 100%);
+  box-shadow: 0 0 .75rem var(--color-pink-a3);
+&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
 </content>
         <category term="shoka" scheme="https://yukiofyume.github.io/categories/shoka/" />
         <updated>2022-03-03T14:19:26.000Z</updated>
