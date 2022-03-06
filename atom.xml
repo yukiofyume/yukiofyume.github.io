@@ -10,9 +10,9 @@
     </author>
     <updated>2022-03-06T02:15:37.000Z</updated>
     <entry>
-        <id>https://yukiofyume.github.io/RocketMQ%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</id>
+        <id>https://yukiofyume.github.io/Midd/RocketMQ/RocketMQ%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</id>
         <title>RocketMQ基础知识</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/RocketMQ%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/Midd/RocketMQ/RocketMQ%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
         <content type="html">&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL2FwYWNoZS9yb2NrZXRtcS90cmVlL21hc3Rlci9kb2NzL2Nu&#34;&gt;RocketMQ 官方中文文档&lt;/span&gt;&lt;/p&gt;
 &lt;h1 id=&#34;mq如何选型&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#mq如何选型&#34;&gt;#&lt;/a&gt; MQ 如何选型&lt;/h1&gt;
 &lt;ul&gt;
@@ -505,9 +505,9 @@ sticky: true
         <updated>2022-03-02T06:24:51.577Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/git%E5%AD%A6%E4%B9%A0/</id>
+        <id>https://yukiofyume.github.io/Tool/git%E5%AD%A6%E4%B9%A0/</id>
         <title>git学习</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/git%E5%AD%A6%E4%B9%A0/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/Tool/git%E5%AD%A6%E4%B9%A0/"/>
         <content type="html">&lt;h1 id=&#34;初始化库&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#初始化库&#34;&gt;#&lt;/a&gt; 初始化库&lt;/h1&gt;
 &lt;pre&gt;&lt;code&gt;1.初始化库
 git init
@@ -609,9 +609,9 @@ git commit -m &amp;quot;success merge&amp;quot;
         <updated>2022-03-01T13:38:31.000Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
+        <id>https://yukiofyume.github.io/Tool/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
         <title>Linux常用命令</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/Tool/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
         <content type="html">&lt;h1 id=&#34;rm-命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#rm-命令&#34;&gt;#&lt;/a&gt; rm 命令&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;1. 删除任何 .log 文件，删除前逐一询问&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;rm -i *.log&lt;/code&gt;&lt;/p&gt;
@@ -737,9 +737,9 @@ git commit -m &amp;quot;success merge&amp;quot;
         <updated>2022-03-01T12:30:07.000Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/SSL-TLS%E5%8D%8F%E8%AE%AE/</id>
+        <id>https://yukiofyume.github.io/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/SSL-TLS%E5%8D%8F%E8%AE%AE/</id>
         <title>SSL/TLS协议</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/SSL-TLS%E5%8D%8F%E8%AE%AE/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/SSL-TLS%E5%8D%8F%E8%AE%AE/"/>
         <content type="html">&lt;p&gt;SSL/TLS 是一种密码通信框架，综合运用了密码学中的对称密码，消息认证码，公钥密码，数字签名，为随机生成器等。&lt;/p&gt;
 &lt;p&gt;SSL（Secure Socket Layer）安全套接字层；&lt;/p&gt;
 &lt;p&gt;TLS（Transport Layer Security）传输层安全。&lt;/p&gt;
@@ -759,9 +759,9 @@ git commit -m &amp;quot;success merge&amp;quot;
         <updated>2021-09-09T03:32:48.000Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AARPC%E6%A1%86%E6%9E%B6/</id>
+        <id>https://yukiofyume.github.io/Project/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AARPC%E6%A1%86%E6%9E%B6/</id>
         <title>手写一个RPC框架</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AARPC%E6%A1%86%E6%9E%B6/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/Project/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AARPC%E6%A1%86%E6%9E%B6/"/>
         <content type="html">&lt;h1 id=&#34;说明&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#说明&#34;&gt;#&lt;/a&gt; 说明&lt;/h1&gt;
 &lt;p&gt;这是一个基于 Netty 和 Nacos 的 RPC 框架最最最最基本的实现，只是为了学习 RPC 的调用过程以及相关知识&lt;/p&gt;
 &lt;h1 id=&#34;实现思路&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#实现思路&#34;&gt;#&lt;/a&gt; 实现思路&lt;/h1&gt;
@@ -820,9 +820,9 @@ git commit -m &amp;quot;success merge&amp;quot;
         <updated>2021-08-24T08:42:34.000Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/SpringSecurity%E9%9D%A2%E8%AF%95%E9%A2%98/</id>
+        <id>https://yukiofyume.github.io/Java/Spring%E5%85%AB%E8%82%A1%E6%96%87/SpringSecurity%E9%9D%A2%E8%AF%95%E9%A2%98/</id>
         <title>SpringSecurity面试题</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/SpringSecurity%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/Java/Spring%E5%85%AB%E8%82%A1%E6%96%87/SpringSecurity%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
         <content type="html">&lt;h1 id=&#34;执行流程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#执行流程&#34;&gt;#&lt;/a&gt; 执行流程&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -861,9 +861,9 @@ git commit -m &amp;quot;success merge&amp;quot;
         <updated>2021-08-14T14:52:00.000Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%AE%9E%E6%88%98/</id>
+        <id>https://yukiofyume.github.io/Database/MySQL/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%AE%9E%E6%88%98/</id>
         <title>分库分表实战</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%AE%9E%E6%88%98/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/Database/MySQL/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%AE%9E%E6%88%98/"/>
         <content type="html">&lt;h1 id=&#34;分库分表&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#分库分表&#34;&gt;#&lt;/a&gt; 分库分表&lt;/h1&gt;
 &lt;h1 id=&#34;主从环境&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#主从环境&#34;&gt;#&lt;/a&gt; 主从环境&lt;/h1&gt;
 &lt;h2 id=&#34;使用docker搭建&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#使用docker搭建&#34;&gt;#&lt;/a&gt; 使用 docker 搭建&lt;/h2&gt;
@@ -954,9 +954,9 @@ spring.shardingsphere.props.sql.show=true
         <updated>2021-08-03T13:44:38.000Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/MBG%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</id>
+        <id>https://yukiofyume.github.io/Midd/Mybatis/MBG%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</id>
         <title>MBG的基本使用</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/MBG%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/Midd/Mybatis/MBG%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
         <content type="html">&lt;h2 id=&#34;导入依赖&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#导入依赖&#34;&gt;#&lt;/a&gt; 导入依赖&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
 &amp;lt;project xmlns=&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot;
@@ -1023,9 +1023,9 @@ spring.shardingsphere.props.sql.show=true
         <updated>2021-07-14T02:13:31.000Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</id>
+        <id>https://yukiofyume.github.io/Midd/Kafka/kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</id>
         <title>Kafka基础知识</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/Midd/Kafka/kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
         <content type="html">&lt;h1 id=&#34;kafka安装&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#kafka安装&#34;&gt;#&lt;/a&gt; Kafka 安装&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;我是使用的阿里云 centos7 进行的安装模拟&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;单机版&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#单机版&#34;&gt;#&lt;/a&gt; 单机版&lt;/h2&gt;
@@ -1222,9 +1222,9 @@ config/server-2.properties:
         <updated>2021-06-23T11:56:44.000Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/Spring%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</id>
+        <id>https://yukiofyume.github.io/Java/Spring%E5%85%AB%E8%82%A1%E6%96%87/Spring%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</id>
         <title>Spring中的设计模式</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/Spring%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/Java/Spring%E5%85%AB%E8%82%A1%E6%96%87/Spring%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
         <content type="html">&lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1311,8 +1311,8 @@ config/server-2.properties:
 </content>
         <category term="Java" scheme="https://yukiofyume.github.io/categories/Java/" />
         <category term="Spring八股文" scheme="https://yukiofyume.github.io/categories/Java/Spring%E5%85%AB%E8%82%A1%E6%96%87/" />
-        <category term="Spring" scheme="https://yukiofyume.github.io/tags/Spring/" />
         <category term="设计模式" scheme="https://yukiofyume.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" />
+        <category term="Spring" scheme="https://yukiofyume.github.io/tags/Spring/" />
         <updated>2021-06-23T06:03:15.000Z</updated>
     </entry>
     <entry>
@@ -1551,9 +1551,9 @@ config/server-2.properties:
         <updated>2021-05-31T01:50:29.000Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/</id>
+        <id>https://yukiofyume.github.io/Midd/Redis/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/</id>
         <title>Redis面试题</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/Midd/Redis/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
         <content type="html">&lt;h1 id=&#34;缓存使用中的坑&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#缓存使用中的坑&#34;&gt;#&lt;/a&gt; 缓存使用中的坑&lt;/h1&gt;
 &lt;h2 id=&#34;缓存一致性&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#缓存一致性&#34;&gt;#&lt;/a&gt; 缓存一致性&lt;/h2&gt;
 &lt;table&gt;
@@ -1752,8 +1752,8 @@ config/server-2.properties:
 </content>
         <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
         <category term="Redis" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" />
-        <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
         <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
+        <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
         <updated>2021-05-27T13:44:32.000Z</updated>
     </entry>
     <entry>
@@ -2128,9 +2128,9 @@ config/server-2.properties:
         <updated>2021-05-24T12:19:04.000Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</id>
+        <id>https://yukiofyume.github.io/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</id>
         <title>计算机基础知识</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
         <content type="html">&lt;h1 id=&#34;计算机网络&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#计算机网络&#34;&gt;#&lt;/a&gt; 计算机网络&lt;/h1&gt;
 &lt;h2 id=&#34;tcpip分层&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#tcpip分层&#34;&gt;#&lt;/a&gt; TCP/IP 分层&lt;/h2&gt;
 &lt;ul&gt;
@@ -2330,9 +2330,9 @@ config/server-2.properties:
         <updated>2021-05-24T09:19:38.000Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/Redis%E5%8D%95%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%BA%93/</id>
+        <id>https://yukiofyume.github.io/Midd/Redis/Redis%E5%8D%95%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%BA%93/</id>
         <title>Redis单机数据库</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/Redis%E5%8D%95%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/Midd/Redis/Redis%E5%8D%95%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
         <content type="html">&lt;h1 id=&#34;在docker下安装配置redis622单机&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#在docker下安装配置redis622单机&#34;&gt;#&lt;/a&gt; 在 docker 下安装配置 redis (6.2.2) 单机&lt;/h1&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9yZWdpc3RyeS5odWIuZG9ja2VyLmNvbS9fL3JlZGlz&#34;&gt;docker hub&lt;/span&gt; ，教程是十个有十一个有问题，我佛了。。。搞了一晚上终于好了...(还不是因为不熟悉 docker...)&lt;/p&gt;
 &lt;ol&gt;
@@ -2541,14 +2541,14 @@ config/server-2.properties:
 </content>
         <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
         <category term="Redis" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" />
-        <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
         <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
+        <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
         <updated>2021-05-20T05:33:24.000Z</updated>
     </entry>
     <entry>
-        <id>https://yukiofyume.github.io/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%B0%8F%E7%BB%93/</id>
+        <id>https://yukiofyume.github.io/Midd/Redis/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%B0%8F%E7%BB%93/</id>
         <title>Redis数据结构与对象小结</title>
-        <link rel="alternate" href="https://yukiofyume.github.io/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%B0%8F%E7%BB%93/"/>
+        <link rel="alternate" href="https://yukiofyume.github.io/Midd/Redis/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%B0%8F%E7%BB%93/"/>
         <content type="html">&lt;h1 id=&#34;redis-的数据结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#redis-的数据结构&#34;&gt;#&lt;/a&gt; Redis 的数据结构&lt;/h1&gt;
 &lt;p&gt;源码版本为 redis-5.0.10&lt;/p&gt;
 &lt;h2 id=&#34;简单动态字符串&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#简单动态字符串&#34;&gt;#&lt;/a&gt; 简单动态字符串&lt;/h2&gt;
@@ -2818,8 +2818,8 @@ index = hash &amp;amp; dict -&amp;gt; ht[0].sizemask = 8 &amp;amp; 3 = 0;
 &lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;token expression&#34;&gt;SETBIT 会返回之前位的值（默认是 &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;）这里会生成 &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt; 个位&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; setbit mykey &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; setbit mykey &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; getbit mykey &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; setbit mykey &lt;span class=&#34;token number&#34;&gt;6&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; setbit mykey &lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;# 通过 bitcount 统计被被设置为 &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; 的位的数量。&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; bitcount &lt;span class=&#34;token function&#34;&gt;mykey&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
         <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
         <category term="Redis" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" />
-        <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
         <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
+        <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
         <updated>2021-05-20T02:19:58.000Z</updated>
     </entry>
 </feed>
