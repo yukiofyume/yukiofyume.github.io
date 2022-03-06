@@ -10,8 +10,57 @@
         </author>
         <description>记录下东西</description>
         <language>zh-CN</language>
-        <pubDate>Sun, 06 Mar 2022 10:15:37 +0800</pubDate>
-        <lastBuildDate>Sun, 06 Mar 2022 10:15:37 +0800</lastBuildDate>
+        <pubDate>Sun, 06 Mar 2022 17:39:55 +0800</pubDate>
+        <lastBuildDate>Sun, 06 Mar 2022 17:39:55 +0800</lastBuildDate>
+        <item>
+            <guid isPermalink="true">https://yukiofyume.github.io/Project/JWT/</guid>
+            <title>JWT</title>
+            <link>https://yukiofyume.github.io/Project/JWT/</link>
+            <category term="项目实战" scheme="https://yukiofyume.github.io/categories/Project/" />
+            <pubDate>Sun, 06 Mar 2022 17:39:55 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;jwt构成和原理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#jwt构成和原理&#34;&gt;#&lt;/a&gt; JWT 构成和原理&lt;/h1&gt;
+&lt;p&gt;一个完整的 JWT 由三部分构成：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;header.payload.signature&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;header&lt;/strong&gt; 主要描述这是什么类型的 token，采用了什么加密算法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;#123;
+  &amp;quot;alg&amp;quot;: &amp;quot;HS256&amp;quot;,
+  &amp;quot;typ&amp;quot;: &amp;quot;JWT&amp;quot;
+&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;payload&lt;/strong&gt; 包含一些不敏感的信息，比如 JWT 的签发者、接收者、有效时间等。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;#123;
+  &amp;quot;sub&amp;quot;: &amp;quot;1234567890&amp;quot;,
+  &amp;quot;name&amp;quot;: &amp;quot;John Doe&amp;quot;,
+  &amp;quot;admin&amp;quot;: true
+&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;signature&lt;/strong&gt; 是对前面两部分的签名，防止篡改&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;生成 JWT 的过程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;构建一个正常的 header A，写入一些信息，然后使用 base64 编码 header A 得到 header B&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;构建一个正常的 payload A，写入一些信息，然后使用 base64 编码 payload A 得到 payload B&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选择一个加密算法，如 HS256，然后自定义一个 secret，这个 secret 是他人都不知道的，只有本服务端保有&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;拼接 headerB 和 payloadB 为 headerB.payloadB，将其作为一个整体，使用 HS256 进行加密 (secret 为密钥)，从而得到 signature A&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;把 signature A 用 base64 编码得到 signature B，所以最后的结果就是 headerB.payloadB.signatureB&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://yukiofyume.github.io/Midd/RocketMQ/RocketMQ%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
             <title>RocketMQ基础知识</title>
@@ -1559,8 +1608,8 @@ config/server-2.properties:
             <link>https://yukiofyume.github.io/Midd/Redis/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
             <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
             <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
-            <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
             <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
+            <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
             <pubDate>Thu, 27 May 2021 21:44:32 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;缓存使用中的坑&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#缓存使用中的坑&#34;&gt;#&lt;/a&gt; 缓存使用中的坑&lt;/h1&gt;
 &lt;h2 id=&#34;缓存一致性&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#缓存一致性&#34;&gt;#&lt;/a&gt; 缓存一致性&lt;/h2&gt;
@@ -2338,8 +2387,8 @@ config/server-2.properties:
             <link>https://yukiofyume.github.io/Midd/Redis/Redis%E5%8D%95%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
             <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
             <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
-            <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
             <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
+            <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
             <pubDate>Thu, 20 May 2021 13:33:24 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;在docker下安装配置redis622单机&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#在docker下安装配置redis622单机&#34;&gt;#&lt;/a&gt; 在 docker 下安装配置 redis (6.2.2) 单机&lt;/h1&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9yZWdpc3RyeS5odWIuZG9ja2VyLmNvbS9fL3JlZGlz&#34;&gt;docker hub&lt;/span&gt; ，教程是十个有十一个有问题，我佛了。。。搞了一晚上终于好了...(还不是因为不熟悉 docker...)&lt;/p&gt;
@@ -2547,283 +2596,6 @@ config/server-2.properties:
 &lt;li&gt;当被监听的套接字准备好执行连接应答（accept）、读取（read）、写入（write）、关闭（close）等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件。&lt;/li&gt;
 &lt;/ul&gt;
  ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://yukiofyume.github.io/Midd/Redis/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%B0%8F%E7%BB%93/</guid>
-            <title>Redis数据结构与对象小结</title>
-            <link>https://yukiofyume.github.io/Midd/Redis/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%B0%8F%E7%BB%93/</link>
-            <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
-            <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
-            <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-            <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
-            <pubDate>Thu, 20 May 2021 10:19:58 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;redis-的数据结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#redis-的数据结构&#34;&gt;#&lt;/a&gt; Redis 的数据结构&lt;/h1&gt;
-&lt;p&gt;源码版本为 redis-5.0.10&lt;/p&gt;
-&lt;h2 id=&#34;简单动态字符串&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#简单动态字符串&#34;&gt;#&lt;/a&gt; 简单动态字符串&lt;/h2&gt;
-&lt;h3 id=&#34;简介&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#简介&#34;&gt;#&lt;/a&gt; 简介&lt;/h3&gt;
-&lt;p&gt;Redis 中，C 字符串只会作为字符串字面量用来一些无须对字符串进行修改的地方，而其它地方都是使用 &lt;strong&gt;简单动态字符串（SDS）&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id=&#34;与-c-字符串的区别&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#与-c-字符串的区别&#34;&gt;#&lt;/a&gt; 与 C 字符串的区别&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;常数复杂度获取字符串长度&lt;/strong&gt;：在 SDS 数据结构中定义了  &lt;code&gt;len&lt;/code&gt;  属性记录了 SDS 本身长度，因此获取 SDS 长度的时间复杂度为 &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;O(1)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。设置和更新 SDS 长度的工作是由 SDS 的 API 在执行时自动完成的。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;防止缓冲区溢出&lt;/strong&gt;：当 SDS API 需要对 SDS 进行修改时，API 会检查 SDS 的空间是否满足修改所需的要求，如果不满足的话，API 会自动将 SDS 的空间拓展至执行修改所需的大小，然后执行修改操作，这样就不会导致缓冲区溢出。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;减少修改字符串时带来的内存重分配次数&lt;/strong&gt;：
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;空间预分配&lt;/strong&gt;：如果对 SDS 进行修改之后， SDS 的长度（len 属性的值，不包括 free 空间的大小）将小于 1MB ，那么程序分配和 len 属性同样大小的未使用空间；如果对 SDS 进行修改之后， SDS 的长度将大于等于 1MB。那么程序会分配 1MB 的未使用空间。&lt;strong&gt;通过空间预分配，Redis 可以减少连续执行字符串增长操作所需的空间。&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;惰性空间释放&lt;/strong&gt;：当 SDS 的 API 需要缩短 SDS 保存的字符串时，程序并不立即使用内存重分配来回收缩短后多出来的字节，而是使用 free 属性将这些字节的数量记录起来，并等待将来使用。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;二进制安全&lt;/strong&gt;：SDS API 会以处理二进制的方式来处理 SDS 存放在 buf 数组里的数据，程序不会对其中的数据做任何限制、过滤、或者假设，数据在写入是什么样的，它被读取是就是什么样。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;兼容部分 C 字符串函数&lt;/strong&gt;：可以使用  &lt;code&gt;&amp;lt;string.h&amp;gt;&lt;/code&gt;  中定义的部分函数。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;C 字符串&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;SDS&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;获取字符串长度的时间复杂度为 &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;O(N)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.10903em;&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;获取字符串长度的时间复杂度 &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;O(1)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;API 不安全，可能导致缓冲区溢出&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;API 安全，不会导致缓冲区溢出&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;修改字符串长度 N 次必然需要执行 N 次内存重分配&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;修改字符串长度 N 次至多需要执行 N 次内存重分配&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;只能保存文本数据&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;可以保存文本或者二进制数据&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;可以使用  &lt;code&gt;&amp;lt;string.h&amp;gt;&lt;/code&gt;  库中的函数&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;只能部分使用  &lt;code&gt;&amp;lt;string.h&amp;gt;&lt;/code&gt;  库中的函数&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id=&#34;链表&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#链表&#34;&gt;#&lt;/a&gt; 链表&lt;/h2&gt;
-&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;listNode&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 前置节点&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;listNode&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;prev&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 后置节点&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;listNode&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;next&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 节点的值&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;value&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;listNode&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;list&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 表头节点&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    listNode &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;head&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 表尾节点&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    listNode &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;tail&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 链表所包含的节点数量&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;long&lt;/span&gt; len&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 节点值复制函数&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;dup&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;ptr&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 节点值释放函数&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;free&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;ptr&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 节点值比较函数&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;match&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;ptr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;key&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;list&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&amp;lt;img src=&amp;quot;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRlZS5jb20vc2FrdXJhbGVlL2Jsb2ctaW1nL3Jhdy9tYXN0ZXIvaW1nLzIwMjEwNzEzMDk0NzExLmpwZw==&#34;&gt;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713094711.jpg&lt;/span&gt;&amp;quot; alt=&amp;quot;1&amp;quot; style=&amp;quot;zoom: 33%;&amp;quot; /&amp;gt;&lt;/p&gt;
-&lt;h2 id=&#34;字典&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#字典&#34;&gt;#&lt;/a&gt; 字典&lt;/h2&gt;
-&lt;p&gt;Redis 的字典使用&lt;strong&gt;哈希表&lt;/strong&gt;作为底层实现。&lt;/p&gt;
-&lt;h3 id=&#34;哈希表&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#哈希表&#34;&gt;#&lt;/a&gt; 哈希表&lt;/h3&gt;
-&lt;p&gt;Redis 字典所使用的哈希表由  &lt;code&gt;dict.h/dictht&lt;/code&gt;  结构定义：&lt;/p&gt;
-&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;dictht&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 哈希表数组&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    dictEntry &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;table&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 哈希表大小&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;long&lt;/span&gt; size&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 哈希表掩码，总是等于 size - 1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;long&lt;/span&gt; sizemask&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 该哈希表已有节点数&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;long&lt;/span&gt; used&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;dictht&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&amp;lt;img src=&amp;quot;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRlZS5jb20vc2FrdXJhbGVlL2Jsb2ctaW1nL3Jhdy9tYXN0ZXIvaW1nLzIwMjEwNzEzMDk0NDQwLmpwZw==&#34;&gt;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713094440.jpg&lt;/span&gt;&amp;quot; alt=&amp;quot;1&amp;quot; style=&amp;quot;zoom:25%;&amp;quot; /&amp;gt;&lt;/p&gt;
-&lt;h3 id=&#34;字典-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#字典-2&#34;&gt;#&lt;/a&gt; 字典&lt;/h3&gt;
-&lt;p&gt;Redis 中的字典由  &lt;code&gt;dict.h/dict&lt;/code&gt;  结构表示：&lt;/p&gt;
-&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;dict&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 类型特定函数&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    dictType &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;type&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 私有数据&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;privdata&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 哈希表&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    dictht ht&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;//rehash 索引。当 rehash 不在进行时，值为 -1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; rehashidx&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt; dict&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;code&gt;type&lt;/code&gt;  属性和  &lt;code&gt;privdata&lt;/code&gt;  属性是针对不同类型的键值对，为创建多态字典而设置的。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;type&lt;/strong&gt;：是一个指向  &lt;code&gt;dictType&lt;/code&gt;  结构的指针，每个  &lt;code&gt;dictType&lt;/code&gt;  结构保存了一簇用于操作特定类型键值对的函数，Redis 会为用途不同的字典设置不同的类型特定函数。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;privdata&lt;/strong&gt;：保存了需要传给那么类型特定函数的可选参数。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;code&gt;ht&lt;/code&gt;  属性是一个包含两个项的数组，数组中的每一项都是一个  &lt;code&gt;dictht&lt;/code&gt;  哈希表，一般情况下，字典只使用  &lt;code&gt;ht[0]&lt;/code&gt;  哈希表，  &lt;code&gt;ht[1]&lt;/code&gt;  哈希表只会在对  &lt;code&gt;ht[0]&lt;/code&gt;  哈希表进行 rehash 时使用。&lt;/p&gt;
-&lt;p&gt;&amp;lt;img src=&amp;quot;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRlZS5jb20vc2FrdXJhbGVlL2Jsb2ctaW1nL3Jhdy9tYXN0ZXIvaW1nLzIwMjEwNzEzMDk0NDU0LmpwZw==&#34;&gt;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713094454.jpg&lt;/span&gt;&amp;quot; alt=&amp;quot;2&amp;quot; style=&amp;quot;zoom: 25%;&amp;quot; /&amp;gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;索引的计算&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;程序先根据键值对的键计算出哈希值和索引值，然后再根据索引值，将包含新键值对的哈希表节点放到哈希表数组的指定索引上。&lt;/p&gt;
-&lt;p&gt;使用&lt;strong&gt;链地址法&lt;/strong&gt;解决冲突。&lt;/p&gt;
-&lt;p&gt;索引是由 hash 值 和哈希表掩码（哈希表 size - 1）得到的。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hash = dict-&amp;gt;type-&amp;gt;hashFunction(k0);
-index = hash &amp;amp; dict -&amp;gt; ht[0].sizemask = 8 &amp;amp; 3 = 0;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;rehash&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#rehash&#34;&gt;#&lt;/a&gt; rehash&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;为字典的  &lt;code&gt;ht[1]&lt;/code&gt;  哈希表分配空间，这个哈希表的空间大小取决于要执行的操作，以及  &lt;code&gt;ht[0]&lt;/code&gt;  当前包含的键值对数量 ( &lt;code&gt;ht[0].used&lt;/code&gt; )
-&lt;ul&gt;
-&lt;li&gt;如果执行的是&lt;strong&gt;拓展操作&lt;/strong&gt;，那么  &lt;code&gt;ht[1]&lt;/code&gt;  的大小为第一个大于等于  &lt;code&gt;ht[0].used * 2&lt;/code&gt;  的 &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;2^n&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.664392em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.664392em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathnormal mtight&#34;&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; ；&lt;/li&gt;
-&lt;li&gt;如果执行的是&lt;strong&gt;收缩操作&lt;/strong&gt;，那么  &lt;code&gt;ht[1]&lt;/code&gt;  的大小为第一个大于等于  &lt;code&gt;ht[0].used&lt;/code&gt;  的 &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;2^n&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.664392em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.664392em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathnormal mtight&#34;&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;将保存在  &lt;code&gt;ht[0]&lt;/code&gt;  中的所有键值对 rehash 到  &lt;code&gt;ht[1]&lt;/code&gt;  上面：rehash 指的是重新计算键的哈希值和索引值，然后将键值对放置到  &lt;code&gt;ht[1]&lt;/code&gt;  哈希表的指定位置上。&lt;/li&gt;
-&lt;li&gt;当  &lt;code&gt;ht[0]&lt;/code&gt;  包含的所有键值对都迁移到了  &lt;code&gt;ht[1]&lt;/code&gt;  之后，释放  &lt;code&gt;ht[0]&lt;/code&gt; ，将  &lt;code&gt;ht[1]&lt;/code&gt;  设置为  &lt;code&gt;ht[0]&lt;/code&gt; ，并在  &lt;code&gt;ht[1]&lt;/code&gt;  新创建一个空白的哈希表，为下一次 rehash 做准备。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;哈希表的拓展与收缩&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#哈希表的拓展与收缩&#34;&gt;#&lt;/a&gt; 哈希表的拓展与收缩&lt;/h3&gt;
-&lt;p&gt;当以下条件中的&lt;strong&gt;任意一个&lt;/strong&gt;被满足时，程序会自动开始对哈希表执行拓展操作：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;服务器目前没有在执行 &lt;em&gt;&lt;strong&gt;BGSAVE&lt;/strong&gt;&lt;/em&gt; 命令或者 &lt;em&gt;&lt;strong&gt;BGREWRITEAOF&lt;/strong&gt;&lt;/em&gt; 命令，并且哈希表的负载因子大于等于 1。&lt;/li&gt;
-&lt;li&gt;服务器目标正在执行 &lt;em&gt;&lt;strong&gt;BGSAVE&lt;/strong&gt;&lt;/em&gt; 命令或者 &lt;em&gt;&lt;strong&gt;BGREWRITEAOF&lt;/strong&gt;&lt;/em&gt;  命令，并且哈希表的负载因子大于等于 5。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;当哈希表的负载因子小于 0.1 时，程序自动开始对哈希表执行收缩操作。&lt;/p&gt;
-&lt;h3 id=&#34;渐进式-rehash&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#渐进式-rehash&#34;&gt;#&lt;/a&gt; 渐进式 rehash&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;为 ht [1] 分配空间，让字典同时持有 ht [0] 和 ht [1] 两个哈希表；&lt;/li&gt;
-&lt;li&gt;在字典中维护一个索引计数器变量  &lt;code&gt;rehashidx = 0&lt;/code&gt; ，表示 rehash 工作正式开始；&lt;/li&gt;
-&lt;li&gt;在 rehash 进行期间，每次对字典执行添加、删除、查找或者更新操作时，程序除了执行指定的操作以外，还会顺带将 ht [0] 哈希表在 rehashidx 索引上的所有键值对 rehash 到 ht [1]，当 rehash 工作完成之后，程序将 rehashidx 属性的值增一；&lt;/li&gt;
-&lt;li&gt;随着字典操作的不断执行，最终在某个时间点上，ht [0] 的所有键值对都会被 rehash 至 ht [1]，这是程序将 rehashidx 属性的值设置为 -1，表示 rehash 操作已完成。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;跳跃表&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#跳跃表&#34;&gt;#&lt;/a&gt; 跳跃表&lt;/h2&gt;
-&lt;p&gt;Redis 只在两个地方用到了跳跃表，一个是实现有序集合键，另一个是在集群节点中用作内部数据结构。&lt;/p&gt;
-&lt;p&gt;&amp;lt;img src=&amp;quot;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRlZS5jb20vc2FrdXJhbGVlL2Jsb2ctaW1nL3Jhdy9tYXN0ZXIvaW1nLzIwMjEwNzEzMTAzOTA0LmpwZw==&#34;&gt;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713103904.jpg&lt;/span&gt;&amp;quot; alt=&amp;quot;1&amp;quot; style=&amp;quot;zoom: 33%;&amp;quot; /&amp;gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;跳跃表结构所包含的属性：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;level&lt;/strong&gt;：记录目前跳跃表内，层数最大的那个节点的层数（&lt;strong&gt;表头节点的层数不计算在内&lt;/strong&gt;）；&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;length&lt;/strong&gt;：记录跳跃表的长度，跳跃表目前包含节点的数量（&lt;strong&gt;表头节点不计算在内&lt;/strong&gt;）；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;跳跃表节点的属性&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;层（level）&lt;/strong&gt;：节点中用 L1、L2、L3 等字样标记节点个各个层，L1 代表第一层，L2 代表第二层，以此类推。每个层都带有两个属性：&lt;strong&gt;前进指针和跨度&lt;/strong&gt;。前进指针用于访问位于表尾方向的其他节点，而跨度则记录了前进指针所指向节点和当前节点的距离；每次创建一个新跳跃表节点的时候，程序都根据&lt;strong&gt;幂次定律&lt;/strong&gt;随机生成一个介于 1 和 32 之间的值作为 level 数组的大小，这个大小就是层的高度。&lt;strong&gt;跨度&lt;/strong&gt;是用来计算 ** 排位（rank）** 的：在查找某个节点的过程中，将沿途访问过的所有层的跨度累计起来，得到的结果就是目标节点在跳跃表中的排位。比如 o3 的排位为 3，o2 的排位为 1+1=2。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;后退（backward）指针&lt;/strong&gt;：节点中用 BW 字样标记节点的后退指针，它指向位于当前节点的前一个节点。后退指针在程序从表尾向表头遍历时使用。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;分值（score）&lt;/strong&gt;：各个节点中的 1.0、2.0 和 3.0 是节点所保存的分值。在跳跃表中，节点按各自所保存的分值从小到大排列；分值是一个 double 类型的浮点数。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;成员对象（obj）&lt;/strong&gt;：各个节点中的 o1、o2 和 o3 是节点所保存的成员对象。是一个指针，它指向一个字符串对象，而字符串对象则保存着一个 SDS 值。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;表头节点和其他节点的构造是一样的，图中只是省略了。&lt;/p&gt;
-&lt;h2 id=&#34;整数集合&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#整数集合&#34;&gt;#&lt;/a&gt; 整数集合&lt;/h2&gt;
-&lt;p&gt;每个  &lt;code&gt;intset.h/intset&lt;/code&gt;  结构表示一个整数集合：&lt;/p&gt;
-&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;intset&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 编码方式&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token class-name&#34;&gt;uint32_t&lt;/span&gt; encoding&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 集合包含的元素数量&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token class-name&#34;&gt;uint32_t&lt;/span&gt; length&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;// 保存元素的数组&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token class-name&#34;&gt;int8_t&lt;/span&gt; contents&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&amp;lt;img src=&amp;quot;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRlZS5jb20vc2FrdXJhbGVlL2Jsb2ctaW1nL3Jhdy9tYXN0ZXIvaW1nLzIwMjEwNzEzMTM1NzIzLmpwZw==&#34;&gt;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713135723.jpg&lt;/span&gt;&amp;quot; alt=&amp;quot;1&amp;quot; style=&amp;quot;zoom: 25%;&amp;quot; /&amp;gt;&lt;/p&gt;
-&lt;p&gt;contents 数组的真正类型取决于 encoding 属性的值。&lt;/p&gt;
-&lt;h3 id=&#34;升级&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#升级&#34;&gt;#&lt;/a&gt; 升级&lt;/h3&gt;
-&lt;p&gt;每当我们要将一个新元素添加到整数集合里面，并且新元素的类型比整数集合现有所有元素的类型都要长时，整数集合需要先升级，然后才能将新元素添加到整数集合里面。&lt;/p&gt;
-&lt;p&gt;分为三步进行：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;根据新元素的类型，拓展整数集合底层数组的空间大小，并为新元素分配空间。&lt;/li&gt;
-&lt;li&gt;将底层数组现有的所有元素都转换成与新元素相同的类型，并将类型转换后的元素放置在正确的位上，而且在放置元素的过程中，需要继续维持底层数组的有序性质不变。&lt;/li&gt;
-&lt;li&gt;将新元素添加到底层数组里面。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;向整数集合中添加新元素的时间复杂度为 &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;O(N)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.10903em;&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;，因为每次添加新元素都可能需要升级。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;升级的好处&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;提升灵活性&lt;/strong&gt;：C 语言是静态类型语言，为了避免类型错误，通常不会将两种不同类型的值放在同一个数据结构中，有了升级以后就可以随意添加了；&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;节约内存&lt;/strong&gt;：如果我们一直向整数集合添加 16 位的值时，底层数组一直是 16 位，只有在我们将 32 或者 64 的值添加到集合时，程序才会对数组进行升级。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;整数集合不支持降级&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id=&#34;压缩列表&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#压缩列表&#34;&gt;#&lt;/a&gt; 压缩列表&lt;/h2&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713141443.png&#34; alt=&#34;image-20210713141443677&#34; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;zlbytes&lt;/strong&gt;：记录整个压缩列表占用的&lt;strong&gt;内存字节数&lt;/strong&gt;，在对压缩列表进行内存重分配或者计算 zlend 的位置时使用。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;zltail&lt;/strong&gt;：记录压缩列表表尾节点距离压缩列表的起始地址有多少字节。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;zllen&lt;/strong&gt;：记录了压缩列表包含的节点数量，大于 UNIT16_MAX 的时候需要计算，小于的时候就直接是包含节点的数量。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;entryX&lt;/strong&gt;：压缩列表包含的各个节点，节点的长度由节点保存的内容决定。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;zlend&lt;/strong&gt;：用于标记压缩列表的末端。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;压缩列表节点的构成&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#压缩列表节点的构成&#34;&gt;#&lt;/a&gt; 压缩列表节点的构成&lt;/h3&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713142507.png&#34; alt=&#34;image-20210713142507316&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;每个压缩列表节点可以保存一个字节数组或者一个整数值。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;previous_entry_length&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;如果前一节点的长度小于 254 字节，那么此属性的长度为 1 字节，前一节点的长度就保存在这一个字节里面。&lt;/li&gt;
-&lt;li&gt;如果前一节点的长度大于等于 254 字节，那么此属性的长度为 5 字节，其中属性的第一字节会被设置为 0xFE（十进制 254），后四个字节用于保存前一节点的长度。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;encoding&lt;/strong&gt;：记录了节点的 content 属性所保存数据的类型以及长度。001011 中，高位 00 表示这是一个字节数组，1011 表示字节数组的长度为 11。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;content&lt;/strong&gt;：保存节点的值，节点值可以是一个字节数组或者整数，值的类型的长度由 encoding 决定。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;连锁更新&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#连锁更新&#34;&gt;#&lt;/a&gt; 连锁更新&lt;/h3&gt;
-&lt;p&gt;在一个压缩列表中，有多个连续、长度介于 250 字节 到 253 字节之间的节点 e1 至 eN，此时  &lt;code&gt;previous_entry_length&lt;/code&gt;  均为 1 字节，当插入一个长度大于等于 254 字节的新节点 new 的时候，e1 的  &lt;code&gt;previous_entry_length&lt;/code&gt;  就需要从 1 字节拓展到 5 字节，会导致后续节点都需要更新，这就是连锁更新。&lt;/p&gt;
-&lt;p&gt;因为连锁更新在最坏情况下需要对压缩列表执行 N 次空间重分配操作，而每次空间重分配的最坏复杂度为 &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;O(N)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.10903em;&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;，所以连锁更新的最坏复杂度为 &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;O(n^2)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.064108em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8141079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。但实际上连锁更新造成性能问题的几率是很低的，因为上述特殊情况很难发生，所以 ziplistPush 等命令的时间复杂度仅为 &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;O(N)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.10903em;&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;h1 id=&#34;redis-五大数据类型对象&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#redis-五大数据类型对象&#34;&gt;#&lt;/a&gt; Redis 五大数据类型（对象）&lt;/h1&gt;
-&lt;p&gt;对于 Redis 数据库保存的键值对来说，&lt;strong&gt;键总是一个字符串对象&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id=&#34;字符串对象redis_string&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#字符串对象redis_string&#34;&gt;#&lt;/a&gt; 字符串对象（REDIS_STRING)&lt;/h2&gt;
-&lt;p&gt;字符串对象的编码可以是 &lt;strong&gt;int、raw（SDS）或者 embstr&lt;/strong&gt;。embstr （字符串值的长度小于等于 39 字节使用）编码是专门用来保存短字符串的一种优化编码方式。&lt;/p&gt;
-&lt;p&gt;raw 编码会调用两次内存分配函数来分别创建  &lt;code&gt;redisObject&lt;/code&gt;  结构和  &lt;code&gt;sdshdr&lt;/code&gt;  结构，而 embstr 编码则通过调用一次内存分配函数来分配一块连续的空间，空间中依次包含  &lt;code&gt;redisObject&lt;/code&gt;  和  &lt;code&gt;sdshdr&lt;/code&gt;  两个结构。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;embstr 好处&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;embstr 编码将创建字符串对象所需的内存分配次数从 raw 编码的两次降低为一次；&lt;/li&gt;
-&lt;li&gt;释放 embstr 编码的字符串对象只需要调用一次内存释放函数，而释放 raw 编码的字符串对象需要调用两次内存释放函数；&lt;/li&gt;
-&lt;li&gt;embstr 编码的字符串对象的所有数据都保存在一个连续的内存里面，可以更好利用缓存带来的优势。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;字符串对象保存各类型值的编码方式&lt;/strong&gt;&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;值&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;编码&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;long 类型保存的整数&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;int&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;long double 类型保存的浮点数&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;embstr 或者 raw&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;字符串值，或者因为长度无法用 long 类型表示的整数，又或者因为太长无法用 long double 类型保存的浮点数&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;embstr 或者 raw&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;编码的转换&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;对于 int 编码的字符串对象来说，如果我们向对象执行了一些命令，使得这个对象保存的不再是整数值，而是一个字符串值，那么字符串编码将从 int 变为 raw。&lt;/p&gt;
-&lt;p&gt;Redis 没有为 embstr 编码的字符串编写任何相应的修改程序，所以 embstr 编码的字符串对象实际上只是可读的。当我们对 embstr 编码的字符串对象执行任何修改命令时，程序会先将对象的编码从 embstr 转换成 raw，然后再执行命令。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;应用场景&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;一般常用在需要计数的场景，比如用户的访问次数、热点文章的点赞转发数量等等。&lt;/p&gt;
-&lt;h2 id=&#34;列表对象redis_list&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#列表对象redis_list&#34;&gt;#&lt;/a&gt; 列表对象（REDIS_LIST)&lt;/h2&gt;
-&lt;p&gt;&lt;s&gt;列表对象的编码可以是 ziplist 或者 linkedlist。&lt;/s&gt;&lt;/p&gt;
-&lt;p&gt;在新版本中通过  &lt;code&gt;server.h&lt;/code&gt;  中的定义来看，好像是只使用 quicklist 了。&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713174606.jpg&#34; alt=&#34;img&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;应用场景&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;发布与订阅或者说消息队列、慢查询。&lt;/p&gt;
-&lt;h2 id=&#34;哈希对象redis_hash&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#哈希对象redis_hash&#34;&gt;#&lt;/a&gt; 哈希对象（REDIS_HASH)&lt;/h2&gt;
-&lt;p&gt;哈希对象的编码可以是 ziplist 或者 hashtable。&lt;/p&gt;
-&lt;h3 id=&#34;ziplist-编码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ziplist-编码&#34;&gt;#&lt;/a&gt; ziplist 编码&lt;/h3&gt;
-&lt;p&gt;ziplist 编码的哈希对象使用&lt;strong&gt;压缩列表&lt;/strong&gt;作为底层实现，每当有新的键值对要加入到哈希对象时，程序会先将保存了&lt;strong&gt;键&lt;/strong&gt;的压缩列表节点推入到压缩列表表尾，然后再将保存了值的压缩列表节点推入到压缩列表表尾，因此：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;保存了同一键值对的两个节点总是紧挨在一起，保存键的节点在前，保存值的节点在后；&lt;/li&gt;
-&lt;li&gt;先添加到哈希对象的键值对会被放在压缩列表的表头方向，而后来添加到哈希对象中的键值对会被放在压缩列表的表尾方向。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;hashtable-编码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#hashtable-编码&#34;&gt;#&lt;/a&gt; hashtable 编码&lt;/h3&gt;
-&lt;p&gt;hashtable 编码的哈希对象使用&lt;strong&gt;字典&lt;/strong&gt;作为底层实现，哈希对象的每个键值对都使用一个字典键值对保存：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;字典的每个键都是一个字符串对象，对象中保存了键值对的键；&lt;/li&gt;
-&lt;li&gt;字典的每个值都是一个字符串对象，对象中保存了键值对的值。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;编码转换&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#编码转换&#34;&gt;#&lt;/a&gt; 编码转换&lt;/h3&gt;
-&lt;p&gt;当哈希对象&lt;strong&gt;可以同时&lt;/strong&gt;满足以下两个条件时，哈希对象使用 ziplist 编码：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;哈希对象保存的所有键值对的键和值的字符串长度都小于 64 字节；&lt;/li&gt;
-&lt;li&gt;哈希对象保存的键值对数量小于 512 个。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713175305.png&#34; alt=&#34;image-20210713175305794&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;应用场景:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;系统中对象数据的存储。&lt;/p&gt;
-&lt;h2 id=&#34;集合对象redis_set&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#集合对象redis_set&#34;&gt;#&lt;/a&gt; 集合对象（REDIS_SET)&lt;/h2&gt;
-&lt;p&gt;集合对象的编码可以是 intset 或者 hashtable&lt;/p&gt;
-&lt;h3 id=&#34;intset-编码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#intset-编码&#34;&gt;#&lt;/a&gt; intset 编码&lt;/h3&gt;
-&lt;p&gt;intset 编码的集合对象使用整数集合作为底层实现，集合对象包含的所有元素都被保存在整数集合中。&lt;/p&gt;
-&lt;p&gt;&amp;lt;img src=&amp;quot;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRlZS5jb20vc2FrdXJhbGVlL2Jsb2ctaW1nL3Jhdy9tYXN0ZXIvaW1nLzIwMjEwNzEzMTk1OTEyLmpwZw==&#34;&gt;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713195912.jpg&lt;/span&gt;&amp;quot; alt=&amp;quot;1&amp;quot; style=&amp;quot;zoom:25%;&amp;quot; /&amp;gt;&lt;/p&gt;
-&lt;h3 id=&#34;hashtable-编码-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#hashtable-编码-2&#34;&gt;#&lt;/a&gt; hashtable 编码&lt;/h3&gt;
-&lt;p&gt;hashtable 编码的集合对象使用字典作为底层实现，字典的每个键都是一个字符串对象，每个字符串对象包含了一个集合元素，而字典的值则全部被设置为 NULL。&lt;/p&gt;
-&lt;p&gt;&amp;lt;img src=&amp;quot;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRlZS5jb20vc2FrdXJhbGVlL2Jsb2ctaW1nL3Jhdy9tYXN0ZXIvaW1nLzIwMjEwNzEzMTk1OTIyLmpwZw==&#34;&gt;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713195922.jpg&lt;/span&gt;&amp;quot; alt=&amp;quot;2&amp;quot; style=&amp;quot;zoom:25%;&amp;quot; /&amp;gt;&lt;/p&gt;
-&lt;h3 id=&#34;编码转换-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#编码转换-2&#34;&gt;#&lt;/a&gt; 编码转换&lt;/h3&gt;
-&lt;p&gt;当集合对象&lt;strong&gt;可以同时满足&lt;/strong&gt;以下两个条件时，对象使用 intset 编码：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;集合对象保存的所有元素都是整数值；&lt;/li&gt;
-&lt;li&gt;集合对象保存的元素数量不超过 512。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713200142.png&#34; alt=&#34;image-20210713200142675&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;应用场景:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;需要存放的数据不能重复以及需要获取多个数据源交集和并集等场景&lt;/p&gt;
-&lt;h2 id=&#34;有序集合对象redis_zset&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#有序集合对象redis_zset&#34;&gt;#&lt;/a&gt; 有序集合对象（REDIS_ZSET)&lt;/h2&gt;
-&lt;p&gt;有序集合的编码可以是 ziplist 或者 skiplist&lt;/p&gt;
-&lt;h3 id=&#34;ziplist编码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ziplist编码&#34;&gt;#&lt;/a&gt; ziplist 编码&lt;/h3&gt;
-&lt;p&gt;此编码的有序集合使用压缩列表作为底层实现，每个集合元素使用两个紧挨在一起的压缩列表节点来保存，第一个节点保存元素的成员（member），而第二个节点则保存分值（score）。&lt;/p&gt;
-&lt;h3 id=&#34;skiplist编码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#skiplist编码&#34;&gt;#&lt;/a&gt; skiplist 编码&lt;/h3&gt;
-&lt;p&gt;此编码的有序集合对象使用  &lt;code&gt;zset&lt;/code&gt;  结构作为底层实现，一个  &lt;code&gt;zset&lt;/code&gt;  结构同时包含一个字典和一个跳跃表。&lt;/p&gt;
-&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;zset&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    zskiplist &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;zsl&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    dict &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;dict&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt; zset&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;通过这个字典，程序可以用 &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;O(1)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; 时间复杂度查找给定成员的分值。&lt;/p&gt;
-&lt;p&gt;&amp;lt;img src=&amp;quot;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRlZS5jb20vc2FrdXJhbGVlL2Jsb2ctaW1nL3Jhdy9tYXN0ZXIvaW1nLzIwMjEwNzEzMjAxNjMwLnBuZw==&#34;&gt;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713201630.png&lt;/span&gt;&amp;quot; alt=&amp;quot;image-20210713201630458&amp;quot; style=&amp;quot;zoom: 80%;&amp;quot; /&amp;gt;&lt;/p&gt;
-&lt;p&gt;&amp;lt;img src=&amp;quot;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRlZS5jb20vc2FrdXJhbGVlL2Jsb2ctaW1nL3Jhdy9tYXN0ZXIvaW1nLzIwMjEwNzEzMjAxNjQzLnBuZw==&#34;&gt;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713201643.png&lt;/span&gt;&amp;quot; alt=&amp;quot;image-20210713201643198&amp;quot; style=&amp;quot;zoom: 80%;&amp;quot; /&amp;gt;&lt;/p&gt;
-&lt;p&gt;在实际中，字典和跳跃表会共享元素的成员和分值。&lt;/p&gt;
-&lt;h3 id=&#34;编码的转换&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#编码的转换&#34;&gt;#&lt;/a&gt; 编码的转换&lt;/h3&gt;
-&lt;p&gt;当有序集合对象&lt;strong&gt;可以同时满足&lt;/strong&gt;以下两个条件时，对象使用 ziplist 编码：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;有序集合保存的元素数量小于 128 个。&lt;/li&gt;
-&lt;li&gt;有序集合保存的所有元素成员的长度都小于 64 字节。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210713201941.png&#34; alt=&#34;image-20210713201941593&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;应用场景：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;需要对数据根据某个权重进行排序的场景。比如在直播系统中，实时排行信息包含直播间在线用户列表，各种礼物排行榜，弹幕消息（可以理解为按消息维度的消息排行榜）等信息。&lt;/p&gt;
-&lt;h2 id=&#34;bitmap&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#bitmap&#34;&gt;#&lt;/a&gt; bitmap&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;介绍 ：&lt;/strong&gt; bitmap 存储的是连续的二进制数字（0 和 1），通过 bitmap, 只需要一个 bit 位来表示某个元素对应的值或者状态，key 就是对应元素本身 。我们知道 8 个 bit 可以组成一个 byte，所以 bitmap 本身会极大的节省储存空间。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;常用命令：&lt;/strong&gt;  &lt;code&gt;setbit&lt;/code&gt;  、 &lt;code&gt;getbit&lt;/code&gt;  、 &lt;code&gt;bitcount&lt;/code&gt; 、 &lt;code&gt;bitop&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;应用场景:&lt;/strong&gt; 适合需要保存状态信息（比如是否签到、是否登录...）并需要进一步对这些信息进行分析的场景。比如用户签到情况、活跃用户情况、用户行为统计（比如是否点赞过某个视频）。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;token expression&#34;&gt;SETBIT 会返回之前位的值（默认是 &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;）这里会生成 &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt; 个位&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; setbit mykey &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; setbit mykey &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; getbit mykey &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; setbit mykey &lt;span class=&#34;token number&#34;&gt;6&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; setbit mykey &lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;# 通过 bitcount 统计被被设置为 &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; 的位的数量。&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; bitcount &lt;span class=&#34;token function&#34;&gt;mykey&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt; ]]></description>
         </item>
     </channel>
 </rss>
