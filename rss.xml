@@ -16,8 +16,8 @@
             <guid isPermalink="true">https://yukiofyume.github.io/Midd/RocketMQ/RocketMQ%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
             <title>RocketMQ基础知识</title>
             <link>https://yukiofyume.github.io/Midd/RocketMQ/RocketMQ%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
-            <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-            <category term="RocketMQ" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ/" />
+            <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+            <category term="RocketMQ" scheme="https://yukiofyume.github.io/categories/Midd/RocketMQ/" />
             <pubDate>Sun, 06 Mar 2022 10:15:37 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL2FwYWNoZS9yb2NrZXRtcS90cmVlL21hc3Rlci9kb2NzL2Nu&#34;&gt;RocketMQ 官方中文文档&lt;/span&gt;&lt;/p&gt;
 &lt;h1 id=&#34;mq如何选型&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#mq如何选型&#34;&gt;#&lt;/a&gt; MQ 如何选型&lt;/h1&gt;
@@ -511,7 +511,7 @@ sticky: true
             <guid isPermalink="true">https://yukiofyume.github.io/Tool/git%E5%AD%A6%E4%B9%A0/</guid>
             <title>git学习</title>
             <link>https://yukiofyume.github.io/Tool/git%E5%AD%A6%E4%B9%A0/</link>
-            <category term="基本工具" scheme="https://yukiofyume.github.io/categories/%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/" />
+            <category term="基本工具" scheme="https://yukiofyume.github.io/categories/Tool/" />
             <category term="git" scheme="https://yukiofyume.github.io/tags/git/" />
             <pubDate>Tue, 01 Mar 2022 21:38:31 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;初始化库&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#初始化库&#34;&gt;#&lt;/a&gt; 初始化库&lt;/h1&gt;
@@ -615,7 +615,7 @@ git commit -m &amp;quot;success merge&amp;quot;
             <guid isPermalink="true">https://yukiofyume.github.io/Tool/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
             <title>Linux常用命令</title>
             <link>https://yukiofyume.github.io/Tool/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
-            <category term="基本工具" scheme="https://yukiofyume.github.io/categories/%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/" />
+            <category term="基本工具" scheme="https://yukiofyume.github.io/categories/Tool/" />
             <pubDate>Tue, 01 Mar 2022 20:30:07 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;rm-命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#rm-命令&#34;&gt;#&lt;/a&gt; rm 命令&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;1. 删除任何 .log 文件，删除前逐一询问&lt;/strong&gt;&lt;/p&gt;
@@ -743,8 +743,8 @@ git commit -m &amp;quot;success merge&amp;quot;
             <guid isPermalink="true">https://yukiofyume.github.io/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/SSL-TLS%E5%8D%8F%E8%AE%AE/</guid>
             <title>SSL/TLS协议</title>
             <link>https://yukiofyume.github.io/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/SSL-TLS%E5%8D%8F%E8%AE%AE/</link>
-            <category term="计算机基础知识" scheme="https://yukiofyume.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" />
-            <category term="计算机网络" scheme="https://yukiofyume.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" />
+            <category term="计算机基础知识" scheme="https://yukiofyume.github.io/categories/S408/" />
+            <category term="计算机网络" scheme="https://yukiofyume.github.io/categories/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" />
             <category term="https" scheme="https://yukiofyume.github.io/tags/https/" />
             <pubDate>Thu, 09 Sep 2021 11:32:48 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;SSL/TLS 是一种密码通信框架，综合运用了密码学中的对称密码，消息认证码，公钥密码，数字签名，为随机生成器等。&lt;/p&gt;
@@ -765,7 +765,7 @@ git commit -m &amp;quot;success merge&amp;quot;
             <guid isPermalink="true">https://yukiofyume.github.io/Project/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AARPC%E6%A1%86%E6%9E%B6/</guid>
             <title>手写一个RPC框架</title>
             <link>https://yukiofyume.github.io/Project/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AARPC%E6%A1%86%E6%9E%B6/</link>
-            <category term="项目实战" scheme="https://yukiofyume.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" />
+            <category term="项目实战" scheme="https://yukiofyume.github.io/categories/Project/" />
             <category term="netty" scheme="https://yukiofyume.github.io/tags/netty/" />
             <category term="RPC" scheme="https://yukiofyume.github.io/tags/RPC/" />
             <pubDate>Tue, 24 Aug 2021 16:42:34 +0800</pubDate>
@@ -867,8 +867,8 @@ git commit -m &amp;quot;success merge&amp;quot;
             <guid isPermalink="true">https://yukiofyume.github.io/Database/MySQL/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%AE%9E%E6%88%98/</guid>
             <title>分库分表实战</title>
             <link>https://yukiofyume.github.io/Database/MySQL/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%AE%9E%E6%88%98/</link>
-            <category term="数据库" scheme="https://yukiofyume.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" />
-            <category term="MySQL" scheme="https://yukiofyume.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" />
+            <category term="数据库" scheme="https://yukiofyume.github.io/categories/Database/" />
+            <category term="MySQL" scheme="https://yukiofyume.github.io/categories/Database/MySQL/" />
             <pubDate>Tue, 03 Aug 2021 21:44:38 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;分库分表&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#分库分表&#34;&gt;#&lt;/a&gt; 分库分表&lt;/h1&gt;
 &lt;h1 id=&#34;主从环境&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#主从环境&#34;&gt;#&lt;/a&gt; 主从环境&lt;/h1&gt;
@@ -960,8 +960,8 @@ spring.shardingsphere.props.sql.show=true
             <guid isPermalink="true">https://yukiofyume.github.io/Midd/Mybatis/MBG%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
             <title>MBG的基本使用</title>
             <link>https://yukiofyume.github.io/Midd/Mybatis/MBG%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
-            <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-            <category term="Mybatis" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Mybatis/" />
+            <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+            <category term="Mybatis" scheme="https://yukiofyume.github.io/categories/Midd/Mybatis/" />
             <category term="MBG" scheme="https://yukiofyume.github.io/tags/MBG/" />
             <pubDate>Wed, 14 Jul 2021 10:13:31 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;导入依赖&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#导入依赖&#34;&gt;#&lt;/a&gt; 导入依赖&lt;/h2&gt;
@@ -1029,8 +1029,8 @@ spring.shardingsphere.props.sql.show=true
             <guid isPermalink="true">https://yukiofyume.github.io/Midd/Kafka/kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
             <title>Kafka基础知识</title>
             <link>https://yukiofyume.github.io/Midd/Kafka/kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
-            <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-            <category term="Kafka" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka/" />
+            <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+            <category term="Kafka" scheme="https://yukiofyume.github.io/categories/Midd/Kafka/" />
             <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
             <category term="Kafka" scheme="https://yukiofyume.github.io/tags/Kafka/" />
             <pubDate>Wed, 23 Jun 2021 19:56:44 +0800</pubDate>
@@ -1557,10 +1557,10 @@ config/server-2.properties:
             <guid isPermalink="true">https://yukiofyume.github.io/Midd/Redis/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
             <title>Redis面试题</title>
             <link>https://yukiofyume.github.io/Midd/Redis/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
-            <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-            <category term="Redis" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" />
-            <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
+            <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+            <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
             <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
+            <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
             <pubDate>Thu, 27 May 2021 21:44:32 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;缓存使用中的坑&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#缓存使用中的坑&#34;&gt;#&lt;/a&gt; 缓存使用中的坑&lt;/h1&gt;
 &lt;h2 id=&#34;缓存一致性&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#缓存一致性&#34;&gt;#&lt;/a&gt; 缓存一致性&lt;/h2&gt;
@@ -2134,8 +2134,8 @@ config/server-2.properties:
             <guid isPermalink="true">https://yukiofyume.github.io/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
             <title>计算机基础知识</title>
             <link>https://yukiofyume.github.io/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
-            <category term="计算机基础知识" scheme="https://yukiofyume.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" />
-            <category term="计算机网络" scheme="https://yukiofyume.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" />
+            <category term="计算机基础知识" scheme="https://yukiofyume.github.io/categories/S408/" />
+            <category term="计算机网络" scheme="https://yukiofyume.github.io/categories/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" />
             <pubDate>Mon, 24 May 2021 17:19:38 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;计算机网络&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#计算机网络&#34;&gt;#&lt;/a&gt; 计算机网络&lt;/h1&gt;
 &lt;h2 id=&#34;tcpip分层&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#tcpip分层&#34;&gt;#&lt;/a&gt; TCP/IP 分层&lt;/h2&gt;
@@ -2336,10 +2336,10 @@ config/server-2.properties:
             <guid isPermalink="true">https://yukiofyume.github.io/Midd/Redis/Redis%E5%8D%95%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
             <title>Redis单机数据库</title>
             <link>https://yukiofyume.github.io/Midd/Redis/Redis%E5%8D%95%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
-            <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-            <category term="Redis" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" />
-            <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
+            <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+            <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
             <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
+            <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
             <pubDate>Thu, 20 May 2021 13:33:24 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;在docker下安装配置redis622单机&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#在docker下安装配置redis622单机&#34;&gt;#&lt;/a&gt; 在 docker 下安装配置 redis (6.2.2) 单机&lt;/h1&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9yZWdpc3RyeS5odWIuZG9ja2VyLmNvbS9fL3JlZGlz&#34;&gt;docker hub&lt;/span&gt; ，教程是十个有十一个有问题，我佛了。。。搞了一晚上终于好了...(还不是因为不熟悉 docker...)&lt;/p&gt;
@@ -2552,10 +2552,10 @@ config/server-2.properties:
             <guid isPermalink="true">https://yukiofyume.github.io/Midd/Redis/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%B0%8F%E7%BB%93/</guid>
             <title>Redis数据结构与对象小结</title>
             <link>https://yukiofyume.github.io/Midd/Redis/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%B0%8F%E7%BB%93/</link>
-            <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-            <category term="Redis" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" />
-            <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
+            <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+            <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
             <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
+            <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
             <pubDate>Thu, 20 May 2021 10:19:58 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;redis-的数据结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#redis-的数据结构&#34;&gt;#&lt;/a&gt; Redis 的数据结构&lt;/h1&gt;
 &lt;p&gt;源码版本为 redis-5.0.10&lt;/p&gt;

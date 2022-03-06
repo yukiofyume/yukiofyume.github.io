@@ -51,8 +51,8 @@
 &lt;/ul&gt;
 &lt;h1 id=&#34;rocketmq有几种消费模式&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#rocketmq有几种消费模式&#34;&gt;#&lt;/a&gt; RocketMQ 有几种消费模式&lt;/h1&gt;
 </content>
-        <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-        <category term="RocketMQ" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ/" />
+        <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+        <category term="RocketMQ" scheme="https://yukiofyume.github.io/categories/Midd/RocketMQ/" />
         <updated>2022-03-06T02:15:37.000Z</updated>
     </entry>
     <entry>
@@ -604,7 +604,7 @@ git commit -m &amp;quot;success merge&amp;quot;
 &lt;li&gt;win 下将 .pub 复制，添加到 GitHub 上： &lt;code&gt;C:\Users\leewenhao\.ssh&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </content>
-        <category term="基本工具" scheme="https://yukiofyume.github.io/categories/%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/" />
+        <category term="基本工具" scheme="https://yukiofyume.github.io/categories/Tool/" />
         <category term="git" scheme="https://yukiofyume.github.io/tags/git/" />
         <updated>2022-03-01T13:38:31.000Z</updated>
     </entry>
@@ -733,7 +733,7 @@ git commit -m &amp;quot;success merge&amp;quot;
 &lt;h2 id=&#34;netstat&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#netstat&#34;&gt;#&lt;/a&gt; netstat&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;netstat -tunlp|grep port&lt;/code&gt;&lt;/p&gt;
 </content>
-        <category term="基本工具" scheme="https://yukiofyume.github.io/categories/%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7/" />
+        <category term="基本工具" scheme="https://yukiofyume.github.io/categories/Tool/" />
         <updated>2022-03-01T12:30:07.000Z</updated>
     </entry>
     <entry>
@@ -753,8 +753,8 @@ git commit -m &amp;quot;success merge&amp;quot;
 &lt;li&gt;&lt;strong&gt;应用数据协议&lt;/strong&gt;：负责将 TLS 承载的应用数据传达给通信对象的协议。&lt;/li&gt;
 &lt;/ul&gt;
 </content>
-        <category term="计算机基础知识" scheme="https://yukiofyume.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" />
-        <category term="计算机网络" scheme="https://yukiofyume.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" />
+        <category term="计算机基础知识" scheme="https://yukiofyume.github.io/categories/S408/" />
+        <category term="计算机网络" scheme="https://yukiofyume.github.io/categories/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" />
         <category term="https" scheme="https://yukiofyume.github.io/tags/https/" />
         <updated>2021-09-09T03:32:48.000Z</updated>
     </entry>
@@ -814,7 +814,7 @@ git commit -m &amp;quot;success merge&amp;quot;
 &lt;p&gt;然后使用 &lt;code&gt;RpcClientProxy(client)&lt;/code&gt;  的  &lt;code&gt;getProxy()&lt;/code&gt;  方法去返回动态代理的  &lt;code&gt;helloservice&lt;/code&gt;  对象，在调用  &lt;code&gt;helloService.hello()&lt;/code&gt;  方法的时候就会去调用动态代理类  &lt;code&gt;RPCClientProxy&lt;/code&gt;  的  &lt;code&gt;invoke()&lt;/code&gt;  方法，在  &lt;code&gt;invoke()&lt;/code&gt;  方法中首先会根据（请求号，待调用接口名，方法名，参数，参数类型）去创建一个  &lt;code&gt;RpcRequest&lt;/code&gt;  对象，然后调用  &lt;code&gt;RpcClient.sendRequest(rpcRequest)&lt;/code&gt;  去向 Nacos 注册中心发送请求。&lt;/p&gt;
 &lt;p&gt;请求过程：首先会调用  &lt;code&gt;serviceDiscovery.lookupService(接口名)&lt;/code&gt;  去找到相应服务所在的地址，然后调用  &lt;code&gt;ChannelProvider.get()&lt;/code&gt;  方法去创建连接到服务端的 channel，如果 channel 存在就直接使用，不然就通过  &lt;code&gt;Bootstrap&lt;/code&gt;  去创建，同时设置 pipeline 上的 handler 为  &lt;code&gt;NettyClientHanlder&lt;/code&gt;  ，这样 channel 就构建完成了。最后返回 RPCResponse。&lt;/p&gt;
 </content>
-        <category term="项目实战" scheme="https://yukiofyume.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" />
+        <category term="项目实战" scheme="https://yukiofyume.github.io/categories/Project/" />
         <category term="netty" scheme="https://yukiofyume.github.io/tags/netty/" />
         <category term="RPC" scheme="https://yukiofyume.github.io/tags/RPC/" />
         <updated>2021-08-24T08:42:34.000Z</updated>
@@ -949,8 +949,8 @@ spring.shardingsphere.props.sql.show=true
 &lt;figure class=&#34;highlight java&#34;&gt;&lt;figcaption data-lang=&#34;java&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token annotation punctuation&#34;&gt;@Test&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; i &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; i &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; i&lt;span class=&#34;token operator&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token class-name&#34;&gt;Order&lt;/span&gt; order &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Order&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            order&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;setId&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;100L&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; i&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            order&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;setName&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;电脑&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; i&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            order&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;setType&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;办公&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            order&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;setGmtCreate&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Date&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            orderService&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;insertOrder&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;order&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;执行测试之后会发现主库从库都成功插入了&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210804141849.png&#34; alt=&#34;image-20210804141849349&#34; /&gt;&lt;/p&gt;
 </content>
-        <category term="数据库" scheme="https://yukiofyume.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" />
-        <category term="MySQL" scheme="https://yukiofyume.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" />
+        <category term="数据库" scheme="https://yukiofyume.github.io/categories/Database/" />
+        <category term="MySQL" scheme="https://yukiofyume.github.io/categories/Database/MySQL/" />
         <updated>2021-08-03T13:44:38.000Z</updated>
     </entry>
     <entry>
@@ -1017,8 +1017,8 @@ spring.shardingsphere.props.sql.show=true
 &lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210714101740.png&#34; alt=&#34;image-20210714101740593&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210714102048.png&#34; alt=&#34;image-20210714102048120&#34; /&gt;&lt;/p&gt;
 </content>
-        <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-        <category term="Mybatis" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Mybatis/" />
+        <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+        <category term="Mybatis" scheme="https://yukiofyume.github.io/categories/Midd/Mybatis/" />
         <category term="MBG" scheme="https://yukiofyume.github.io/tags/MBG/" />
         <updated>2021-07-14T02:13:31.000Z</updated>
     </entry>
@@ -1215,8 +1215,8 @@ config/server-2.properties:
 &lt;p&gt;利用 cmd 发送请求后，控制台打印出如下信息&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210625170740.png&#34; alt=&#34;image-20210625170740679&#34; /&gt;&lt;/p&gt;
 </content>
-        <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-        <category term="Kafka" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka/" />
+        <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+        <category term="Kafka" scheme="https://yukiofyume.github.io/categories/Midd/Kafka/" />
         <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
         <category term="Kafka" scheme="https://yukiofyume.github.io/tags/Kafka/" />
         <updated>2021-06-23T11:56:44.000Z</updated>
@@ -1750,10 +1750,10 @@ config/server-2.properties:
 &lt;li&gt;&lt;strong&gt;allkeys-lfu（least frequently used）&lt;/strong&gt;：当内存不足以容纳新写入数据时，在键空间中，移除最不经常使用的 key。&lt;/li&gt;
 &lt;/ol&gt;
 </content>
-        <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-        <category term="Redis" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" />
-        <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
+        <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+        <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
         <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
+        <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
         <updated>2021-05-27T13:44:32.000Z</updated>
     </entry>
     <entry>
@@ -2325,8 +2325,8 @@ config/server-2.properties:
 &lt;/li&gt;
 &lt;/ol&gt;
 </content>
-        <category term="计算机基础知识" scheme="https://yukiofyume.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" />
-        <category term="计算机网络" scheme="https://yukiofyume.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" />
+        <category term="计算机基础知识" scheme="https://yukiofyume.github.io/categories/S408/" />
+        <category term="计算机网络" scheme="https://yukiofyume.github.io/categories/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" />
         <updated>2021-05-24T09:19:38.000Z</updated>
     </entry>
     <entry>
@@ -2539,10 +2539,10 @@ config/server-2.properties:
 &lt;li&gt;当被监听的套接字准备好执行连接应答（accept）、读取（read）、写入（write）、关闭（close）等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件。&lt;/li&gt;
 &lt;/ul&gt;
 </content>
-        <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-        <category term="Redis" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" />
-        <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
+        <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+        <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
         <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
+        <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
         <updated>2021-05-20T05:33:24.000Z</updated>
     </entry>
     <entry>
@@ -2816,10 +2816,10 @@ index = hash &amp;amp; dict -&amp;gt; ht[0].sizemask = 8 &amp;amp; 3 = 0;
 &lt;li&gt;&lt;strong&gt;应用场景:&lt;/strong&gt; 适合需要保存状态信息（比如是否签到、是否登录...）并需要进一步对这些信息进行分析的场景。比如用户签到情况、活跃用户情况、用户行为统计（比如是否点赞过某个视频）。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;token expression&#34;&gt;SETBIT 会返回之前位的值（默认是 &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;）这里会生成 &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt; 个位&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; setbit mykey &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; setbit mykey &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; getbit mykey &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; setbit mykey &lt;span class=&#34;token number&#34;&gt;6&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; setbit mykey &lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;# 通过 bitcount 统计被被设置为 &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; 的位的数量。&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.0&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6379&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; bitcount &lt;span class=&#34;token function&#34;&gt;mykey&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;integer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
-        <category term="中间件" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-        <category term="Redis" scheme="https://yukiofyume.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" />
-        <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
+        <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+        <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
         <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
+        <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
         <updated>2021-05-20T02:19:58.000Z</updated>
     </entry>
 </feed>
