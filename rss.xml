@@ -10,8 +10,187 @@
         </author>
         <description>记录下东西</description>
         <language>zh-CN</language>
-        <pubDate>Sun, 06 Mar 2022 17:39:55 +0800</pubDate>
-        <lastBuildDate>Sun, 06 Mar 2022 17:39:55 +0800</lastBuildDate>
+        <pubDate>Mon, 07 Mar 2022 14:39:10 +0800</pubDate>
+        <lastBuildDate>Mon, 07 Mar 2022 14:39:10 +0800</lastBuildDate>
+        <item>
+            <guid isPermalink="true">https://yukiofyume.github.io/Midd/Redis/Redis%E6%90%AD%E5%BB%BA%E6%96%B9%E5%BC%8F%E6%AF%94%E8%BE%83/</guid>
+            <title>Redis搭建方式比较</title>
+            <link>https://yukiofyume.github.io/Midd/Redis/Redis%E6%90%AD%E5%BB%BA%E6%96%B9%E5%BC%8F%E6%AF%94%E8%BE%83/</link>
+            <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+            <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
+            <pubDate>Mon, 07 Mar 2022 14:39:10 +0800</pubDate>
+            <description><![CDATA[  ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://yukiofyume.github.io/Midd/Redis/Redis%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+            <title>Redis环境搭建</title>
+            <link>https://yukiofyume.github.io/Midd/Redis/Redis%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+            <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
+            <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
+            <pubDate>Sun, 06 Mar 2022 22:29:03 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;主从复制&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#主从复制&#34;&gt;#&lt;/a&gt; 主从复制&lt;/h1&gt;
+&lt;h2 id=&#34;配置原理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#配置原理&#34;&gt;#&lt;/a&gt; 配置原理&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;主 Redis 配置&lt;/strong&gt;：无需配置&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;从 Redis 配置&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;修改从服务器上的 redis.conf 文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# slaveof &amp;lt;masterip&amp;gt; &amp;lt;masterport&amp;gt; 
+# 表示当前【从服务器】对应的【主服务器】的IP是192.168.10.135，端口是6379。 
+replicaof 127.0.0.1 6379
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;第一步：安装 C 语言需要的 GCC 环境，并更新到 9 版本以上，不然会编译报错&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install -y gcc-c++ 
+yum install -y wget
+yum -y install centos-release-scl
+#临时设置 gcc 版本
+scl enable devtoolset-9 bash
+#永久设置 gcc 版本
+echo &amp;quot;source /opt/rh/devtoolset-9/enable&amp;quot; &amp;gt;&amp;gt;/etc/profile
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#第二步：下载并解压缩 Redis 源码压缩包
+wget https://download.redis.io/releases/redis-6.0.10.tar.gz
+tar -zxf redis-6.0.10.tar.gz
+#第三步：编译 Redis 源码，进入 redis-6.0.10 目录，执行编译命令
+cd redis-6.0.10/src 
+make
+make test(不必须)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;编译完成后&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/202203062305178.png&#34; alt=&#34;image-20220306230528140&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;如果  &lt;code&gt;make test&lt;/code&gt;  失败提醒需要更新 tcl 版本&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;wget http://downloads.sourceforge.net/tcl/tcl8.6.1-src.tar.gz  
+tar -zxf tcl8.6.1-src.tar.gz
+cd  tcl8.6.1/unix/  
+sudo ./configure  
+sudo make  
+sudo make install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;第四步：安装 Redis，需要通过 PREFIX 指定安装路径&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mkdir&#34;&gt;mkdir /usr/local/env/redis -p 
+make install PREFIX=/usr/local/env/redis
+#复制conf
+cd ..
+cp redis.conf /usr/local/env/redis/bin/
+cp sentinel.conf /usr/local/env/redis/bin/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;#修改 redis.conf&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd ..
+cd redis/bin
+vim redis.conf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#注释掉则不限于本机器访问
+bind 127.0.0.1
+#no 允许外界访问
+protected-mode no
+#yes 守护进程后台启动
+daemonize yes
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#占用窗口启动 --不可以被远程访问
+./redis-server
+#关闭
+control + c
+#不占用窗口启动 --不可以被远程访问
+./redis-server &amp;amp; 
+#守护进程后台启动 --可以被远程访问
+ ./redis-server redis.conf
+#守护进程后台启动关闭ll
+./redis-cli shutdown  
+#查看进程
+ps -ef |grep redis
+root      25498      1  0 09:56 ?        00:00:00 ./redis-server 127.0.0.1:6379
+#关闭进程
+kill -9 25498
+#客户端启动
+./redis-cli -h 127.0.0.1 -p 6379
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;搭建主从&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#搭建主从&#34;&gt;#&lt;/a&gt; 搭建主从&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;cd /usr/local/env
+mkdir redis-ms
+cp -r redis redis-ms/redis-master
+cp -r redis redis-ms/redis-slave1
+cp -r redis redis-ms/redis-slave2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/202203071017336.png&#34; alt=&#34;image-20220307101655282&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;修改 redis-slave1 的  &lt;code&gt;redis.conf&lt;/code&gt;  内容为：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;replicaof 127.0.0.1 6380
+port 6381（大约在地91行左右）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;修改 redis-slave2 的  &lt;code&gt;redis.conf&lt;/code&gt;  内容为：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;replicaof 127.0.0.1 6380
+port 6382
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;分别启动三台 redis 服务器&lt;/p&gt;
+&lt;p&gt;编写启动脚本  &lt;code&gt;start.sh&lt;/code&gt;  和关闭脚本  &lt;code&gt;shutdown.sh&lt;/code&gt;  (这里后三行的 sentinel 脚本先不要复制进去)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/env/redis-ms/redis-master/bin/redis-server /usr/local/env/redis-ms/redis-master/bin/redis.conf
+/usr/local/env/redis-ms/redis-slave1/bin/redis-server /usr/local/env/redis-ms/redis-slave1/bin/redis.conf
+/usr/local/env/redis-ms/redis-slave2/bin/redis-server /usr/local/env/redis-ms/redis-slave2/bin/redis.conf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/env/redis-ms/redis-master/bin/redis-cli -p 6380 shutdown
+/usr/local/env/redis-ms/redis-slave1/bin/redis-cli -p 6381 shutdown
+/usr/local/env/redis-ms/redis-slave2/bin/redis-cli -p 6382 shutdown
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;赋予权限&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;chmod +x start.sh shutdown.sh 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;切换到 master&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./redis-master/bin/redis-cli -p 6380
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/202203071406268.png&#34; alt=&#34;image-20220307140621234&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;切换到 redis-slave1&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./redis-master/bin/redis-cli -p 6381
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/202203071407771.png&#34; alt=&#34;image-20220307140722745&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;可以看到 从服务器已经自动复制了主服务器的数据，并且无法写&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;选举主服务器实验&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;查看主服务器进程号，然后杀死&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/202203071408267.png&#34; alt=&#34;image-20220307140826221&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;从服务器无法选举出主服务器&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/202203071408619.png&#34; alt=&#34;image-20220307140857589&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#总结&#34;&gt;#&lt;/a&gt; 总结&lt;/h2&gt;
+&lt;p&gt;主服务可以读写，从服务器只能读。并且主服务器挂了之后，从服务器无法选举为主服务器。&lt;/p&gt;
+&lt;h1 id=&#34;sentinel模式&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#sentinel模式&#34;&gt;#&lt;/a&gt; sentinel 模式&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;修改  &lt;code&gt;sentinel.conf&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;port 26380
+
+daemonize yes
+
+sentinel monitor mymaster 127.0.0.1 6380 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;新建  &lt;code&gt;start-sentinel.sh&lt;/code&gt;  和  &lt;code&gt;shutdown-sentinel.sh&lt;/code&gt;  脚本&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/env/redis-ms/redis-master/bin/redis-server /usr/local/env/redis-ms/redis-master/bin/redis.conf
+/usr/local/env/redis-ms/redis-slave1/bin/redis-server /usr/local/env/redis-ms/redis-slave1/bin/redis.conf
+/usr/local/env/redis-ms/redis-slave2/bin/redis-server /usr/local/env/redis-ms/redis-slave2/bin/redis.conf
+/usr/local/env/redis-ms/redis-master/bin/redis-sentinel  /usr/local/env/redis-ms/redis-master/bin/sentinel.conf
+/usr/local/env/redis-ms/redis-slave1/bin/redis-sentinel  /usr/local/env/redis-ms/redis-slave1/bin/sentinel.conf
+/usr/local/env/redis-ms/redis-slave2/bin/redis-sentinel  /usr/local/env/redis-ms/redis-slave2/bin/sentinel.conf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;/usr/local/env/redis-ms/redis-master/bin/redis-cli -p 6380 shutdown
+/usr/local/env/redis-ms/redis-slave1/bin/redis-cli -p 6381 shutdown
+/usr/local/env/redis-ms/redis-slave2/bin/redis-cli -p 6382 shutdown
+/usr/local/env/redis-ms/redis-master/bin/redis-cli -p 26380 shutdown
+/usr/local/env/redis-ms/redis-slave1/bin/redis-cli -p 26381 shutdown
+/usr/local/env/redis-ms/redis-slave2/bin/redis-cli -p 26382 shutdown
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;并赋予权限&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;chmod +x start-sentinel.sh shutdown-sentinel.sh 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;测试&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;./redis-master/bin/redis-cli -p 26380
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/202203071415641.png&#34; alt=&#34;image-20220307141523603&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看 master 节点和 slave 节点信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;127.0.0.1:26380&amp;gt; sentinel master mymaster
+127.0.0.1:26380&amp;gt; sentinel slaves mymaster
+&lt;/code&gt;&lt;/pre&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://yukiofyume.github.io/Project/JWT/</guid>
             <title>JWT</title>
@@ -2177,424 +2356,6 @@ config/server-2.properties:
 &lt;p&gt;方法表的属性表集合中有一张 Code 属性表，用于存储当前方法经编译器编译后的字节码指令。&lt;/p&gt;
 &lt;h2 id=&#34;属性表集合&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#属性表集合&#34;&gt;#&lt;/a&gt; 属性表集合&lt;/h2&gt;
 &lt;p&gt;每个属性对应一张属性表。&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://yukiofyume.github.io/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
-            <title>计算机基础知识</title>
-            <link>https://yukiofyume.github.io/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
-            <category term="计算机基础知识" scheme="https://yukiofyume.github.io/categories/S408/" />
-            <category term="计算机网络" scheme="https://yukiofyume.github.io/categories/S408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" />
-            <pubDate>Mon, 24 May 2021 17:19:38 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;计算机网络&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#计算机网络&#34;&gt;#&lt;/a&gt; 计算机网络&lt;/h1&gt;
-&lt;h2 id=&#34;tcpip分层&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#tcpip分层&#34;&gt;#&lt;/a&gt; TCP/IP 分层&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;应用层&lt;/strong&gt;：应用层决定了向用户提供应用服务时通信的活动。（DNS、HTTP）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;传输层&lt;/strong&gt;：对上层应用层提供处于网络连接中的两台计算机之间的数据传输。处理需要传输的数据。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;网络层&lt;/strong&gt;：处理在网络上流动的数据包，数据包是网络传输的最小数据单位，该层规定了通过怎样的路径到达对方计算机。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;链路层&lt;/strong&gt;：用来处理连接网络的硬件部分。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;tcp-三次握手和四次挥手&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#tcp-三次握手和四次挥手&#34;&gt;#&lt;/a&gt; TCP 三次握手和四次挥手&lt;/h2&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210720194757.png&#34; alt=&#34;image-20210720194757847&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;三次握手的原因？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;第三次握手是为了防止失效的连接请求到达服务器，让服务器错误打开连接。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;客户端发送的连接请求如果在网络中滞留，那么就会隔很长一段时间才能收到服务器端发回的连接确认。客户端等待一个超时重传时间之后，就会重新请求连接。但是这个滞留的连接请求最后还是会到达服务器，如果不进行三次握手，那么服务器就会打开两个连接。如果有第三次握手，客户端会忽略服务器之后发送的对滞留连接请求的连接确认，不进行第三次握手，因此就不会再次打开连接。&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210720200214.png&#34; alt=&#34;image-20210720200214739&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;以下描述不讨论序号和确认号，因为序号和确认号的规则比较简单。并且不讨论 ACK，因为 ACK 在连接建立之后都为 1。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A 发送连接释放报文，FIN=1。&lt;/li&gt;
-&lt;li&gt;B 收到之后发出确认，此时 TCP 属于半关闭状态，B 能向 A 发送数据但是 A 不能向 B 发送数据。&lt;/li&gt;
-&lt;li&gt;当 B 不再需要连接时，发送连接释放报文，FIN=1。&lt;/li&gt;
-&lt;li&gt;A 收到后发出确认，进入 TIME-WAIT 状态，等待 2 MSL（最大报文存活时间）后释放连接。&lt;/li&gt;
-&lt;li&gt;B 收到 A 的确认后释放连接。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;四次挥手的原因&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;客户端发送了 FIN 连接释放报文之后，服务器收到了这个报文，就进入了 CLOSE-WAIT 状态。这个状态是为了让服务器端发送还未传送完毕的数据，传送完毕之后，服务器会发送 FIN 连接释放报文。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;TIME_WAIT&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;客户端接收到服务器端的 FIN 报文后进入此状态，此时并不是直接进入 CLOSED 状态，还需要等待一个时间计时器设置的时间 2MSL。这么做有两个理由：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;确保最后一个确认报文能够到达。如果 B 没收到 A 发送来的确认报文，那么就会重新发送连接释放请求报文，A 等待一段时间就是为了处理这种情况的发生。&lt;/li&gt;
-&lt;li&gt;等待一段时间是为了让本连接持续时间内所产生的所有报文都从网络中消失，使得下一个新的连接不会出现旧的连接请求报文。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;tcpudp区别&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#tcpudp区别&#34;&gt;#&lt;/a&gt; TCP/UDP 区别&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;类型&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;面向连接&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;传输可靠性&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;传输形式&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;传输效率&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;所需资源&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;应用场景&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;首部字节&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;TCP&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;是&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;可靠&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;字节流&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;慢&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;多&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;要求通信数据可靠&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;20-60&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;UDP&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;否&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;不可靠&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;数据报文段&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;快&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;少&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;要求通信速度快&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;8 个字节&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id=&#34;输入-url-后到显示主页过程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#输入-url-后到显示主页过程&#34;&gt;#&lt;/a&gt; 输入 url 后到显示主页过程&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;浏览器通过 DNS 查找域名所对应的 IP 地址；&lt;/li&gt;
-&lt;li&gt;浏览器与目标服务器通过三次握手建立 TCP 连接；&lt;/li&gt;
-&lt;li&gt;浏览器通过 http 协议发送请求；&lt;/li&gt;
-&lt;li&gt;服务端响应 http 请求；&lt;/li&gt;
-&lt;li&gt;浏览器发送请求获取 html 中的资源然后渲染展示出来。&lt;/li&gt;
-&lt;li&gt;释放连接。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;状态码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#状态码&#34;&gt;#&lt;/a&gt; 状态码&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;状态码&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;类别&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;原因&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;1XX&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;信息类状态码&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;接收的请求正在处理&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;200 OK&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;成功状态码&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;请求被正常处理&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;204 No Content&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;服务器成功处理请求，但是不会返回资源&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;206 Partial Content&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;客户端进行了范围请求，并且服务器成功执行这部分 Get 请求&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;301 Moved Permanently&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;重定向状态码&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;该状态码表示请求的资源已被分配了新的 URI，以后应使用资源现在所指的 URI&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;302 Found&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;表示请求的资源已被分配新的 URI，希望用户本次能使用新的 URI 访问&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;303 See Other&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;由于请求对应的资源存在另一个 URI，应使用 GET 方法定向获取请求的资源&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;304 Not Modified&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;资源已找到，但未符合条件请求&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;400 Bad Request&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;客户端错误状态码&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;该状态码表示请求报文中存在语法错误&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;401 Unauthorized&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;第一次表示需要认证，第二次表示认证失败&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;403 Forbidden&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;表示请求的资源被服务器拒绝&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;404 Not Found&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;服务器上没有请求的资源&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;500 Internal Server Error&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;服务器错误状态码&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;表示服务器执行请求时发生错误&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;503 Service Unavailable&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;表明服务器暂时处于超负载或正在停机维护，无法处理请求&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;301，302，303 虽然规定不是这样，但是实际上浏览器在响应状态码返回的时候都会将 POST 改成 GET&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id=&#34;http101120&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#http101120&#34;&gt;#&lt;/a&gt; Http1.0,1.1,2.0&lt;/h2&gt;
-&lt;h3 id=&#34;http10-11&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#http10-11&#34;&gt;#&lt;/a&gt; Http1.0、1.1&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;缓存策略&lt;/strong&gt;：http1.0 的缓存策略主要是依赖 header 中的 If-Modiified-Since，Expire (到期)，http1.1 的缓存策略要比 http1.0 略多，例如 Entity tag (实体标签)，If-Unmodified-Since，If-Match，If-None-Match 等.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;宽带网络连接优化&lt;/strong&gt;：http1.0 中会存在一些性能浪费，比如只需要对象中的一部分，但是每次请求返回的却是整个对象，这无疑造成了性能的损害。http1.1 则不然，它可以通过在请求头处设置 range 头域，就可以返回请求资源的某一部分，也就是返回码为 206 (Partial Content) 的时候，这对于性能优化很有必要。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;新增部分错误通知&lt;/strong&gt;：Http1.1 新增了 24 个错误状态响应码；&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Host 头处理&lt;/strong&gt;：http1.1 在请求消息和响应消息中加入 HOST 头域，用来传递主机名；&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;长连接&lt;/strong&gt;：http1.1 支持长连接。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;http20-1x&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#http20-1x&#34;&gt;#&lt;/a&gt; Http2.0、1.x&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;http1 的解析是基于文本协议的各式解析，而 http2.0 的协议解析是二进制格式，更加的强大&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;多路复用 (Mutiplexing) :&lt;/strong&gt; 一个连接上可以有多个 request, 且可以随机的混在一起，每个不同的 request 都有对应的 id, 服务端可以通过 request_id 来辨别，大大加快了传输速率&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;header 压缩:  http1.x 中的 header 需要携带大量信息。而且每次都要重复发送.http2.0 使用 encode 来减少传输的 header 大小。而且客户端和服务端可以各自缓存 (cache) 一份 header filed 表，避免了 header 的重复传输，还可以减少传输的大小.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;服务端推送 (server push): 可以通过解析 html 中的依赖，只能的返回所需的其他文件 (css 或者 js 等), 而不用再发起一次请求.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://yukiofyume.github.io/Midd/Redis/Redis%E5%8D%95%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
-            <title>Redis单机数据库</title>
-            <link>https://yukiofyume.github.io/Midd/Redis/Redis%E5%8D%95%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
-            <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
-            <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
-            <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
-            <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
-            <pubDate>Thu, 20 May 2021 13:33:24 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;在docker下安装配置redis622单机&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#在docker下安装配置redis622单机&#34;&gt;#&lt;/a&gt; 在 docker 下安装配置 redis (6.2.2) 单机&lt;/h1&gt;
-&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9yZWdpc3RyeS5odWIuZG9ja2VyLmNvbS9fL3JlZGlz&#34;&gt;docker hub&lt;/span&gt; ，教程是十个有十一个有问题，我佛了。。。搞了一晚上终于好了...(还不是因为不熟悉 docker...)&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;因为我之前就在centos下有过配置，所以将之前的配置文件复制到本地用于启动目录&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;将配置文件复制到  &lt;code&gt;/usr/local/etc/redis&lt;/code&gt;  下，&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;docker run -p 6379:6379 --name myredis -v /usr/local/etc/redis:/etc/redis/redis.conf  -d redis redis-server /etc/redis/redis.conf&lt;/code&gt; ，这里可以使用&lt;strong&gt; Portainer&lt;/strong&gt; 可视化 docker 页面来查看 redis 容器启动成功了没。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;-v /usr/local/etc/redis:/etc/redis/redis.conf 这个是本地 /usr/local/etc/redis 映射到 docker 里面的 redis 配置文件，这里本地路径 /usr/local/etc/redis&lt;strong&gt; 一定不能&lt;/strong&gt;写成 /usr/local/etc/redis**/redis.conf**，不然会映射不过去！！！&lt;/p&gt;
-&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;在 redis 容器成功运行后运行 &lt;code&gt;docker exec -it myredis /bin/bash&lt;/code&gt; ，然后按图中所示的进行测试发现成功了。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://gitee.com/sakuralee/blog-img/raw/master/img/20210426211617.png&#34; alt=&#34;image-20210426211617389&#34; /&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h1 id=&#34;数据库&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#数据库&#34;&gt;#&lt;/a&gt; 数据库&lt;/h1&gt;
-&lt;h2 id=&#34;键空间&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#键空间&#34;&gt;#&lt;/a&gt; 键空间&lt;/h2&gt;
-&lt;p&gt;Redis 是一个键值对数据库服务器，服务器中的每个数据库都由一个  &lt;code&gt;redis.h/redisDb&lt;/code&gt;  结构表示，其中， &lt;code&gt;redisDb&lt;/code&gt;  结构的  &lt;code&gt;dict&lt;/code&gt;  字典保存了数据库中的所有键值对，将这个字典称为&lt;strong&gt;键空间&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id=&#34;读写键空间的维护操作&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#读写键空间的维护操作&#34;&gt;#&lt;/a&gt; 读写键空间的维护操作&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;在读取一个键之后，服务器会根据键是否存在来更新服务器的&lt;strong&gt;键空间命中（hit）次数或键空间不命中（miss）次数&lt;/strong&gt;，这两个值可以在  &lt;code&gt;INFO stats&lt;/code&gt;  命令的  &lt;code&gt;keyspace_hits&lt;/code&gt;  属性和  &lt;code&gt;keyspace_misses&lt;/code&gt;  属性查看；&lt;/li&gt;
-&lt;li&gt;在读取一个键之后，服务器会更新键的 LRU（最后一次使用）时间，这个值可以用于计算键的闲置时间，使用  &lt;code&gt;OBJECT idletime &amp;lt;key&amp;gt;&lt;/code&gt;  命令可以查看键 key 的闲置时间；&lt;/li&gt;
-&lt;li&gt;如果服务器在读取一个键时发现该键已经过期，那么服务器会先删除这个过期键，然后才执行余下的其他操作；&lt;/li&gt;
-&lt;li&gt;如果有客户端使用  &lt;code&gt;WATCH&lt;/code&gt;  命令监视了某个键，那么服务器在对被监视的键进行修改之后，会将这个键标记为脏，从而让事务程序注意到这个键已经被修改过；&lt;/li&gt;
-&lt;li&gt;服务器每次修改一个键之后，都会对脏键计数器的值增 1，这个计数器会触发服务器的持久化以及复制操作；&lt;/li&gt;
-&lt;li&gt;如果服务器开启了数据库通知功能，那么在对键进行修改之后，服务器将按配置发送相应的数据库通知。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;键的生存时间&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#键的生存时间&#34;&gt;#&lt;/a&gt; 键的生存时间&lt;/h2&gt;
-&lt;h3 id=&#34;设置过期时间&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#设置过期时间&#34;&gt;#&lt;/a&gt; 设置过期时间&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;EXPIRE &amp;lt;key&amp;gt;&amp;lt;ttl&amp;gt; 命令用于将键 key 的生存时间设置为 ttl 秒；&lt;/li&gt;
-&lt;li&gt;PEXPIRE &amp;lt;key&amp;gt;&amp;lt;ttl&amp;gt; 命令用于将键 key 的生存时间设置为 ttl 毫秒；&lt;/li&gt;
-&lt;li&gt;EXPIREAT &amp;lt;key&amp;gt;&amp;lt;timestamp&amp;gt; 命令用于将键 key 的过期时间设置为 timestamp 所指定的秒数时间戳；&lt;/li&gt;
-&lt;li&gt;PEXPIREAT &amp;lt;key&amp;gt;&amp;lt;timestamp&amp;gt; 命令用于将键 key 的过期时间设置为 timestamp 所指定的毫秒数时间戳。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;上述命令的底层实现其实都是  &lt;code&gt;PEXPIREAT&lt;/code&gt;  命令。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;PERSIST &amp;lt;key&amp;gt;&lt;/code&gt;  用于移除过期时间。&lt;/p&gt;
-&lt;h3 id=&#34;保存过期时间&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#保存过期时间&#34;&gt;#&lt;/a&gt; 保存过期时间&lt;/h3&gt;
-&lt;p&gt;redisDb 结构中的  &lt;code&gt;dict *expires&lt;/code&gt;  字典保存了数据库中所有键的过期时间，称这个字典为过期字典。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;过期字典的 key 是一个指针，这个指针指向键空间中的某个键对象。&lt;/li&gt;
-&lt;li&gt;过期字典的 value 是一个 long long 类型的整数，这个整数保存了键所指向的数据库键的过期时间，一个毫秒精度的 UNIX 时间戳。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;过期键的判断&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#过期键的判断&#34;&gt;#&lt;/a&gt; 过期键的判断&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;检查给定键是否存在于过期字典，如果存在，那么取得键的过期时间。&lt;/li&gt;
-&lt;li&gt;检查当前 UNIX 时间戳是否大于键的过期时间，如果是的话，那么键已过期。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;过期删除策略&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#过期删除策略&#34;&gt;#&lt;/a&gt; 过期删除策略&lt;/h2&gt;
-&lt;h3 id=&#34;定时删除&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#定时删除&#34;&gt;#&lt;/a&gt; 定时删除&lt;/h3&gt;
-&lt;p&gt;在设置键的过期时间的同时，创建一个定时器（timer），让定时器在键的过期时间来临时，立即执行对键的删除操作。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;定时删除策略对内存最友好，但是对 CPU 最不友好&lt;/strong&gt;，在过期键比较多的情况下，删除过期键这一行为可能会占用相当一部分 CPU 时间，会对服务器的响应时间和吞吐量造成影响。&lt;/p&gt;
-&lt;p&gt;创建定时器需要用到 &lt;strong&gt;Redis 服务器中的时间事件&lt;/strong&gt;，而当前时间事件的实现方式为&lt;strong&gt;无序链表&lt;/strong&gt;，查找一个时间事件的时间复杂度为 &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;O(N)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.10903em;&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;，并不能高效地处理大量时间时间。&lt;/p&gt;
-&lt;h3 id=&#34;惰性删除&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#惰性删除&#34;&gt;#&lt;/a&gt; 惰性删除&lt;/h3&gt;
-&lt;p&gt;放任键过期不管，但是每次从键空间中获取键时，都检查取得的键是否过期，如果过期的话，就删除该键；如果没有过期，就返回该键。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;惰性删除策略对 CPU 是最友好的&lt;/strong&gt;，程序只会在取出键时才对键进行过期检查，这可以保证删除过期键的操作只会在非做不可的情况下进行，并且删除的目标仅限于当前处理的键，这个策略不会在删除其他无关的过期键上花费任何 CPU 时间。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;对内存最不友好&lt;/strong&gt;，如果一个键已经过期，而这个键又仍然保留在数据库中，那么只要这个过期键不被删除，它占用的内存就不会释放。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;实现&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;过期键的惰性删除策略由  &lt;code&gt;db.c/expireIfNeeded&lt;/code&gt;  函数实现，在所有读写数据库的 Redis 命令在执行之前都会调用这个函数对输入键进行检查：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果输入键已经过期，那么此函数将输入键从数据库中删除；&lt;/li&gt;
-&lt;li&gt;如果输入键还未过期，那么此函数不会做动作。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;定期删除&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#定期删除&#34;&gt;#&lt;/a&gt; 定期删除&lt;/h3&gt;
-&lt;p&gt;每隔一段时间，程序就对数据库进行一次检查，删除里面的过期键。至于要删除多少过期键，以及要检查多少个数据库，则由算法决定。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;定期删除策略每隔一段时间执行一次删除过期键操作，并通过限制删除操作执行的时长和频率来减少删除操作对 CPU 时间的影响；&lt;/li&gt;
-&lt;li&gt;通过定期删除过期键，有效地减少了因为过期键而带来的内存浪费。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;实现&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;过期键的定时删除策略由  &lt;code&gt;expire.c/activeExpireCycle&lt;/code&gt;  函数实现，每当 Redis 服务器周期性操作  &lt;code&gt;server.c/serverCron&lt;/code&gt;   函数执行时，  &lt;code&gt;activeExpireCycle&lt;/code&gt;  函数就会被调用，它在规定的时间内，分多次遍历服务器中的各个数据库，从数据库的  &lt;code&gt;expires&lt;/code&gt;  字典中随机检查一部分键的过期时间，并删除其中过期键。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;activeExpireCycle&lt;/strong&gt; 函数工作模式总结如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;函数每次运行时，都从一定数量的数据库中取出一定数量的随机键进行检查，并删除其中的过期键。&lt;/li&gt;
-&lt;li&gt;全局变量  &lt;code&gt;current_db&lt;/code&gt;  会记录当前  &lt;code&gt;activateExpireCycle&lt;/code&gt;  函数检查的进度，并在下一次  &lt;code&gt;activeExpireCycle&lt;/code&gt;  函数调用时，接着上一次的进度进行处理。&lt;/li&gt;
-&lt;li&gt;随着  &lt;code&gt;activeExpireCycle&lt;/code&gt;  函数的不断执行，服务器中的所有数据库都会被检查一遍，这时函数将  &lt;code&gt;current_db&lt;/code&gt;  变量重置为 0，然后再次开始新一轮的检查工作。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;Redis 服务器实际使用的是惰性删除和定期删除这两种策略。&lt;/strong&gt;&lt;!-- more --&gt;&lt;/p&gt;
-&lt;h2 id=&#34;aof-rdb-和复制功能对过期键的处理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#aof-rdb-和复制功能对过期键的处理&#34;&gt;#&lt;/a&gt; AOF、RDB 和复制功能对过期键的处理&lt;/h2&gt;
-&lt;h3 id=&#34;rdb&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#rdb&#34;&gt;#&lt;/a&gt; RDB&lt;/h3&gt;
-&lt;h4 id=&#34;生成-rdb-文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#生成-rdb-文件&#34;&gt;#&lt;/a&gt; 生成 RDB 文件&lt;/h4&gt;
-&lt;p&gt;过期键不会被保存到新创建的 RDB 文件中&lt;/p&gt;
-&lt;h4 id=&#34;载入-rdb-文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#载入-rdb-文件&#34;&gt;#&lt;/a&gt; 载入 RDB 文件&lt;/h4&gt;
-&lt;p&gt;在启动 Redis 服务器时，如果服务器开启了 RDB 功能，那么服务器将对 RDB 文件进行载入：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;如果服务器以主服务器模式运行&lt;/strong&gt;：在载入 RDB 文件时，程序会对文件中保存的键进行检查，未过期的键会被载入到数据库中；&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;如果服务器以服务器模式运行&lt;/strong&gt;：在载入 RDB 文件时，文件中保存的所有键，不论是否过期，都会被载入到数据库中。不过，因为主服务器在进行数据同步的时候，从服务器的数据库就会被清空，所以一般来说，过期键对载入 RDB 文件的从服务器也不会造成影响。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;aof&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#aof&#34;&gt;#&lt;/a&gt; AOF&lt;/h3&gt;
-&lt;h4 id=&#34;aof文件写入&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#aof文件写入&#34;&gt;#&lt;/a&gt; AOF 文件写入&lt;/h4&gt;
-&lt;p&gt;如果某个键已经过期，但是还没有被删除，那么不会对 AOF 文件产生影响。&lt;/p&gt;
-&lt;p&gt;如果某个键已经过期，并且被删除了，程序会向 AOF 文件 append 一条 DEL 命令，显式地记录该键已被删除。&lt;/p&gt;
-&lt;h4 id=&#34;aof重写&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#aof重写&#34;&gt;#&lt;/a&gt; AOF 重写&lt;/h4&gt;
-&lt;p&gt;已过期的键不会被保存到重写后的 AOF 文件中，所以，数据库中包含过期键不会对 AOF 重写造成影响。&lt;/p&gt;
-&lt;h1 id=&#34;rdb持久化&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#rdb持久化&#34;&gt;#&lt;/a&gt; RDB 持久化&lt;/h1&gt;
-&lt;h2 id=&#34;简介&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#简介&#34;&gt;#&lt;/a&gt; 简介&lt;/h2&gt;
-&lt;p&gt;RDB 持久化功能所生成的 RDB 文件是一个经过压缩的二进制文件，通过该文件可以还原生成 RDB 文件时的数据库状态。&lt;/p&gt;
-&lt;h2 id=&#34;rdb文件的创建和载入&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#rdb文件的创建和载入&#34;&gt;#&lt;/a&gt; RDB 文件的创建和载入&lt;/h2&gt;
-&lt;h3 id=&#34;创建rdbcrdbsave-函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#创建rdbcrdbsave-函数&#34;&gt;#&lt;/a&gt; 创建 (rdb.c/rdbSave 函数)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;&lt;strong&gt;SAVA&lt;/strong&gt;&lt;/em&gt; 命令会&lt;strong&gt;阻塞 redis 服务器进程&lt;/strong&gt;，直到 RDB 文件创建完毕为止，在服务器进程阻塞期间，服务器不能处理任何命令请求。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&lt;strong&gt;BGSAVE&lt;/strong&gt;&lt;/em&gt; 命令会&lt;strong&gt;派生出一个子进程&lt;/strong&gt;，然后由子进程负责创建 RDB 文件，服务器进程（父进程）继续处理命令请求。（轮询等待子进程的信号）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;载入-rdbcrdbload-函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#载入-rdbcrdbload-函数&#34;&gt;#&lt;/a&gt; 载入 (rdb.c/rdbLoad 函数)&lt;/h3&gt;
-&lt;p&gt;RDB 文件的载入工作是在服务器启动时自动执行的，所以 redis 没有专门用于载入 RDB 文件的命令。只要 redis 服务器在启动时检测到 RDB 文件存在，它就会自动载入 RDB 文件。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;因为 AOF 文件的更新频率通常比 RDB 文件高，所以：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果服务器开启了 AOF，那么服务器会优先使用 AOF 文件来还原数据库状态&lt;/li&gt;
-&lt;li&gt;只有在 AOF 关闭的时候，服务器才会使用 RDB 来还原数据库状态。&lt;!-- more --&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;bgsave-命令执行时服务器的状态&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#bgsave-命令执行时服务器的状态&#34;&gt;#&lt;/a&gt; BGSAVE 命令执行时服务器的状态&lt;/h3&gt;
-&lt;p&gt;在 BGSAVE 执行期间，服务器处理 &lt;em&gt;&lt;strong&gt;SAVE、BGSAVE、BGREWRITEAOF&lt;/strong&gt;&lt;/em&gt; 三个命令的方式会和平时有所不同。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;客户端发送的 &lt;strong&gt;SAVE&lt;/strong&gt; 命令会被服务器拒绝，避免父进程（服务器进程）和子进程同时执行两个 &lt;strong&gt;rdbSave&lt;/strong&gt; 调用，防止产生竞争条件。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;BGSAVE 也会被拒绝，因为两个 BGSAVE 命令也会产生竞争条件.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;BGREWRITEAOF 命令会被延迟到 BGSAVE 命令执行完毕之后执行；如果 BGREWRITEAOF 命令正在执行，客户端发送的 BGSAVE 命令也会被服务器拒绝。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;实际上 BGSAVE 和 BGREWRITEAOF 都是由子进程执行，所以这两个命令在操作方面并没有冲突的地方，不能同时执行它们只是一个性能方面的考虑。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;rdb-文件载入时的服务器状态&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#rdb-文件载入时的服务器状态&#34;&gt;#&lt;/a&gt; RDB 文件载入时的服务器状态&lt;/h3&gt;
-&lt;p&gt;服务器在载入 RDB 文件期间，会一直处于阻塞状态，直到载入工作完成为止。&lt;/p&gt;
-&lt;h1 id=&#34;aof-持久化&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#aof-持久化&#34;&gt;#&lt;/a&gt; AOF 持久化&lt;/h1&gt;
-&lt;p&gt;与 &lt;strong&gt;RDB&lt;/strong&gt; 持久化通过保存数据库中的键值对来记录数据库状态不同，&lt;strong&gt;AOF&lt;/strong&gt; 持久化是通过保存 redis 服务器所执行的写命令来记录数据库状态的。服务器启动时，可以通过载入和执行 AOF 文件中保存的命令来还原服务器关闭之前的数据库状态。&lt;/p&gt;
-&lt;p&gt;AOF 持久化功能的实现可以分为&lt;strong&gt;追加、文件写入、文件同步&lt;/strong&gt; 三个步骤。&lt;/p&gt;
-&lt;h2 id=&#34;命令追加&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#命令追加&#34;&gt;#&lt;/a&gt; 命令追加&lt;/h2&gt;
-&lt;p&gt;当 AOF 持久化功能处于打开状态的时候，服务器在执行完一个写命令之后，会以协议格式将被执行的命令追加到服务器状态的  &lt;code&gt;aof_buf&lt;/code&gt;  缓冲区的末尾。&lt;/p&gt;
-&lt;h2 id=&#34;aof-文件的写入和同步&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#aof-文件的写入和同步&#34;&gt;#&lt;/a&gt; AOF 文件的写入和同步&lt;/h2&gt;
-&lt;p&gt;redis 的服务器进程就是一个&lt;strong&gt;事件循环 (loop)&lt;/strong&gt;，这个循环中的&lt;strong&gt;文件事件&lt;/strong&gt;负责接收客户端的请求命令，以及向客户端发送命令回复，而&lt;strong&gt;时间事件&lt;/strong&gt;负责执行像  &lt;code&gt;serverCron()&lt;/code&gt;  函数这样需要定时运行的函数。&lt;/p&gt;
-&lt;p&gt;因为服务器在处理文件事件时可能会执行写命令，使得一些内容被追加到  &lt;code&gt;aof_buf&lt;/code&gt;  缓冲区里面，所以在服务器每次结束一个事件循环之前，它都会调用  &lt;code&gt;flushAppendOnlyFile()&lt;/code&gt;  函数，考虑是否需要将  &lt;code&gt;aof_buf&lt;/code&gt;  缓冲区中的内容写入和保存到 AOF 文件里面。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;flushAppendOnlyFile()&lt;/code&gt;  函数的行为由服务器配置的  &lt;code&gt;appendsync&lt;/code&gt;  值来决定&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;appendsync 选项的值&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;flushAppendOnlyFile 函数行为&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;always（最安全，效率最低）&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;将  &lt;code&gt;aof_buf&lt;/code&gt;  缓冲区中的所有内容&lt;strong&gt;写入并同步&lt;/strong&gt;到 AOF 文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;everysync(&lt;strong&gt;默认值&lt;/strong&gt;)（足够快，够安全）&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;将  &lt;code&gt;aof_buf&lt;/code&gt;  缓冲区的所有内容&lt;strong&gt;写入&lt;/strong&gt;到 AOF 文件，如果上次同步 AOF 文件的时间距离现在超过一秒钟，那么再次对 AOF 文件进行同步，并且这个同步操作是由一个线程专门负责的。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;no（写入速度最快，效率和 everysync 类似）&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;将  &lt;code&gt;aof_buf&lt;/code&gt;  缓冲区中的所有内容写入到 AOF 文件，但并不对 AOF 文件进行同步，何时同步由操作系统决定&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id=&#34;aof-文件的载入与数据还原&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#aof-文件的载入与数据还原&#34;&gt;#&lt;/a&gt; AOF 文件的载入与数据还原&lt;/h2&gt;
-&lt;p&gt;载入：&lt;/p&gt;
-&lt;p&gt;&amp;lt;img src=&amp;quot;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRlZS5jb20vc2FrdXJhbGVlL2Jsb2ctaW1nL3Jhdy9tYXN0ZXIvaW1nL2ltYWdlLTIwMjEwNDMwMDk0MDE5MDQ2LnBuZw==&#34;&gt;https://gitee.com/sakuralee/blog-img/raw/master/img/image-20210430094019046.png&lt;/span&gt;&amp;quot; alt=&amp;quot;image-20210430094019046&amp;quot; style=&amp;quot;zoom:67%;&amp;quot; /&amp;gt;&lt;/p&gt;
-&lt;p&gt;伪客户端就是一个没有&lt;strong&gt;网络连接&lt;/strong&gt;的客户端。&lt;/p&gt;
-&lt;h2 id=&#34;aof-重写bgrewriteaof-命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#aof-重写bgrewriteaof-命令&#34;&gt;#&lt;/a&gt; AOF 重写（BGREWRITEAOF 命令）&lt;/h2&gt;
-&lt;p&gt;为了解决 AOF 文件体积膨胀的问题，redis 提供了 AOF 文件重写（rewrite）功能。通过该功能，redis 服务器可以创建一个新的 AOF 文件来替代现有的 AOF 文件，&lt;strong&gt;新旧两个 AOF 文件&lt;/strong&gt;保存的数据库状态相同，但新的 AOF 文件不会包含任何浪费空间的冗余命令，所以新 AOF 文件的体积会比旧的小很多。&lt;/p&gt;
-&lt;h3 id=&#34;aof-文件重写的实现&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#aof-文件重写的实现&#34;&gt;#&lt;/a&gt; AOF 文件重写的实现&lt;/h3&gt;
-&lt;p&gt;** 通过 &lt;strong&gt; &lt;code&gt;aof_rewrite&lt;/code&gt;  函数&lt;/strong&gt;：AOF 文件重写并不需要对现有的 AOF 文件进行任何读取、分析或者写入操作，这个功能是通过读取服务器当前的数据库状态来实现的。通过读取 **key 的 &lt;strong&gt;value&lt;/strong&gt;，可以将多条命令合并，减少冗余。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;tips：为了避免在执行命令时造成客户端输入缓冲区溢出，重写程序在处理列表、哈希表、集合、有序集合这四种可能会带有多个元素的键时，会先检查所包含的元素（value）数量，如果元素数量超过了  &lt;code&gt;redis.h/REDIS_AOF_ITEMS_PRE_CMD&lt;/code&gt;  常量的值，那么&lt;strong&gt;重写程序会使用多条命令来记录键的值，而不单单一条命令&lt;/strong&gt;。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;code&gt;aof_rewrite&lt;/code&gt;  函数如果通过 redis 服务器来调用，由于大量的写入操作，会被长时间阻塞，所以 redis 将 AOF 重写程序放在&lt;strong&gt;子进程&lt;/strong&gt;中执行，这样做可以达到两个目的：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;子进程进行 AOF 重写期间，服务器进程可以继续处理请求。&lt;/li&gt;
-&lt;li&gt;子进程带有服务器进程的数据副本，使用子进程而不是线程，可以在避免使用锁的情况下，保证数据的安全性。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;如何解决服务器当前的数据库状态和重写后的 AOF 文件所保存的数据库状态不一致？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;redis 服务器设置了一个 AOF 重写缓冲区，这个缓冲区会在服务器创建子进程之后开始使用，当 redis 服务器执行完一个写命令之后，它会同时将这个写命令发送给 AOF 缓冲区和 AOF 重写缓冲区。这也就是说，在子进程执行 AOF 重写期间，&lt;strong&gt;服务器进程&lt;/strong&gt;需要执行以下三个工作：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;执行客户端发来的命令&lt;/li&gt;
-&lt;li&gt;将执行后的写命令追加到 AOF 缓冲区&lt;/li&gt;
-&lt;li&gt;将执行后的写命令追加到 AOF 重写缓冲区。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;当子进程完成 AOF 重写工作之后&lt;/strong&gt;，它会向父进程发送一个信号，父进程在接到该信号之后，会调用一个信号处理函数，并执行以下工作：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;将 AOF 重写缓冲区的所有内容写入到新 AOF 文件中，这时新的 AOF 文件所保存的数据库状态将和服务器当前的数据库状态一致&lt;/li&gt;
-&lt;li&gt;对新的 AOF 文件进行改名，原子地覆盖现有的 AOF 文件，完成新旧两个 AOF 文件的交替。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;这个信号处理函数执行完毕之后，父进程就可以继续像往常一样接受命令请求了。&lt;/p&gt;
-&lt;p&gt;在整个 AOF 后台重写过程中，只有信号处理函数执行时会对服务器进程造成阻塞。&lt;/p&gt;
-&lt;h1 id=&#34;事件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#事件&#34;&gt;#&lt;/a&gt; 事件&lt;/h1&gt;
-&lt;p&gt;Redis 服务器是一个事件驱动程序，服务器需要处理以下两类事件：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;文件事件&lt;/strong&gt;：Redis 服务器通过套接字与客户端（或者其它 Redis 服务器）进行连接，而文件事件就是服务器对套接字操作的抽象。服务器与客户端（或者其它 Redis 服务器）的通信会产生相应的文件事件，而服务器则通过监听并处理这些事件来完成一系列网络通信操作。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;时间事件&lt;/strong&gt;：Redis 服务器中的一些操作（比如  &lt;code&gt;serverCron&lt;/code&gt;  函数）需要在给定的时间点执行，而时间事件就是服务器对这类定时操作的抽象。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;文件事件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#文件事件&#34;&gt;#&lt;/a&gt; 文件事件&lt;/h2&gt;
-&lt;p&gt;Redis 基于 Reactor 模式开发了自己的网络事件处理器：这个处理器被称为文件事件处理器：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;文件事件处理器使用&lt;strong&gt; I/O 多路复用&lt;/strong&gt;程序来同时监听多个套接字，并根据套接字目前执行的任务来为套接字关联不同的事件处理器。&lt;/li&gt;
-&lt;li&gt;当被监听的套接字准备好执行连接应答（accept）、读取（read）、写入（write）、关闭（close）等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件。&lt;/li&gt;
-&lt;/ul&gt;
  ]]></description>
         </item>
     </channel>
