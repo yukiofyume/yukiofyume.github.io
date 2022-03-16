@@ -2004,8 +2004,8 @@ config/server-2.properties:
             <link>https://yukiofyume.github.io/Midd/Redis/Redis%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
             <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
             <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
-            <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
             <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
+            <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
             <pubDate>Thu, 27 May 2021 21:44:32 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;缓存使用中的坑&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#缓存使用中的坑&#34;&gt;#&lt;/a&gt; 缓存使用中的坑&lt;/h1&gt;
 &lt;h2 id=&#34;缓存一致性&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#缓存一致性&#34;&gt;#&lt;/a&gt; 缓存一致性&lt;/h2&gt;

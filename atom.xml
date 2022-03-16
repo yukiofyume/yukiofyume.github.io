@@ -2197,8 +2197,8 @@ config/server-2.properties:
 </content>
         <category term="中间件" scheme="https://yukiofyume.github.io/categories/Midd/" />
         <category term="Redis" scheme="https://yukiofyume.github.io/categories/Midd/Redis/" />
-        <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
         <category term="中间件" scheme="https://yukiofyume.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" />
+        <category term="Redis" scheme="https://yukiofyume.github.io/tags/Redis/" />
         <updated>2021-05-27T13:44:32.000Z</updated>
     </entry>
 </feed>
