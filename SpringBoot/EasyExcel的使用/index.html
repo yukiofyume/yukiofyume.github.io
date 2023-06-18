@@ -1,0 +1,692 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="lwh">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1.基本读写Excel1.1.导入具体的依赖12345&lt;dependency&gt;    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;easyexcel&lt;&#x2F;artifactId&gt;    &lt;version&gt;3.2.1&lt;&#x2F;version&gt;&lt;&#x2F;dependency&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EasyExcel的使用">
+<meta property="og:url" content="https://yukiofyume.github.io/SpringBoot/EasyExcel%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="简单的记录">
+<meta property="og:description" content="1.基本读写Excel1.1.导入具体的依赖12345&lt;dependency&gt;    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;easyexcel&lt;&#x2F;artifactId&gt;    &lt;version&gt;3.2.1&lt;&#x2F;version&gt;&lt;&#x2F;dependency&gt;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192011132.png">
+<meta property="og:image" content="c:\Users\85303\AppData\Roaming\Typora\typora-user-images\image-20230219131444906.png">
+<meta property="og:image" content="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192012446.png">
+<meta property="og:image" content="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192013090.png">
+<meta property="og:image" content="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192013329.png">
+<meta property="og:image" content="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192013053.png">
+<meta property="og:image" content="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192013831.png">
+<meta property="article:published_time" content="2023-02-19T04:27:25.000Z">
+<meta property="article:modified_time" content="2023-02-19T12:25:02.000Z">
+<meta property="article:author" content="lwh">
+<meta property="article:tag" content="SpringBoot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192011132.png">
+  
+  
+  
+  <title>EasyExcel的使用 - 简单的记录</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yukiofyume.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="EasyExcel的使用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-19 12:27" pubdate>
+          2023年2月19日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          67 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">EasyExcel的使用</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-基本读写Excel"><a href="#1-基本读写Excel" class="headerlink" title="1.基本读写Excel"></a>1.基本读写Excel</h1><h2 id="1-1-导入具体的依赖"><a href="#1-1-导入具体的依赖" class="headerlink" title="1.1.导入具体的依赖"></a>1.1.导入具体的依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>easyexcel<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.2.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="1-2-实体类"><a href="#1-2-实体类" class="headerlink" title="1.2.实体类"></a>1.2.实体类</h2><p>在这里以导入值班人员信息为例子。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@ExcelIgnoreUnannotated</span><br><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DutyPersonEntity</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br>    <span class="hljs-meta">@Serial</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> -<span class="hljs-number">5785320784299816034L</span>;<br>    <span class="hljs-keyword">private</span> Long id;<br>    <span class="hljs-meta">@ExcelProperty(index = 0, value = &quot;值班人员姓名&quot;)</span><br>    <span class="hljs-keyword">private</span> String personName;<br>    <span class="hljs-meta">@ExcelProperty(index = 1, value = &quot;值班地点&quot;)</span><br>    <span class="hljs-keyword">private</span> String dutyPlace;<br>    <span class="hljs-meta">@ExcelProperty(index = 2, value = &quot;电话号码&quot;)</span><br>    <span class="hljs-keyword">private</span> String phoneNum;<br>    <span class="hljs-meta">@ExcelProperty(index = 3, value = &quot;值班时间&quot;)</span><br>    <span class="hljs-meta">@DateTimeFormat(&quot;yyyy-MM-dd&quot;)</span><br>    <span class="hljs-meta">@JsonSerialize(using = LocalDateTimeSerializer.class)</span><br>    <span class="hljs-meta">@JsonDeserialize(using = LocalDateTimeDeserializer.class)</span><br>    <span class="hljs-meta">@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br>    <span class="hljs-keyword">private</span> LocalDateTime dutyTime;<br>    <span class="hljs-keyword">private</span> Integer deleteFlag;<br>    <span class="hljs-meta">@JsonSerialize(using = LocalDateTimeSerializer.class)</span><br>    <span class="hljs-meta">@JsonDeserialize(using = LocalDateTimeDeserializer.class)</span><br>    <span class="hljs-meta">@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br>    <span class="hljs-keyword">private</span> LocalDateTime createTime;<br>    <span class="hljs-meta">@JsonSerialize(using = LocalDateTimeSerializer.class)</span><br>    <span class="hljs-meta">@JsonDeserialize(using = LocalDateTimeDeserializer.class)</span><br>    <span class="hljs-meta">@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br>    <span class="hljs-keyword">private</span> LocalDateTime updateTime;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-3-持久层"><a href="#1-3-持久层" class="headerlink" title="1.3.持久层"></a>1.3.持久层</h2><p>首先创建接口 <code>DutyPersonRepository</code> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Repository</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">DutyPersonRepository</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 批量插入</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> list</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-type">long</span> <span class="hljs-title function_">insertBatch</span><span class="hljs-params">(<span class="hljs-meta">@Param(&quot;list&quot;)</span> List&lt;DutyPersonEntity&gt; list)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对应的 xml 文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">mapper</span></span><br><span class="hljs-meta">        <span class="hljs-keyword">PUBLIC</span> <span class="hljs-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span><br><span class="hljs-meta">        <span class="hljs-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;com.lwh.learn.easyexcel.repository.DutyPersonRepository&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">insert</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;insertBatch&quot;</span>&gt;</span><br>        insert into duty_person(person_name,duty_place,phone_num,duty_time,delete_flag,create_time,update_time)<br>        values<br>        <span class="hljs-tag">&lt;<span class="hljs-name">foreach</span> <span class="hljs-attr">collection</span>=<span class="hljs-string">&quot;list&quot;</span> <span class="hljs-attr">item</span>=<span class="hljs-string">&quot;item&quot;</span> <span class="hljs-attr">separator</span>=<span class="hljs-string">&quot;,&quot;</span>&gt;</span><br>            (#&#123;item.personName&#125;,#&#123;item.dutyPlace&#125;,#&#123;item.phoneNum&#125;,#&#123;item.dutyTime&#125;,<br>            #&#123;item.deleteFlag&#125;,#&#123;item.createTime&#125;,#&#123;item.updateTime&#125;)<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">foreach</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>配置文件</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">spring.datasource.url</span>=<span class="hljs-string">jdbc:postgresql://127.0.0.1:49156/postgres</span><br><span class="hljs-attr">spring.datasource.driver-class-name</span>=<span class="hljs-string">org.postgresql.Driver</span><br><span class="hljs-attr">spring.datasource.username</span>=<span class="hljs-string">postgres</span><br><span class="hljs-attr">spring.datasource.password</span>=<span class="hljs-string">postgrespw</span><br><span class="hljs-attr">mybatis.mapper-locations</span>=<span class="hljs-string">classpath:/repository/*.xml</span><br><span class="hljs-attr">mybatis.type-aliases-package</span>=<span class="hljs-string">com.lwh.learn.easyexcel.entity</span><br><span class="hljs-attr">mybatis.configuration.map-underscore-to-camel-case</span>=<span class="hljs-string">true</span><br><span class="hljs-attr">logging.level.com.lwh.learn.easyexcel.repository</span>=<span class="hljs-string">debug</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="1-4-读监听器"><a href="#1-4-读监听器" class="headerlink" title="1.4.读监听器"></a>1.4.读监听器</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Slf4j</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DutyPersonListener</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ReadListener</span>&lt;DutyPersonEntity&gt; &#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 每隔5条存储数据库，实际使用中可以100条，然后清理list ，方便内存回收</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">BATCH_COUNT</span> <span class="hljs-operator">=</span> <span class="hljs-number">5</span>;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 缓存的数据</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> List&lt;DutyPersonEntity&gt; cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);<br><br>    <span class="hljs-keyword">private</span> DutyPersonRepository dutyPersonRepository;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">DutyPersonListener</span><span class="hljs-params">(DutyPersonRepository dutyPersonRepository)</span> &#123;<br>        <span class="hljs-built_in">this</span>.dutyPersonRepository = dutyPersonRepository;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 每来一条数据都会调用</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> dutyPersonEntity one row value. Is is same as &#123;<span class="hljs-doctag">@link</span> AnalysisContext#readRowHolder()&#125;</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> analysisContext  analysis context</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">invoke</span><span class="hljs-params">(DutyPersonEntity dutyPersonEntity, AnalysisContext analysisContext)</span> &#123;<br>        log.info(<span class="hljs-string">&quot;解析到一条数据:&#123;&#125;&quot;</span>, JacksonUtils.entity2Json(dutyPersonEntity));<br>        cachedDataList.add(dutyPersonEntity);<br>        <span class="hljs-keyword">if</span> (cachedDataList.size() &gt;= BATCH_COUNT) &#123;<br>            saveData();<br>            <span class="hljs-comment">//存储完成后清理 list</span><br>            cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 所以数据解析完成了，都会来调用</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> analysisContext</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doAfterAllAnalysed</span><span class="hljs-params">(AnalysisContext analysisContext)</span> &#123;<br>        <span class="hljs-comment">// 这里的 save 操作是插入不足 BATCH_COUNT 的数据</span><br>        saveData();<br>        log.info(<span class="hljs-string">&quot;所以数据解析完成&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">saveData</span><span class="hljs-params">()</span> &#123;<br>        log.info(<span class="hljs-string">&quot;&#123;&#125;条数据，开始存储数据库！&quot;</span>, cachedDataList.size());<br>        cachedDataList.forEach(dutyPersonEntity -&gt; &#123;<br>            dutyPersonEntity.setDeleteFlag(<span class="hljs-number">0</span>);<br>            dutyPersonEntity.setCreateTime(LocalDateTime.now());<br>            dutyPersonEntity.setUpdateTime(LocalDateTime.now());<br>        &#125;);<br>        dutyPersonRepository.insertBatch(cachedDataList);<br>        log.info(<span class="hljs-string">&quot;存储数据库成功！&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="1-5-测试"><a href="#1-5-测试" class="headerlink" title="1.5.测试"></a>1.5.测试</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@SpringBootTest</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">EasyExcelApplicationTest</span> &#123;<br>    <span class="hljs-meta">@Resource</span><br>    <span class="hljs-keyword">private</span> DutyPersonRepository dutyPersonRepository;<br><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">localDateTimeTest</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">DutyPersonEntity</span> <span class="hljs-variable">dutyPersonEntity</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DutyPersonEntity</span>();<br>        <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> LocalDateTime.now();<br>        dutyPersonEntity.setDutyTime(now);<br>        log.info(<span class="hljs-string">&quot;now:&#123;&#125;&quot;</span>, now);<br>        log.info(<span class="hljs-string">&quot;json:&#123;&#125;&quot;</span>, JacksonUtils.entity2Json(dutyPersonEntity));<br>    &#125;<br><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">simpleDownload</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">fileName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;D:\\Project\\JavaProject\\spring-learn\\spring-easyexcel\\src\\main\\resources\\值班人员模板.xlsx&quot;</span>;<br>        EasyExcel.write(fileName, DutyPersonEntity.class)<br>                .sheet(<span class="hljs-string">&quot;测试&quot;</span>)<br>                .doWrite(() -&gt; <span class="hljs-literal">null</span>);<br>        log.info(<span class="hljs-string">&quot;成功导出模板Excel&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">simpleRead</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">fileName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;D:\\Project\\JavaProject\\spring-learn\\spring-easyexcel\\src\\main\\resources\\值班人员模板.xlsx&quot;</span>;<br>        EasyExcel.read(fileName, DutyPersonEntity.class, <span class="hljs-keyword">new</span> <span class="hljs-title class_">DutyPersonListener</span>(dutyPersonRepository)).sheet().doRead();<br>    &#125;<br><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">simpleWrite</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">fileName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;D:\\Project\\JavaProject\\spring-learn\\spring-easyexcel\\src\\main\\resources\\值班人员下载.xlsx&quot;</span>;<br>        EasyExcel.write(fileName, DutyPersonEntity.class)<br>                .sheet(<span class="hljs-string">&quot;测试&quot;</span>)<br>                .doWrite(() -&gt; &#123;<br>                    PageHelper.startPage(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>);<br>                    <span class="hljs-keyword">return</span> dutyPersonRepository.selectBatch();<br>                &#125;);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192011132.png" srcset="/img/loading.gif" lazyload alt="image-20230219131436785"></p>
+<p><img src="C:\Users\85303\AppData\Roaming\Typora\typora-user-images\image-20230219131444906.png" srcset="/img/loading.gif" lazyload alt="image-20230219131444906"></p>
+<h2 id="1-6-遇到的问题"><a href="#1-6-遇到的问题" class="headerlink" title="1.6.遇到的问题"></a>1.6.遇到的问题</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@ExcelProperty(index = 3, value = &quot;值班时间&quot;)</span><br><span class="hljs-meta">@DateTimeFormat(&quot;yyyy-MM-dd&quot;)</span><br><span class="hljs-meta">@JsonSerialize(using = LocalDateTimeSerializer.class)</span><br><span class="hljs-meta">@JsonDeserialize(using = LocalDateTimeDeserializer.class)</span><br><span class="hljs-meta">@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br><span class="hljs-keyword">private</span> LocalDateTime dutyTime;<br></code></pre></td></tr></table></figure>
+
+<p>当我尝试在 <code>@ExcelProperty</code> 注解中指定 <code>convert</code> 为 <code>localdatetime</code> 包下的转换器的时候会存在一些问题。指定为 <code>LocalDateTimeDateConverter</code> 的时候从数据库导出数据是可以的，但是在基础导出的数据导入的时候会无法转换。所以在使用的时候尽量不指定 <code>convert</code> ？或者之后这种需要导入导出的字段就用 <code>Date</code> 类型好了。</p>
+<p><img src="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192012446.png" srcset="/img/loading.gif" lazyload alt="image-20230219193141149"></p>
+<h1 id="2-Web测试"><a href="#2-Web测试" class="headerlink" title="2.Web测试"></a>2.Web测试</h1><h2 id="2-1-导入依赖"><a href="#2-1-导入依赖" class="headerlink" title="2.1.导入依赖"></a>2.1.导入依赖</h2><p>导入 <code>springdoc</code> 的依赖，在这里不能导入 <code>springdoc-openapi-ui 1.6.14</code>，会无法打开接口页面。这个版本及以下的版本应该都是不行的，依赖的版本没有更新。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;dependency&gt;<br>    &lt;groupId&gt;org.springdoc&lt;/groupId&gt;<br>    &lt;artifactId&gt;springdoc-openapi-starter-webmvc-ui&lt;/artifactId&gt;<br>    &lt;version&gt;<span class="hljs-number">2.0</span><span class="hljs-number">.2</span>&lt;/version&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">springdoc.swagger-ui.path</span>=<span class="hljs-string">/swagger-ui.html</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-2-Web代码"><a href="#2-2-Web代码" class="headerlink" title="2.2.Web代码"></a>2.2.Web代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Tag(name = &quot;excel测试&quot;)</span><br><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;/test&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestController</span> &#123;<br>    <span class="hljs-meta">@Resource</span><br>    <span class="hljs-keyword">private</span> DutyPersonRepository dutyPersonRepository;<br><br>    <span class="hljs-meta">@Operation(summary = &quot;下载值班人员模板&quot;)</span><br>    <span class="hljs-meta">@GetMapping(&quot;/download&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">download</span><span class="hljs-params">(HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        response.setContentType(<span class="hljs-string">&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;</span>);<br>        response.setCharacterEncoding(<span class="hljs-string">&quot;utf-8&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">fileName</span> <span class="hljs-operator">=</span> URLEncoder.encode(<span class="hljs-string">&quot;测试&quot;</span>, StandardCharsets.UTF_8).replaceAll(<span class="hljs-string">&quot;\\+&quot;</span>, <span class="hljs-string">&quot;%20&quot;</span>);<br>        response.setHeader(<span class="hljs-string">&quot;Content-disposition&quot;</span>, <span class="hljs-string">&quot;attachment;filename*=utf-8&#x27;&#x27;&quot;</span> + fileName + <span class="hljs-string">&quot;.xlsx&quot;</span>);<br>        EasyExcel.write(response.getOutputStream(), DutyPersonEntity.class).sheet(<span class="hljs-string">&quot;模板&quot;</span>).doWrite(() -&gt; <span class="hljs-literal">null</span>);<br>        log.info(<span class="hljs-string">&quot;成功下载了模板&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Operation(summary = &quot;导入值班人员数据&quot;)</span><br>    <span class="hljs-meta">@PostMapping(&quot;upload&quot;)</span><br>    <span class="hljs-meta">@ResponseBody</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">upload</span><span class="hljs-params">(MultipartFile file)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        EasyExcel.read(file.getInputStream(), DutyPersonEntity.class, <span class="hljs-keyword">new</span> <span class="hljs-title class_">DutyPersonListener</span>(dutyPersonRepository)).sheet().doRead();<br>        log.info(<span class="hljs-string">&quot;读取数据成功&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;success&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>打开 web 页面 <code>http://localhost:8080/swagger-ui.html</code></p>
+<p><img src="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192013090.png" srcset="/img/loading.gif" lazyload alt="image-20230219200853691"></p>
+<p>点击下载接口就可以成功下载模板了。</p>
+<p>但是导入数据的时候存在一些问题，应该不是代码的问题。我使用 Postman 就可以导入数据了。</p>
+<p><img src="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192013329.png" srcset="/img/loading.gif" lazyload alt="image-20230219200947782"></p>
+<p><img src="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192013053.png" srcset="/img/loading.gif" lazyload alt="image-20230219201054816"></p>
+<p><img src="https://hwl-blog.oss-cn-beijing.aliyuncs.com/image/202302192013831.png" srcset="/img/loading.gif" lazyload alt="image-20230219201117324"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/SpringBoot/" class="category-chain-item">SpringBoot</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SpringBoot/">#SpringBoot</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>EasyExcel的使用</div>
+      <div>https://yukiofyume.github.io/SpringBoot/EasyExcel的使用/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>lwh</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年2月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/docker/Docker%E5%9F%BA%E6%9C%AC%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" title="Docker基本软件安装记录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Docker基本软件安装记录</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/SpringBoot/SpringBoot%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%92%8C%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C/" title="SpringBoot全局异常处理和参数校验">
+                        <span class="hidden-mobile">SpringBoot全局异常处理和参数校验</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
